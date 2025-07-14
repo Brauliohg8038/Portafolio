@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <span class="lang-es">Análisis de cotizaciones en Bolsa Empresas tecnológicas </span>
+        <span class="lang-en hidden">Analysis of Stock Market Quotes for Tech Companies</span>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- MathJax para renderizar fórmulas matemáticas -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            scroll-behavior: smooth;
+        }
+        /* Añade estas reglas para el scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        /* Para asegurar que los elementos ocultos realmente no ocupen espacio */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="dotted-background">
+    <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+            <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                <span class="lang-es text-base font-semibold flex items-center">EN<i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en text-base font-semibold flex items-center">ES<i class="fas fa-globe text-base ml-2"></i></span>
+            </button>
+            <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-00 p-6 sm:p-8 text-white text-center rounded-t-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                    <span class="lang-es">Análisis de cotizaciones en Bolsa Empresas tecnológicas desde 2023 a 2025.</span>
+                    <span class="lang-en hidden">Analysis of Stock Market Quotes for Tech Companies from 2023 to 2025</span>
+                </h1>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Resumen Ejecutivo</span>
+                        <span class="lang-en hidden">Executive Summary</span>
+                    </h2>
+                   <p class="text-gray-300 leading-relaxed text-justify mb-2">
+                        <span class="lang-es">Este informe presenta un análisis exploratorio y descriptivo de la evolución de los precios de cierre mensuales de siete de las principales empresas del sector tecnológico a nivel mundial: <span class="text-white">Apple Inc, Microsoft Corp, Google (Alphabet Inc), Amazon Inc, Meta Inc(Facebook), Nvidia Corp y Tesla Inc</span>, durante el período comprendido entre enero de 2023 y enero de 2025.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify mb-2">
+                        <span class="lang-es">La metodología se basó en herramientas de análisis de datos en Python, incluyendo Pandas, NumPy, Matplotlib y Seaborn, y en datos obtenidos mediante la API de Alpha Vantage. El estudio no solo examinó el comportamiento histórico de los precios, sino que también incluyó el cálculo de métricas clave como retorno, volatilidad y riesgo, además de la aplicación de simulaciones Monte Carlo para proyectar posibles escenarios futuros.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-es">El objetivo principal de este análisis es ofrecer insights útiles para la toma de decisiones de inversión, proporcionando una visión comparativa de la relación riesgo-retorno entre las distintas compañías analizadas.</span>
+                    </p>
+            
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-en hidden">This report presents an exploratory and descriptive analysis of the monthly closing price trends of seven leading global technology companies: <span class="text-white">Apple Inc., Microsoft Corp., Google (Alphabet Inc.), Amazon Inc., Meta Inc. (Facebook), Nvidia Corp., and Tesla Inc.</span>, over the period from January 2023 to January 2025.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-en hidden">The methodology was based on data analysis tools in Python, including Pandas, NumPy, Matplotlib, and Seaborn, using data retrieved through the Alpha Vantage API. The study examined not only the historical behavior of stock prices but also included the calculation of key metrics such as return, volatility, and risk, along with the application of Monte Carlo simulations to project potential future scenarios.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-en hidden">The primary objective of this analysis is to provide actionable insights to support investment decision-making by offering a comparative view of the risk-return profiles of the companies analyzed.</span>
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Problema y Objetivos</span>
+                        <span class="lang-en hidden">Problem and Objectives</span>
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">El Problema</span>
+                                <span class="lang-en hidden">The Problem</span>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                <span class="lang-es">Las acciones de empresas tecnológicas suelen tener alta volatilidad, lo cual genera incertidumbre para los inversionistas que buscan maximizar rendimientos y minimizar riesgos. Es necesario entender cómo se comportan estos activos en el tiempo, su nivel de riesgo, y cuáles ofrecen una mejor relación riesgo-retorno.</span>
+                                <span class="lang-en hidden">Tech company stocks are typically highly volatile, which creates uncertainty for investors aiming to maximize returns while minimizing risks. It is essential to understand how these assets behave over time, their level of risk, and which ones offer a better risk-return trade-off.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Objetivos</span>
+                                <span class="lang-en hidden">Objectives</span>
+                            </h3>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>
+                                        <span class="lang-es">Analizar el comportamiento histórico de los precios de cierre de las principales tecnológicas.</span>
+                                        <span class="lang-en hidden">Analyze the historical behavior of closing prices of major tech companies.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Evaluar el rendimiento y la volatilidad de cada acción.</span>
+                                        <span class="lang-en hidden">Evaluate the performance and volatility of each stock.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Determinar la correlación entre activos.</span>
+                                        <span class="lang-en hidden">Determine the correlation between assets.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Simular trayectorias futuras mediante un modelo Monte Carlo.</span>
+                                        <span class="lang-en hidden">Simulate future trajectories using a Monte Carlo model.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Identificar oportunidades de inversión basadas en métricas de riesgo-retorno.</span>
+                                        <span class="lang-en hidden">Identify investment opportunities based on risk-return metrics.</span>
+                                    </li>
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </section>
+<!-- Datos y Metodología -->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Datos y Metodología</span>
+                        <span class="lang-en hidden">Data and Methodology</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="lang-es">Los datos utilizados en este análisis provienen de la API de Alpha Vantage e incluyen los precios de cierre ajustados en frecuencia mensual para el período comprendido entre enero de 2023 y enero de 2025. El estudio se centró en siete de las principales empresas tecnológicas: Apple, Microsoft, Google (Alphabet), Amazon, Meta (Facebook), Nvidia y Tesla.</span>
+                        <span class="lang-en hidden">The data used in this analysis comes from the Alpha Vantage API and includes monthly adjusted closing prices for the period from January 2023 to January 2025. The study focused on seven leading technology companies: Apple, Microsoft, Google (Alphabet), Amazon, Meta (Facebook), Nvidia, and Tesla.</span>
+                    </p>
+                    <div class="text-gray-300 leading-relaxed mb-4">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Proceso de Análisis</span>
+                                <span class="lang-en hidden">Analysis Process</span>
+                            </h3>
+                        <ul class="list-disc list-inside text-gray-300 space-y-2">
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Extracción de datos usando la API y limpieza para estandarizar series temporales</span>
+                                    <span class="lang-en hidden">Data extraction using the API and cleaning to standardize time series</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Análisis exploratorio (EDA) con estadísticas descriptivas, visualización de distribuciones y correlaciones.</span>
+                                    <span class="lang-en hidden">Exploratory analysis (EDA) with descriptive statistics, visualization of distributions, and correlations.</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Cálculo de retornos mensuales, volatilidad anualizada, coeficiente de variación y drawdowns.</span>
+                                    <span class="lang-en hidden">Calculation of monthly returns, annualized volatility, coefficient of variation, and drawdowns.</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Evaluación de rendimiento mediante el ratio de Sharpe para comparar riesgo-retorno.</span>
+                                    <span class="lang-en hidden">Performance evaluation using the Sharpe ratio to compare risk-return.</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Simulación Monte Carlo con trayectorias aleatorias para visualizar posibles escenarios futuros</span>
+                                    <span class="lang-en hidden">Monte Carlo simulation with random paths to visualize possible future scenarios</span>
+                                </span>
+                            </li>
+                        </ul>
+                            <h3 class="text-xl font-medium text-white mb-2 mt-6"> <span class="lang-es">Herramientas Utilizadas</span>
+                                <span class="lang-en hidden">Tools Used</span>
+                            </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Python</span>
+                            <span class="bg-green-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Pandas</span>
+                            <span class="bg-purple-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Numpy</span>
+                            <span class="bg-red-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Alpha-Vantage</span>
+                            <span class="bg-indigo-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Matplotlib</span>
+                            <span class="bg-pink-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Seaborn</span>
+                            <span class="bg-teal-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                    transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Hallazgos Clave y Visualizaciones</span>
+                        <span class="lang-en hidden">Key Findings and Visualizations</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="lang-es">A continuación, se destacan algunos de los resultados más relevantes del análisis:</span>
+                        <span class="lang-en hidden">Below are some of the most relevant findings from the analysis:</span>
+                    </p>
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Tendencia de precios: La mayoría de las empresas representadas en el gráfico, como Microsoft, Google, Amazon, Meta y Nvidia, muestran una tendencia alcista en los precios de sus acciones desde principios de 2023 hasta principios de 2025. Esto sugiere un período generalmente favorable para el sector tecnológico en el mercado bursátil.</span>
+                                <span class="lang-en hidden">Price trend: Most companies shown in the chart, such as Microsoft, Google, Amazon, Meta, and Nvidia, display an upward trend in their stock prices from early 2023 to early 2025. This suggests a generally favorable period for the technology sector in the stock market.</span>
+                            </span>
+                        </li> 
+                    </ul>
+
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4">
+                        <h3 class="text-lg font-medium text-white mb-2">
+                            <span class="lang-es">Precios de las Acciones por empresa del 2023 al 2025</span>
+                            <span class="lang-en hidden">Stock Prices by Company from 2023 to 2025</span>
+                        </h3>
+                        <img src="images/price.png"
+                            alt="Captura de precios"
+                            class="w-full h-auto rounded-md shadow-md object-contain"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Liderazgo de Crecimiento al Final del Período: Meta y Microsoft se perfilan como las que experimentan los crecimientos más pronunciados hacia el final del período analizado. Meta, en particular, alcanza el precio de acción más alto en el gráfico al inicio de 2025.</span>
+                                <span class="lang-en hidden">Growth Leadership at the End of the Period: Meta and Microsoft stand out as the companies with the most pronounced growth towards the end of the analyzed period. Meta, in particular, reaches the highest stock price on the chart at the beginning of 2025.</span>
+                            </span>
+                        </li> 
+                    </ul>
+
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Crecimiento Constante pero a Diferentes Niveles: Empresas como Apple y Nvidia también exhiben un crecimiento, aunque a ritmos y niveles de precios diferentes en comparación con las de mayor crecimiento como Microsoft y Meta. Apple mantiene un precio relativamente estable con una tendencia al alza, mientras que Nvidia muestra un crecimiento acelerado en 2024 tras un inicio más lento.</span>
+                                <span class="lang-en hidden">Steady Growth but at Different Levels: Companies like Apple and Nvidia also show growth, although at different rates and price levels compared to the higher-growth companies like Microsoft and Meta. Apple maintains a relatively stable price with an upward trend, while Nvidia shows accelerated growth in 2024 after a slower start.</span>
+                            </span>
+                        </li> 
+                    </ul>
+<!--Volatilidad-->
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4"> <h4 class="text-lg font-medium text-white mb-2">
+                        <span class="lang-es">Volatilidad Anualizada de las Acciones del 2023 al 2025</span>
+                        <span class="lang-en hidden">Annualized Stock Volatility from 2023 to 2025</span>
+                    </h4>
+                    <img src="images/volatilidad.png"
+                        alt="Captura de pantalla de volatilidad"
+                        class="w-full h-auto rounded-md shadow-md object-contain"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+<!--Boton Volatilidad-->
+                    <div class="mt-4">
+                    <button id="toggleVolatilidad" 
+                            class="flex items-center justify-between w-full p-4 bg-gray-500 text-white font-semibold rounded-lg shadow-md 
+                                hover:bg-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-35">
+                        <span class="lang-es">¿Qué es la Volatilidad?</span>
+                        <span class="lang-en hidden">What is Volatility?</span>
+                        <svg class="w-5 h-5 transform transition-transform duration-200" 
+                            id="arrowIcon" 
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div id="volatilidadContent" class="hidden mt-2 p-4 bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-lg shadow-inner border border-gray-700">
+                        <ul class="list-inside ml-4 text-gray-400 space-y-2">
+                            <li>
+                                <span class="text-gray-300 leading-relaxed">
+                                    <span class="lang-es">
+                                        Volatilidad: Es una medida de la dispersión de los retornos de un instrumento financiero, indicando qué tan rápido y en qué medida cambia su precio. Una alta volatilidad implica mayor riesgo y potencial de ganancias o pérdidas.
+                                    </span>
+                                    <span class="lang-en hidden">
+                                        Volatility: It is a measure of the dispersion of financial instrument returns, indicating how quickly and to what extent its price changes. High volatility implies greater risk and potential for gains or losses.
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-4">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Volatilidad: Tesla y Nvidia presentaron los niveles de volatilidad más altos, mientras que Microsoft y Apple mostraron mayor estabilidad.</span>
+                                <span class="lang-en hidden">Volatility: Tesla and Nvidia showed the highest levels of volatility, while Microsoft and Apple were more stable.</span></span>
+                        </li> 
+                    </ul>
+<!--imagen correlacion-->
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4"> <h5 class="text-lg font-medium text-white mb-2">
+                        <span class="lang-es">Matríz de Correlación</span>
+                        <span class="lang-en hidden">Correlation Matrix</span>
+                    </h5>
+                    <img src="images/corre.png"
+                        alt="Captura de pantalla de correlacion"
+                        class="w-full h-auto rounded-md shadow-md object-contain"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+<!--boton de correlacion-->
+                    <div class="mt-2 mb-4"> <button id="toggleCorrelacion"
+                                class="flex items-center justify-between w-full p-4 bg-gray-500 text-white font-semibold rounded-lg shadow-md
+                                    hover:bg-purple-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-35">
+                            <span class="lang-es">¿Qué es la Correlación?</span>
+                            <span class="lang-en hidden">What is Correlation?</span>
+                            <svg class="w-5 h-5 transform transition-transform duration-200"
+                                id="arrowIconCorrelacion"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="correlacionContent" class="hidden mt-2 p-4 bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-lg shadow-inner border border-gray-700">
+                            <ul class="text-gray-400 space-y-2">
+                                <li>
+                                    <span class="text-gray-300 leading-relaxed">
+                                        <span class="lang-es">
+                                            <span class="text-white">Correlación:</span> Mide la relación estadística entre los movimientos de dos variables. En el contexto financiero, indica cómo se mueven los precios de dos activos entre sí.
+                                            <br><br>
+                                            Tipos de Correlación:
+                                            <ul>
+                                                <li>Correlación Positiva (+1): Los precios se mueven en la misma dirección. Si uno sube, el otro tiende a subir.</li>
+                                                <li>Correlación Negativa (-1): Los precios se mueven en direcciones opuestas. Si uno sube, el otro tiende a bajar.</li>
+                                                <li>Correlación Nula (0): No hay relación aparente entre sus movimientos.</li>
+                                            </ul>
+                                            <br>
+                                            <span class="text-white">Importancia:</span> La correlación es fundamental para la diversificación de carteras. Activos con baja o negativa correlación pueden reducir el riesgo general de una cartera.
+                                        </span>
+                                        <span class="lang-en hidden">
+                                            <span class="text-white">Correlation:</span> Measures the statistical relationship between the movements of two variables. In a financial context, it indicates how the prices of two assets move in relation to each other.
+                                            <br><br>
+                                            Types of Correlation:
+                                            <ul>
+                                                <li>Positive Correlation (+1): Prices move in the same direction. If one goes up, the other tends to go up.</li>
+                                                <li>Negative Correlation (-1): Prices move in opposite directions. If one goes up, the other tends to go down.</li>
+                                                <li>Zero Correlation (0): No apparent relationship between their movements.</li>
+                                            </ul>
+                                            <br>
+                                            <span class="text-white">Importance:</span> Correlation is fundamental for portfolio diversification. Assets with low or negative correlation can reduce the overall risk of a portfolio.
+                                        </span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+<!--argumento correlacion-->
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Correlación: Alta correlación entre Apple, Microsoft y Google, lo que sugiere un comportamiento sincronizado. Sin embargo, Tesla muestra patrones más independientes.</span>
+                                <span class="lang-en hidden">Correlation: High correlation between Apple, Microsoft, and Google, suggesting synchronized behavior. However Tesla show more independent patterns.</span></li> 
+                    </ul>
+<!-- Explicación ojo traducir-->
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Aunque todas las empresas analizadas pertenecen al sector tecnológico, se observan diferencias en la correlación de sus precios debido a sus distintos modelos de negocio y exposición al riesgo. Apple, Microsoft y Google muestran una alta correlación, lo que sugiere un comportamiento sincronizado influenciado por factores macroeconómicos comunes, capitalización bursátil elevada, ingresos recurrentes y percepción de estabilidad por parte de los inversionistas institucionales.</span>
+                                <span class="lang-en hidden">Although all the companies analyzed belong to the technology sector, differences in price correlation are observed due to their distinct business models and risk exposure. Apple, Microsoft, and Google show a high correlation, suggesting synchronized behavior influenced by shared macroeconomic factors, high market capitalization, recurring revenues, and a perception of stability among institutional investors.</span>
+                        </li> 
+                    </ul>
+                <!--Expliación 22222-->
+                    <ul class="text-gray-300 space-y-2 mt-2 mb-8>
+                        <li>
+                            <span class="text-gray-300 leading-relaxed">
+                                <span class="lang-es">
+                                    En contraste, Tesla presenta patrones más independientes:
+                                    <ul class="list-disc list-inside ml-4 text-gray-300 space-y-2 mt-2">
+                                        <li>
+                                            <span class="text-white">Tesla</span> aunque considerada tecnológica, opera principalmente como fabricante automotriz, con fuerte dependencia de la cadena de suministro, regulaciones ambientales y decisiones corporativas particulares. Además, su volatilidad se ve amplificada por la figura mediática de su CEO, Elon Musk, cuyas declaraciones públicas y acciones suelen generar movimientos significativos en el mercado.
+                                        </li>
+                                    </ul>
+                                </span>
+                                <span class="lang-en hidden">
+                                    In contrast, Tesla exhibit more independent patterns:
+                                    <ul class="list-disc list-inside ml-4 text-gray-300 space-y-2 mt-2">
+                                        <li>
+                                            <span class="text-white">Tesla</span> although considered a tech company, operates primarily as an automotive manufacturer, with strong dependence on the supply chain, environmental regulations, and specific corporate decisions. Additionally, its volatility is amplified by the media presence of its CEO, Elon Musk, whose public statements and actions often trigger significant market movements.
+                                        </li>
+                                    </ul>
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+<!--Resumen-->
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4"> <h5 class="text-lg font-medium text-white mb-2">
+                        <span class="lang-es">Tabla de resumen</span>
+                        <span class="lang-en hidden">Summary table</span>
+                    </h5>
+                    <img src="images/cuadrog.png"
+                        alt="Captura de pantalla tabla"
+                        class="w-full h-auto rounded-md shadow-md object-contain"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Durante ciertos meses del período analizado, <span class="text-white">Tesla y Nvidia</span> experimentaron caídas máximas (drawdowns) más pronunciadas en sus precios de cierre. Estas caídas reflejan una mayor sensibilidad a eventos adversos del mercado y una recuperación más lenta en comparación con otras empresas del sector.</span>
+                                <span class="lang-en hidden">During certain months of the analyzed period, <span class="text-white">Tesla and Nvidia</span> experienced more pronounced maximum drawdowns in their closing prices. These declines reflect greater sensitivity to adverse market events and a slower recovery compared to other companies in the sector.</span>
+                        </li> 
+                    </ul>
+
+                    <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                        <li> 
+                            <span class="text-gray-300 leading-relaxed mb-4">
+                                <span class="lang-es">Al evaluar el rendimiento ajustado por riesgo, <span class="text-white">Nvidia y Meta</span> destacaron con los mejores ratios de Sharpe, combinando retornos consistentes con volatilidad. En contraste, <span class="text-white">Microsoft y Apple</span> presentaron los ratios más bajos, indicando que a pesar posibles altos retornos, estuvieron acompañados de una mayor inestabilidad en sus precios.</span>
+                                <span class="lang-en hidden">When evaluating risk-adjusted performance, <span class="text-white">Nvidia and Meta</span> stood out with the highest Sharpe ratios, combining consistent returns with volatility. In contrast, <span class="text-white">Microsoft and Apple</span> showed the lowest ratios, indicating that despite potentially high returns, they were accompanied by greater price instability.</span>
+                        </li> 
+                    </ul>
+                </section>
+<!--Simulacion Monte Carlo-->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Simulación Monte Carlo</span>
+                        <span class="lang-en hidden">Monte Carlo Simulation</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        <span class="lang-es">En esta sección, se realiza una simulación de Monte Carlo para proyectar los posibles precios futuros de las acciones de las principales empresas tecnológicas analizadas. Este método permite modelar múltiples posibles trayectorias de precios al incorporar el rendimiento histórico y los factores de riesgo asociados.</span>
+                        <span class="lang-en hidden">In this section, a Monte Carlo simulation is conducted to project the potential future stock prices of the leading technology companies analyzed. This method enables the modeling of multiple possible price trajectories by incorporating historical performance and associated risk factors.</span>
+                    </p>
+                    <div class="lang-es">
+                        <p class="text-white mb-2">
+                            <span class="font-bold">Variables Utilizadas:</span>
+                        </p>
+                        <ul class="list-disc list-inside ml-4 text-gray-300 space-y-1">
+                            <li><span class="text-white">Precio de cierre mensual:</span> Precio final registrado para cada mes en el período analizado (2023-2025).</li>
+                            <li><span class="text-white">Retorno medio mensual (%):</span> Promedio de los retornos mensuales históricos, que indica la rentabilidad esperada.</li>
+                            <li><span class="text-white">Volatilidad mensual (%):</span> Medida de la variabilidad de los precios, que refleja la magnitud de los cambios en el tiempo.</li>
+                            <li><pan class="text-white">Período de proyección:</pan> 6 meses, para estimar los posibles precios al cierre del semestre siguiente.</li>
+                            <li><pan class="text-white">Número de simulaciones:</pan> 1000 trayectorias, para capturar una amplia gama de escenarios posibles.</li>
+                        </ul>
+                    </div>
+                    <div class="lang-en hidden">
+                        <p class="text-white mb-2">
+                        <span class="font-bold">Variables Used:</span>
+                        </p>
+                        <ul class="list-disc list-inside ml-4 text-gray-300 space-y-1">
+                            <li><span class="text-white">Monthly Closing Price:</span> The final price recorded for each month during the analyzed period (2023-2025).</li>
+                            <li><span class="text-white">Average Monthly Return (%):</span> The average of historical monthly returns, indicating the expected profitability.</li>
+                            <li><span class="text-white">Monthly Volatility (%): </span>A measure of price variability, reflecting the magnitude of changes over time.</li>
+                            <li><span class="text-white">Projection Period:</span> 6 months, to estimate potential prices at the end of the next semester.</li>
+                            <li><span class="text-white">Number of Simulations:</span> 1000 trajectories, to capture a wide range of possible scenarios.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4"> <h6 class="text-lg font-medium text-white mb-2">
+                        <span class="lang-es">Simulación Monte Carlo - Precio de Tesla Inc (6 meses)</span>
+                        <span class="lang-en hidden">Monte Carlo Simulation – Tesla Inc. Price (6 Months)</span>
+                    </h6>
+                    <img src="images/Simul.png"
+                        alt="Captura de pantalla tabla"
+                        class="w-full h-auto rounded-md shadow-md object-contain"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4">
+                    <h6 class="text-lg font-medium text-white mb-2">
+                        <span class="lang-es">Resumen de Simulaciones Monte Carlo</span>
+                        <span class="lang-en hidden">Monte Carlo Simulations Summary</span>
+                    </h6>
+                    <img src="images/MonteResumen.png"
+                        alt="resumen mot"
+                        class="w-full h-auto rounded-md shadow-md object-contain"
+                        loading="lazy"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        <span class="lang-es">En la simulación de Monte Carlo las trayectorias generadas mostraron una alta dispersión en empresas con mayor volatilidad, como Tesla, Nvidia y Meta, reflejando la incertidumbre asociada a su comportamiento futuro. Mientras que Apple y Google presentaron proyecciones más estables, lo que sugiere una mayor previsibilidad en sus precios bajo los supuestos del modelo.</span>
+                        <span class="lang-en hidden">In the Monte Carlo simulation the generated trajectories showed greater dispersion for highly volatile companies such as Tesla, Nvidia and Meta, reflecting the uncertainty associated with their future behavior. In contrast, Apple and Google exhibited more stable projections, indicating greater predictability in their prices under the model’s assumptions.</span>
+                    </p>
+                    <div class="text-center mt-8">
+                        <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center px-6 py-3 border border-blue-300 text-white hover:bg-gray-500 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
+                            <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
+                            <span class="lang-es">Ver Gráficos completos</span>
+                            <span class="lang-en hidden">See full graphics</span>
+                        </a>
+                    </div>
+                </section>
+<!--Ultima sección-->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Conclusiones y Recomendaciones</span>
+                        <span class="lang-en hidden">Conclusions and Recommendations</span>
+                    </h2>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white mb-4">
+                                <span class="lang-es">Conclusiones Clave</span>
+                                <span class="lang-en hidden">Key Conclusions</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-4">
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">NVIDIA y Meta lideran en rendimiento ajustado por riesgo:</span>
+                                        <span class="lang-en hidden">NVIDIA and Meta lead in risk-adjusted performance</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Ambas empresas presentaron los mejores ratios de Sharpe del grupo (0.30 y 0.27, respectivamente), lo que indica que lograron un buen equilibrio entre retorno y volatilidad. Sin embargo, su desempeño estuvo acompañado de una alta variabilidad en los precios, lo cual representa un mayor riesgo para inversionistas conservadores.</span>
+                                            <span class="lang-en hidden">Both companies recorded the highest Sharpe Ratios among the group (0.30 and 0.27, respectively), indicating a favorable balance between return and volatility. However, their performance was accompanied by high price variability, representing a higher risk for more conservative investors.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Tesla muestra alta rentabilidad bruta, pero con riesgo extremo:</span>
+                                        <span class="lang-en hidden">Tesla shows moderate returns but extreme risk exposure:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Aunque Tesla tuvo un retorno promedio aceptable (3.53%), se vio afectada por una volatilidad mensual del 15.72% y un drawdown máximo del -41.96%, el más severo entre las empresas analizadas. Su ratio de Sharpe negativo (-0.04) sugiere que el riesgo superó al rendimiento obtenido.</span>
+                                            <span class="lang-en hidden">Although Tesla achieved a decent average monthly return (3.53%), it faced high volatility (15.72%) and the largest maximum drawdown (-41.96%) among the companies analyzed. Its negative Sharpe Ratio (-0.04) suggests that risk outweighed the return during the period.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Microsoft y Apple ofrecen estabilidad, pero con bajo rendimiento relativo:</span>
+                                        <span class="lang-en hidden">Microsoft and Apple offer stability but limited relative returns:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Estas empresas presentaron las menores volatilidades (5.55 % y 5.82 %) y una proyección más estable en la simulación de Monte Carlo. Sin embargo, sus retornos mensuales fueron modestos y sus ratios de Sharpe negativos, indicando que su nivel de riesgo no fue debidamente compensado por los rendimientos durante el periodo.</span>
+                                            <span class="lang-en hidden">These companies recorded the lowest levels of volatility (5.55% and 5.82%) and more stable projections in the Monte Carlo simulation. However, their monthly returns were modest, and their negative Sharpe Ratios indicate that the risk was not adequately compensated by performance over the analyzed period.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Amazon y Google mantienen un perfil intermedio:</span>
+                                        <span class="lang-en hidden">Amazon and Google maintain a middle-ground profile:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Ambas compañías se ubicaron en posiciones medias tanto en retorno como en volatilidad. Sin embargo, sus ratios de Sharpe también fueron negativos, lo que sugiere una relación riesgo-retorno menos eficiente en comparación con NVIDIA y Meta.</span>
+                                            <span class="lang-en hidden">Both companies ranked in the middle in terms of return and volatility. Nevertheless, their Sharpe Ratios were also negative, suggesting a less efficient risk-return relationship compared to NVIDIA and Meta.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Tendencias Temporales y Correlaciones:</span>
+                                        <span class="lang-en hidden">Correlations reflect structural similarities but also key divergences:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Apple, Microsoft y Google mostraron alta correlación, posiblemente por la estabilidad y madurez de sus modelos de negocio. En contraste, Tesla y Nvidia fueron menos correlacionadas, reflejando una mayor dependencia de factores específicos, como innovación, liderazgo y ciclos de mercado.</span>
+                                            <span class="lang-en hidden">Apple, Microsoft, and Google showed high correlation, likely due to the maturity and stability of their business models. In contrast, Tesla and Nvidia displayed lower correlation, highlighting a stronger dependence on specific factors such as innovation, leadership, and market cycles.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold text-white mb-4 border-b border-blue-600 pb-2">
+                                <span class="lang-es">Recomendaciones</span>
+                                <span class="lang-en hidden">Recommendations</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-4">
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Para inversionistas conservadores, Microsoft y Apple ofrecen los perfiles más estables:</span>
+                                        <span class="lang-en hidden">For risk-averse investors, Microsoft and Apple offer the most stable profiles:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Con la menor volatilidad histórica y proyecciones más predecibles en la simulación (por ejemplo, Microsoft entre $315 y $709, Apple entre $174 y $408), estas empresas son adecuadas para portafolios que buscan crecimiento moderado y menor exposición a shocks del mercado.</span>
+                                            <span class="lang-en hidden">With the lowest historical volatility and more predictable projections (e.g., Microsoft ranging between $315 and $709, Apple between $174 and $408), these companies are well-suited for portfolios seeking consistency and moderate growth with lower exposure to market shocks.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Para perfiles más agresivos, Meta y Tesla presentan alto potencial de retorno:</span>
+                                        <span class="lang-en hidden">For investors with a higher risk appetite, Meta and Tesla present high-reward potential:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">A pesar de su alta volatilidad y caídas significativas en el pasado, ambas compañías mostraron un fuerte potencial alcista en las simulaciones. Meta podría alcanzar hasta $1,792, y Tesla más de $1,440. Estas oportunidades deben ser consideradas con precaución, debido al riesgo elevado asociado.</span>
+                                            <span class="lang-en hidden">Despite their high volatility and historical drawdowns, both companies showed strong upside in the Monte Carlo simulations. Meta could reach prices up to $1,792, while Tesla's simulated maximum was over $1,440. These opportunities should be considered with caution, given the elevated risk.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Nvidia representa un balance atractivo entre riesgo y retorno:</span>
+                                        <span class="lang-en hidden">Nvidia shows a promising risk-return balance, with a broad price projection:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Con el retorno mensual promedio más alto (7.57%) y un rango proyectado amplio (de $77 a $410), Nvidia se presenta como una opción interesante para inversionistas dispuestos a asumir variaciones de precio a cambio de mayores rendimientos potenciales.</span>
+                                            <span class="lang-en hidden">With the highest average monthly return (7.57%) and a projected range between $77 and $410, Nvidia remains attractive for investors willing to accept price swings in exchange for higher potential gains.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Amazon y Google ofrecen oportunidades equilibradas:</span>
+                                        <span class="lang-en hidden">Amazon and Google offer balanced opportunities:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Ambas empresas mostraron un crecimiento proyectado moderado (Amazon entre $237 y $454; Google entre $204 y $388), lo que las convierte en opciones intermedias para portafolios que buscan diversificación entre estabilidad y crecimiento.</span>
+                                            <span class="lang-en hidden">Both companies showed moderate projected growth (Amazon from $237 to $454; Google from $204 to $388), and represent a middle-ground option for portfolios that aim to diversify between growth and stability.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Regular monitoring and dynamic portfolio allocation are essential:</span>
+                                        <span class="lang-en hidden">Amazon and Google offer balanced opportunities:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Dada la volatilidad observada y la dispersión en las proyecciones de precios, es necesario revisar periódicamente las posiciones y ajustar las asignaciones del portafolio según las condiciones del mercado, el desempeño de las acciones y la evolución de los fundamentos del negocio.</span>
+                                            <span class="lang-en hidden">Given the volatility observed and the dispersion in projected prices, it is advisable to review positions periodically and adjust portfolio allocations in response to market conditions, performance trends, and evolving business fundamentals.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="text-center mt-8">
+        <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
+            <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
+            <span class="lang-es">Ver el Código en GitHub</span>
+            <span class="lang-en hidden">View Code on GitHub</span>
+        </a>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en"></span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- 1. Actualizar el año en el footer ---
+            // Se puede optimizar si ambos elementos comparten el mismo ID o una clase común.
+            // Asumiendo que pueden ser diferentes o necesitar IDs separados, la forma actual es clara.
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            const currentYear = new Date().getFullYear();
+
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = currentYear;
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = currentYear;
+            }
+
+            // --- 2. Lógica de traducción para esta página ---
+            const htmlElement = document.documentElement;
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function updateTitle(lang) {
+                // Busca los spans de idioma dentro del elemento <title>
+                const titleEsSpan = document.querySelector('title .lang-es');
+                const titleEnSpan = document.querySelector('title .lang-en');
+
+                if (titleEsSpan && titleEnSpan) {
+                    // Si los spans existen, usa su contenido
+                    document.title = (lang === 'es') ? titleEsSpan.textContent : titleEnSpan.textContent;
+                } else {
+                    // Fallback si los spans dentro del title no se encuentran
+                    // Asegúrate de que este fallback sea apropiado para la página actual
+                    document.title = (lang === 'es') ? 'Proyecto: Análisis de Sentimientos de Reseñas de Productos' : 'Project: Product Review Sentiment Analysis';
+                }
+            }
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang;
+                localStorage.setItem('preferredLang', lang);
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = (currentLang === 'es') ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+
+            // --- 3. Lógica para los toggles de Volatilidad y Correlación ---
+
+            // Elementos de Volatilidad
+            // Se corrigió el ID del icono de flecha aquí, era 'arrowIcon' y debería ser 'arrowIconVolatilidad' según tu HTML más reciente.
+            const toggleButtonVolatilidad = document.getElementById('toggleVolatilidad');
+            const volatilidadContent = document.getElementById('volatilidadContent');
+            const arrowIconVolatilidad = document.getElementById('arrowIcon'); 
+
+            // Elementos de Correlación
+            const toggleButtonCorrelacion = document.getElementById('toggleCorrelacion');
+            const correlacionContent = document.getElementById('correlacionContent');
+            const arrowIconCorrelacion = document.getElementById('arrowIconCorrelacion');
+
+            // Función reutilizable para alternar contenido y rotar flecha
+            function toggleSection(button, contentElement, arrowElement) {
+                contentElement.classList.toggle('hidden');
+                if (contentElement.classList.contains('hidden')) {
+                    arrowElement.style.transform = 'rotate(0deg)'; // Flecha hacia abajo (contenido oculto)
+                } else {
+                    arrowElement.style.transform = 'rotate(180deg)'; // Flecha hacia arriba (contenido visible)
+                }
+            }
+
+            // Asignar event listeners solo si los elementos existen
+            if (toggleButtonVolatilidad && volatilidadContent && arrowIconVolatilidad) {
+                toggleButtonVolatilidad.addEventListener('click', function() {
+                    toggleSection(this, volatilidadContent, arrowIconVolatilidad);
+                });
+            }
+
+            if (toggleButtonCorrelacion && correlacionContent && arrowIconCorrelacion) {
+                toggleButtonCorrelacion.addEventListener('click', function() {
+                    toggleSection(this, correlacionContent, arrowIconCorrelacion);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

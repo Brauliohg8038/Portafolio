@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Data Analysis-BHG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estructura general */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1rem 0;
+        }
+
+        /* Scrollbar personalizada */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+
+        /* Fondo animado de estrellas */
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #6fafeb;
+            border-radius: 100%;
+            opacity: 0.1;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.5);
+            }
+        }
+</style>
+</head>
+<body class="flex flex-col min-h-screen m-0 p-0 dotted-background">
+    <div class="stars" id="stars-container"></div>
+    <main class="flex-grow relative z-10"> 
+<!--Barra izquierda-->
+    <div class="fixed left-1 top-1/2 -translate-y-1/2 p-4 hidden md:flex flex-col items-center space-y-6 z-50">
+        <div class="w-px h-24 bg-gray-600"></div>
+        <a href="https://wa.me/50683661646" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-200">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/braulio-herrerag" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-200">
+            <i class="fab fa-linkedin text-2xl"></i>
+        </a>
+        <a href="mailto:braulioherre98@gmail.com" class="text-gray-400 hover:text-white transition duration-200">
+            <i class="fas fa-envelope text-2xl"></i>
+        </a>
+        <div class="w-px h-32 bg-gray-600"></div>
+    </div>
+<!-- barra horizonzal -->
+    <header class="py-4 sticky top-0 z-50 backdrop-blur-sm">
+        <nav class="container mx-auto flex justify-center items-center px-4 sm:px-6 lg:px-8">
+            <ul class="hidden md:flex space-x-6 bg-transparent backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700 shadow-lg">
+                <li>
+                    <a href="#inicio" class="text-gray-300 hover:text-white font-semibold transition duration-200 px-3 py-1 rounded-full hover:bg-gray-700 flex items-center">
+                        <span class="lang-es">Inicio</span>
+                        <span class="lang-en">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#experiencia" class="text-gray-300 hover:text-white font-semibold transition duration-200 px-3 py-1 rounded-full hover:bg-gray-700 flex items-center">
+                        <span class="lang-es">Experiencia</span>
+                        <span class="lang-en">Experience</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#proyectos" class="text-gray-300 hover:text-white font-semibold transition duration-200 px-3 py-1 rounded-full hover:bg-gray-700 flex items-center">
+                        <span class="lang-es">Proyectos</span>
+                        <span class="lang-en">Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#sobre-mi" class="text-gray-300 hover:text-white font-semibold transition duration-200 px-3 py-1 rounded-full hover:bg-gray-700 flex items-center">
+                        <span class="lang-es">Sobre Mí</span>
+                        <span class="lang-en">About Me</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contacto" class="text-gray-300 hover:text-white font-semibold transition duration-200 px-3 py-1 rounded-full hover:bg-gray-700 flex items-center">
+                        <span class="lang-es">Contacto</span>
+                        <span class="lang-en">Contact</span>
+                    </a>
+                <li class="ml-4 pl-4 border-l border-gray-600">
+                    <button id="lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                        <span class="lang-es text-base font-semibold flex items-center">EN<i class="fas fa-globe text-base ml-2"></i></span>
+                        <span class="lang-en text-base font-semibold flex items-center">ES<i class="fas fa-globe text-base ml-2"></i></span>
+                    </button>
+                </li>
+            </ul>
+            <div class="md:hidden ml-auto">
+                <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none backdrop-blur-sm rounded-full p-2 border border-gray-700 shadow-lg">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+    <!--menu mobil-->
+        <div id="mobile-menu" class="hidden md:hidden bg-transparent backdrop-blur-sm shadow-lg py-4 mt-2 rounded-lg mx-4">
+            <ul class="flex flex-col items-center space-y-4">
+                <li>
+                    <a href="#inicio" class="block py-2 text-gray-300 hover:text-white font-medium transition duration-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                        <span class="lang-es">Inicio</span>
+                        <span class="lang-en">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#experiencia" class="block py-2 text-gray-300 hover:text-white font-medium transition duration-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                        <span class="lang-es">Experiencia</span>
+                        <span class="lang-en">Experience</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#proyectos" class="block py-2 text-gray-300 hover:text-white font-medium transition duration-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                        <span class="lang-es">Proyectos</span>
+                        <span class="lang-en">Projects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#sobre-mi" class="block py-2 text-gray-300 hover:text-white font-medium transition duration-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                        <span class="lang-es">Sobre Mí</span>
+                        <span class="lang-en">About Me</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#contacto" class="block py-2 text-gray-300 hover:text-white font-medium transition duration-200" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                        <span class="lang-es">Contacto</span>
+                        <span class="lang-en">Contact</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="mt-4 text-center">
+                <button id="mobile-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none p-2 rounded-full transition duration-200 ease-in-out">
+                    <span class="lang-es text-base font-semibold">ES <i class="fas fa-globe text-base ml-1"></i></span>
+                    <span class="lang-en text-base font-semibold">EN <i class="fas fa-globe text-base ml-1"></i></span>
+                </button>
+            </div>
+        </div>
+    </header>
+<!-- Inicio Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center min-h-screen bg-stars bg-cover bg-center text-white overflow-hidden scroll-mt-10 pt-1">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
+            <div class="inline-flex items-center bg-green-600 bg-opacity-20 text-black-300 text-sm font-medium px-4 py-1 rounded-full mb-8 border border-green-700 shadow-md -mt-4">
+                <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></span>
+                <span class="lang-es">¡Disponible para trabajar!</span>
+                <span class="lang-en">Available for Work!</span>
+            </div>
+            <div class="text-center">
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-4 leading-tight">
+                    <span class="lang-es">¡Hola, soy <span class="text-blue-500">Braulio Herrera!</span></span>
+                    <span class="lang-en">Hi, I'm <span class="text-blue-500">Braulio Herrera!</span></span>
+                </h1>
+                <p class="text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-6 font-light">
+                    <span class="lang-es">Analista de Datos - Dirección de Empresas</span>
+                    <span class="lang-en">Data Analyst - Business Management</span>
+                </p>
+                <p class="text-md sm:text-lg text-white max-w-2xl mx-auto mb-8 leading-relaxed">
+                    <span class="lang-es">Aplico pensamiento analítico y visión estratégica para transformar datos en decisiones que impulsan resultados reales en los negocios</span>
+                    <span class="lang-en">I apply analytical thinking and strategic vision to turn data into decisions that drive real business results.</span>
+                </p>
+                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10">
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Power BI</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointerhover: bg-opacity-40">SQL</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Python</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Excel</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">DAX</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">ETL & Modeling</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Machine Learning</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Looker Studio</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Lean Six Sigma</span>
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <a href="#contacto" class="px-8 py-3 border border-gray-500 text-white rounded-full text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:border-blue-500 hover:shadow-xl">
+                        <i class="fas fa-paper-plane mr-3"></i> 
+                        <span class="lang-es">Contactarme</span>
+                        <span class="lang-en">Contact Me</span>
+                    </a>
+                    <a href="#proyectos" class="px-8 py-3 border border-gray-500 text-white rounded-full text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:border-blue-500 hover:shadow-xl">
+                        <i class="fas fa-briefcase mr-2"></i> 
+                        <span class="lang-es">Ver Proyectos</span>
+                        <span class="lang-en">View Projects</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Experiencia Laboral Section -->    
+    <section id="experiencia" class="py-16 sm:py-20 lg:py-24 bg-transparent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 relative pb-4">
+                <span class="lang-es">Experiencia Laboral</span>
+                <span class="lang-en">Work Experience</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+            </h2>
+            <div class="flex justify-center mb-8 space-x-4">
+                <button class="experience-tab-button active-tab px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ease-in-out bg-blue-400 text-white transform scale-105" data-target="data-analysis-experience">
+                    <span class="lang-es">Análisis de Datos</span>
+                    <span class="lang-en">Data Analysis</span>
+                </button>
+                <button class="experience-tab-button px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 ease-in-out bg-transparent text-white hover:bg-black hover:bg-opacity-10 hover:scale-105" data-target="business-management-experience">
+                    <span class="lang-es">Dirección de Empresas</span>
+                    <span class="lang-en">Business Management</span>
+                </button>
+            </div>
+            <div id="data-analysis-experience" class="experience-category space-y-10">
+        <div class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 hover:bg-opacity-30">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-white mb-1">
+                        <span class="lang-es">Analista de Datos</span>
+                        <span class="lang-en">Data Analyst</span>
+                    </h3>
+                    <p class="text-blue-400 text-lg sm:text-xl">Freelance</p>
+                    <p class="text-gray-400 text-sm sm:text-base">
+                        <span class="lang-es">Costa Rica</span>
+                        <span class="lang-en">Costa Rica</span>
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <p class="text-gray-300 text-sm sm:text-base font-medium">
+                        <span class="lang-es">Octubre 2024 - 2025</span>
+                        <span class="lang-en">October 2024 - 2025</span>
+                    </p>
+                    <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mt-1">
+                        <span class="lang-es">Actual</span>
+                        <span class="lang-en">Current</span>
+                    </span>
+                </div>
+            </div>
+            <p class="text-gray-300 leading-relaxed text-base mb-4">
+                <span class="lang-es">Brindo servicios freelance de análisis de datos orientados a mejorar la eficiencia operativa y apoyar la toma de decisiones estratégicas. He ayudado a organizaciones a aumentar su productividad hasta en un 20% mediante paneles interactivos y reportes detallados, adaptados a sus necesidades específicas. Cuento con una sólida capacidad analítica, experiencia en la detección de patrones y tendencias, que me permiten generar recomendaciones accionables basadas en datos.</span>
+                <span class="lang-en">I provide freelance data analysis services focused on improving operational efficiency and supporting strategic decision-making. I have helped organizations increase productivity by up to 20% through interactive dashboards and detailed reports tailored to their specific needs. I bring strong analytical skills, experience in identifying trends and patterns, and market analysis expertise to deliver actionable, data-driven insights.</span>
+            </p>
+            <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                <li>
+                    <span class="lang-es">Diseñé y desarrollé dashboards interactivos en Power BI para el monitoreo en tiempo real de KPIs.</span>
+                    <span class="lang-en">Designed and developed interactive dashboards in Power BI for real-time KPI monitoring.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Automaticé la actualización de informes y visualizaciones mediante SQL y Power BI.</span>
+                    <span class="lang-en">Automated report and visualization updates using SQL and Power BI.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Realicé análisis predictivos y estudios de tendencias para apoyar la planificación estratégica.</span>
+                    <span class="lang-en">Performed predictive analytics and trend analysis to support strategic planning.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Desarrollé análisis de mercado enfocados en detectar oportunidades y optimizar decisiones comerciales.</span>
+                    <span class="lang-en">Conducted market analysis to identify opportunities and support business optimization.</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 hover:bg-opacity-30">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-white mb-1"> <span class="lang-es">Analista de Datos Junior</span>
+                        <span class="lang-en">Junior Data Analyst</span>
+                    </h3>
+                    <p class="text-blue-400 text-lg sm:text-xl">Paragon One</p>
+                    <p class="text-gray-400 text-sm sm:text-base">
+                        <span class="lang-es">EEUU - Remoto</span>
+                        <span class="lang-en">EEUU - Remote</span>
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <p class="text-gray-300 text-sm sm:text-base font-medium">
+                        <span class="lang-es">Feb 2023 - Agos 2025</span>
+                        <span class="lang-en">Feb 2023 - Agos 2025</span>
+                    </p>
+                    <span class="inline-block bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mt-1">
+                        <span class="lang-es">Pasantía</span>
+                        <span class="lang-en">internship</span>
+                    </span>
+                </div>
+            </div>
+            <p class="text-gray-300 leading-relaxed text-base mb-4">
+                <span class="lang-es">Colaboré en la limpieza y preparación de grandes volúmenes de datos de usuarios para el equipo de producto. Contribuí al diseño de experimentos A/B y al análisis de sus resultados para optimizar la experiencia del usuario.</span>
+                <span class="lang-en">Collaborated in cleaning and preparing large volumes of user data for the product team. Contributed to the design of A/B experiments and analysis of their results to optimize user experience.</span>
+            </p>
+            <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                <li>
+                    <span class="lang-es">Limpieza y transformación de datos usando Pandas en Python.</span>
+                    <span class="lang-en">Cleaned and transformed data using Pandas in Python.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Creación de reportes semanales sobre el rendimiento de la plataforma.</span>
+                    <span class="lang-en">Created weekly reports on platform performance.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Soporte en la implementación de bases de datos SQL para el almacenamiento de datos (Migraciones de Excel a SQL).</span>
+                    <span class="lang-en">Supported the implementation of SQL databases for data storage (Excel to SQL Migrations).</span>
+                </li>
+            </ul>
+        </div>
+    </div> <div id="business-management-experience" class="experience-category space-y-10 hidden">
+        <div class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 hover:bg-opacity-30">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-semibold text-white mb-1"> <span class="lang-es">Administrador general</span>
+                        <span class="lang-en">General administrator</span>
+                    </h3>
+                    <p class="text-blue-400 text-lg sm:text-xl">Reserva el Toledo</p>
+                    <p class="text-gray-400 text-sm sm:text-base">
+                        <span class="lang-es">Guanacaste, Costa Rica</span>
+                        <span class="lang-en">Guanacaste, Costa Rica</span>
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <p class="text-gray-300 text-sm sm:text-base font-medium">
+                        <span class="lang-es">Ene 2020 - Mar 2022</span>
+                        <span class="lang-en">Jan 2020 - Mar 2022</span> </p>
+                </div>
+            </div>
+            <p class="text-gray-300 leading-relaxed text-base mb-4">
+                <span class="lang-es">Desempeñé el rol de Administrador General en El Toledo, liderando la supervisión de operaciones administrativas, logísticas y comerciales. Mi enfoque estuvo orientado a la eficiencia operativa, la sostenibilidad y el uso estratégico de datos para la toma de decisiones. Implementé tableros de control en Power BI, coordiné con proveedores clave y gestioné presupuestos enfocados en objetivos claros y medibles.</span>
+                <span class="lang-en">I served as General Manager at El Toledo, overseeing administrative, logistical, and commercial operations. My approach focused on operational efficiency, sustainability, and the strategic use of data to support decision-making. I implemented Power BI dashboards, coordinated with key suppliers, and managed budgets aligned with measurable objectives</span>
+            </p>
+            <ul class="list-disc list-inside text-gray-400 text-sm space-y-1">
+                <li>
+                    <span class="lang-es">Supervisé las operaciones administrativas, logísticas y comerciales de la Reserva.</span>
+                    <span class="lang-en">Oversaw the company’s administrative, logistical, and commercial operations.</span>
+                </li>
+                <li>
+                    <span class="lang-es">Estuve a cargo de la planificación y control de presupuestos, coordinación con proveedores estratégicos y manejo de compras.</span>
+                    <span class="lang-en">Managed budget planning and control, coordinated with strategic suppliers, and handled procurement</span>
+                </li>
+                <li>
+                    <span class="lang-es">Diseñé e implementé estrategias orientadas a objetivos, además de desarrollar dashboards de control en Power BI para facilitar la toma de decisiones.</span>
+                    <span class="lang-en">Designed and implemented goal-oriented strategies, and developed Power BI dashboards to support data-driven decision-making.</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section> 
+            
+<!--Seccion de proyectos-->
+    <section id="proyectos" class="py-16 sm:py-20 lg:py-24 bg-transparent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 relative pb-4">
+                <span class="lang-es">Mis Proyectos</span>
+                <span class="lang-en">My Projects</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Proyecto 1 -->
+                <a href="proyecto1.html" class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 flex flex-col min-h-[480px]">
+                    <img src="images/pro1.png" alt="Análisis de Campañas de Marketing" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold text-white mb-2">
+                            <span class="lang-es">Análisis de Campañas de Marketing</span>
+                            <span class="lang-en">Marketing Campaign Analysis</span>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4 flex-grow">
+                            <span class="lang-es">Diseñé y ejecuté un proyecto de análisis de mercado orientado a mejorar la segmentación de clientes y optimizar el ROI de campañas de marketing.</span>
+                            <span class="lang-en">I designed and executed a market analysis project aimed at improving customer segmentation and optimizing the ROI of marketing campaigns.</span>
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="bg-blue-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-green-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Jupyter Notebook</span>
+                            <span class="bg-blue-400 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Pandas</span>
+                            <span class="bg-purple-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Scikit-learn</span>
+                            <span class="bg-yellow-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Power BI</span>
+                        </div>
+                    </div>
+                </a>
+        <!-- Proyecto 2 -->
+                <a href="proyecto2.html" class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 flex flex-col min-h-[480px]">
+                    <img src="images/pro2.png" alt="Optimización de Campañas de Marketing" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold text-white mb-2">
+                            <span class="lang-es">Análisis de cotizaciones en Bolsa Empresas tecnológicas</span>
+                            <span class="lang-en">Analysis of Stock Market Quotes for Tech Companies</span>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4 flex-grow">
+                            <span class="lang-es">Análisis financiero de las principales empresas tecnológicas del mercado bursátil durante el período 2023–2025, con el objetivo de identificar patrones de rendimiento, correlaciones y proyecciones de comportamiento futuro.</span>
+                            <span class="lang-en">Financial analysis of leading tech companies in the stock market during the 2023–2025 period, aiming to identify performance patterns, correlations, and future behavior projections.</span>
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="bg-blue-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-yellow-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">API</span>
+                            <span class="bg-red-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Monte Carlo</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Proyecto 3 -->
+                <a href="" class="block bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 ease-in-out group border border-gray-700 hover:border-blue-500 flex flex-col min-h-[480px]">
+                    <img src="https://placehold.co/600x400/1a1a1a/e0e0e0?text=Predicción+Churn" alt="No avaliable for Now" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold text-white mb-2">
+                            <span class="lang-es">Análisis de Encuesta sobre Tendencias Tecnológicas (IBM)</span>
+                            <span class="lang-en">Survey Analysis on Technology Trends (IBM)</span>
+                        </h3>
+                        <p class="text-gray-300 text-sm mb-4 flex-grow">
+                            <span class="lang-es">Como parte del proyecto final del Certificado de Analista de Datos de IBM, realicé un análisis integral de una encuesta global sobre tecnologías emergentes.</span>
+                            <span class="lang-en">As part of the final project for the IBM Data Analyst Certificate, I conducted a comprehensive analysis of a global survey on emerging technologies.</span>
+                        </p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span class="bg-blue-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Web-Scraping</span>
+                            <span class="bg-purple-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Python</span>
+                            <span class="bg-indigo-900 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">Power BI</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="text-center mt-12">
+                <a href="https://github.com/Brauliohg8038" target="_blank" class="inline-flex items-center px-8 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-lg font-semibold shadow-lg transition duration-300 ease-in-out">
+                    <i class="fab fa-github mr-3"></i>
+                    <span class="lang-es">GitHub</span>
+                    <span class="lang-en">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+<!-- Sección sobre mi -->
+    </section>
+    <section id="sobre-mi" class="py-16 sm:py-20 lg:py-24 bg-transparent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 relative pb-4">
+                <span class="lang-es">Sobre Mí</span>
+                <span class="lang-en">About Me</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+            </h2>
+
+            <div class="flex flex-col md:flex-row items-center md:space-x-10 bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-6 sm:p-8 shadow-lg border border-gray-700 mb-16">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="images/foto.png" alt="Tu Foto Profesional" class="rounded-full shadow-xl w-48 h-48 sm:w-60 sm:h-60 mx-auto object-cover border-4 border-blue-400">
+                    <div>
+                        <p class="text-gray-300 text-sm text-center mt-4 italic">
+                            <span class="lang-es">"Mi formación marcó el inicio de una carrera enfocada en análisis y mejora continua."</span>
+                            <span class="lang-en hidden">"My academic journey sparked a career focused on analytics and continuous improvement."</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-2/3 text-gray-300 leading-relaxed text-lg text-center md:text-left">
+                    <p class="mb-4">
+                        <span class="lang-es">Soy un analista de datos con formación en Dirección de empresas con experiencia en proyectos reales que integran áreas como marketing, finanzas, operaciones y talento humano. Mi enfoque está en traducir datos complejos en soluciones accionables que aporten valor estratégico y mejoren la toma de decisiones.</span>
+                        <span class="lang-en">I am a data analyst with a background in Business Management, experienced in real projects integrating areas such as marketing, finance, operations, and human talent. My focus is on translating complex data into actionable solutions that provide strategic value and improve decision-making.</span>
+                    </p>
+                    <p class="mb-4">
+                        <span class="lang-es">He desarrollado dashboards interactivos, modelos predictivos y automatizaciones en herramientas como <span class="font-semibold text-blue-400">Python</span> (Pandas, NumPy, Scikit-learn, Matplotlib), <span class="font-semibold text-blue-400">SQL, Power BI y Looker Studio</span>. También cuento con formación en Lean Six Sigma, lo que refuerza mi capacidad para optimizar procesos y orientar los análisis a resultados medibles.</span>
+                        <span class="lang-en">I have developed interactive dashboards, predictive models, and automations using tools such as <span class="font-semibold text-blue-400">Python</span> (Pandas, NumPy, Scikit-learn, Matplotlib), <span class="font-semibold text-blue-400">SQL, Power BI, and Looker Studio</span>. I also have training in Lean Six Sigma, which enhances my ability to optimize processes and orient analyses towards measurable results.</span>
+                    </p>
+                    <p>
+                        <span class="lang-es">Me apasiona aplicar el análisis de datos para resolver problemas reales y generar impacto estratégico.</span>
+                        <span class="lang-en">I am passionate about applying data analysis to solve real problems and generate strategic impact.</span>
+                    </p>
+                </div>
+            </div>
+<!-- Sección de formación académica -->
+            <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 relative pb-3">
+                <span class="lang-es">Formación Académica</span>
+                <span class="lang-en">Academic Background</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded-full"></span>
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-40">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-graduation-cap text-blue-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-blue-400">
+                            <span class="lang-es">Licenciatura en Dirección de Empresas</span>
+                            <span class="lang-en">Licenciate Degree in Business Management</span>
+                        </h4>
+                    </div>
+                    <p class="text-gray-300 text-lg">
+                        <span class="lang-es">Universidad de Costa Rica</span>
+                        <span class="lang-en">University of Costa Rica</span>
+                    </p>
+                    <p class="text-white text-sm mt-1"> 
+                        <span class="lang-es">Actualmente</span> 
+                        <span class="lang-en">Currently Enrolled</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-40">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-graduation-cap text-blue-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-blue-400">
+                            <span class="lang-es">Bachillerato en Dirección de Empresas</span>
+                            <span class="lang-en">Bachelor's Degree in Business Management</span>
+                        </h4>
+                    </div>
+                    <p class="text-gray-300 text-lg">
+                        <span class="lang-es">Universidad de Costa Rica</span>
+                        <span class="lang-en">University of Costa Rica</span>
+                    </p>
+                    <p class="text-white text-sm mt-1">
+                        <span class="lang-es">2024</span>
+                        <span class="lang-en">2024</span>
+                    </p>
+                </div>
+            </div>
+
+<!-- Sección de cursos y certificaciones -->
+            <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 relative pb-3">
+                <span class="lang-es">Cursos y Certificaciones</span>
+                <span class="lang-en">Courses & Certifications</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded-full"></span>
+            </h3>
+            <div class="grid grid-cols-1 gap-6 mb-16 max-w-2xl mx-auto">
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fas fa-award text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">IBM Data Analyst Professional Certificate</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">IBM - <span class="text-white text-lg">2025</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Dominio en análisis y visualización de datos con Python, SQL, Excel, Cognos y Looker Studio. Incluye limpieza, modelado, presentación de datos y el uso de herramientas de Machine Learning para análisis predictivo.</span>
+                        <span class="lang-en">Mastery of data analysis and visualization using Python, SQL, Excel, Cognos, and Looker Studio. Includes data cleaning, modeling, presentation, and the use of Machine Learning tools for predictive analysis.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fas fa-chart-bar text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">Power BI Specialist</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">Cámara de Comercio Exterior - <span class="text-white text-lg">2024</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Enfoque práctico en la creación de informes dinámicos, modelos de datos, dashboards interactivos y métricas personalizadas con Power BI en contextos empresariales.</span>
+                        <span class="lang-en">Practical training focused on building dynamic reports, data models, interactive dashboards, and custom metrics with Power BI in business scenarios.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fas fa-leaf text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">Green Belt Lean Six Sigma</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">OPEX Mentor - <span class="text-white text-lg">2023</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Formación en metodologías Lean Six Sigma para la mejora de procesos, reducción de defectos y aumento de eficiencia, aplicando herramientas como DMAIC y análisis de causa raíz.</span>
+                        <span class="lang-en">Certified training in Lean Six Sigma methodologies for process improvement, defect reduction, and efficiency optimization, applying tools such as DMAIC and root cause analysis</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fas fa-database text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">Databases and SQL for Data Science with Python</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">IBM - <span class="text-white text-lg">2024</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Uso avanzado de SQL para consultas, gestión de bases de datos y su integración con Python para análisis de datos y automatización de tareas.</span>
+                        <span class="lang-en">Specialized training in advanced SQL for querying and managing databases, integrated with Python for data analysis and task automation.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fas fa-chart-line text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">Data Visualization and Dashboards with Excel and Cognos</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">IBM - <span class="text-white text-lg">2025</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Desarrollo de visualizaciones efectivas y paneles interactivos utilizando Excel y Cognos Analytics para apoyar la toma de decisiones basada en datos.</span>
+                        <span class="lang-en">Hands-on experience designing effective visualizations and interactive dashboards using Excel and Cognos Analytics to support data-driven decision-making.</span>
+                    </p>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 shadow-xl hover:shadow-2xl transition-all duration-300 ease-in-out transform hover:scale-105 border border-gray-700 hover:bg-opacity-50">
+                    <div class="flex items-center mb-1">
+                        <i class="fab fa-python text-green-400 text-2xl mr-3"></i>
+                        <h4 class="text-xl font-semibold text-green-400">Python for Data Science, AI & Development</h4>
+                    </div>
+                    <p class="text-blue-300 text-lg -mt-1">IBM - <span class="text-white text-lg">2025</span></p>
+                    <p class="text-gray-400 text-base mt-2">
+                        <span class="lang-es">Certificado en Python aplicado a ciencia de datos, inteligencia artificial y desarrollo de soluciones. Incluye manejo de datos, programación y uso de librerías clave.</span>
+                        <span class="lang-en">Certificate in Python for data science, artificial intelligence, and application development. Covers data handling, programming fundamentals, and essential libraries.</span>
+                    </p>
+                </div>
+            </div>
+    </section>
+<!--Seccion de habilidades-->
+    <section id="habilidades" class="py-16 sm:py-20 lg:py-24 bg-transparent text-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 relative pb-4">
+            <span class="lang-es">Mis Habilidades</span>
+            <span class="lang-en">My Skills</span>
+            <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center">
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-blue-900 rounded-full">
+                    <i class="fas fa-database text-4xl text-blue-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Análisis de Datos</span>
+                    <span class="lang-en">Data Analysis</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Extraigo y analizo datos para generar insights que apoyen la toma de decisiones estratégicas y basadas en evidencia.</span>
+                    <span class="lang-en">I extract and analyze data to generate insights that support strategic and evidence-based decision-making.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-green-900 rounded-full">
+                    <i class="fas fa-chart-line text-4xl text-green-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Visualización de Datos</span>
+                    <span class="lang-en">Data Visualization</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Diseño dashboards interactivos y visualizaciones que comunican tendencias, anomalías y el rendimiento de KPIs.</span>
+                    <span class="lang-en">I design interactive dashboards and visualizations that communicate trends, anomalies, and KPI performance.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-purple-900 rounded-full">
+                    <i class="fas fa-briefcase text-4xl text-purple-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Análisis de Negocio</span>
+                    <span class="lang-en">Business Analysis</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Identifico oportunidades y cuellos de botella a través del análisis de datos enfocado en KPIs clave e indicadores estratégicos.</span>
+                    <span class="lang-en">I identify opportunities and bottlenecks through data analysis focused on key KPIs and strategic indicators.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-red-900 rounded-full">
+                    <i class="fas fa-robot text-4xl text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Machine Learning</span>
+                    <span class="lang-en">Machine Learning</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Desarrollo modelos predictivos para clasificar, segmentar o anticipar comportamientos que optimizan procesos de negocio.</span>
+                    <span class="lang-en">I develop predictive models to classify, segment, or anticipate behaviors that optimize business processes.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-yellow-900 rounded-full">
+                    <i class="fas fa-broom text-4xl text-yellow-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Limpieza de Datos</span>
+                    <span class="lang-en">Data Cleaning</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Limpio, transformo y preparo datos para asegurar que estén listos para el análisis y sean confiables para la toma de decisiones.</span>
+                    <span class="lang-en">I clean, transform, and prepare data to ensure it's ready for analysis and reliable for decision-making.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-teal-900 rounded-full">
+                    <i class="fas fa-dollar-sign text-4xl text-teal-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Análisis Financiero</span>
+                    <span class="lang-en">Financial Analysis</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Evalúo el rendimiento utilizando ratios financieros clave, proyecciones y análisis de sensibilidad basados en datos.</span>
+                    <span class="lang-en">I evaluate performance using key financial ratios, projections, and data-driven sensitivity analysis.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-orange-900 rounded-full">
+                    <i class="fas fa-folder-open text-4xl text-orange-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Gestión de Proyectos de Datos</span>
+                    <span class="lang-en">Data Project Management</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Coordino proyectos de principio a fin, enfocados en resultados accionables y alineados con los objetivos de negocio.</span>
+                    <span class="lang-en">I coordinate projects from start to finish, focused on actionable results and aligned with business objectives.</span>
+                </p>
+            </div>
+
+            <div class="w-full max-w-xs bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col items-center text-center transform hover:-translate-y-1 hover:shadow-xl transition-all duration-200 ease-in-out border border-gray-700">
+                <div class="mb-3 p-3 bg-indigo-900 rounded-full">
+                    <i class="fab fa-python text-4xl text-indigo-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                    <span class="lang-es">Automatización con Python</span>
+                    <span class="lang-en">Python Automation</span>
+                </h3>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    <span class="lang-es">Automatizo flujos de trabajo de análisis, informes y actualizaciones de datos para aumentar la eficiencia operativa.</span>
+                    <span class="lang-en">I automate analysis workflows, reports, and data updates to increase operational efficiency.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    </section>
+<!--Seccion de contacto-->
+    <section section id="contacto" class="py-16 sm:py-20 lg:py-24 bg-transparent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 relative pb-4">
+                <span class="lang-es">Contacto</span>
+                <span class="lang-en">Contact</span>
+                <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-blue-500 rounded-full"></span>
+            </h2>
+            <p class="text-lg text-gray-300 mb-8">
+                <span class="lang-es">¿Interesado en colaborar o tienes alguna pregunta? No dudes en contactarme.</span>
+                <span class="lang-en">Interested in collaborating or have a question? Feel free to contact me.</span>
+            </p>
+            <div class="flex justify-center space-x-6 sm:space-x-8 mb-12">
+                <a href="https://wa.me/50688881234" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-200">
+                    <i class="fab fa-whatsapp text-4xl sm:text-5xl"></i>
+                    <span class="block text-sm mt-2">
+                        <span class="lang-es">WhatsApp</span>
+                        <span class="lang-en">WhatsApp</span>
+                    </span>
+                </a>
+                <a href="mailto:braulioherre98@gmail.com" class="text-gray-400 hover:text-white transition duration-200">
+                    <i class="fas fa-envelope text-4xl sm:text-5xl"></i>
+                    <span class="block text-sm mt-2">
+                        <span class="lang-es">Correo</span>
+                        <span class="lang-en">Email</span>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/in/braulio-herrerag" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-200">
+                    <i class="fab fa-linkedin text-4xl sm:text-5xl"></i>
+                    <span class="block text-sm mt-2">LinkedIn</span>
+                </a>
+                <a href="https://github.com/Brauliohg8038" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition duration-200">
+                    <i class="fab fa-github text-4xl sm:text-5xl"></i>
+                    <span class="block text-sm mt-2">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-white py-6 text-center border-t border-gray-700">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-semibold mb-4">
+                &copy; <span id="current-year"></span> Braulio HG. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        // --- 1. Para las estrellas animadas ---
+        const starsContainer = document.getElementById('stars-container');
+        const numStars = 100;
+
+        if (starsContainer) {
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${1.5 + Math.random() * 3}s`;
+                star.style.opacity = Math.random() * 0.5 + 0.3;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // --- 2. Para el año actual en el footer ---
+        const yearElements = document.querySelectorAll('#current-year, #current-year-en');
+        const currentYear = new Date().getFullYear();
+        yearElements.forEach(el => {
+            el.textContent = currentYear;
+        });
+
+        // --- 3. Lógica para el cambio de idioma ---
+        const langToggleButton = document.getElementById('lang-toggle-button');
+        const mobileLangToggleButton = document.getElementById('mobile-lang-toggle-button');
+        const htmlElement = document.documentElement;
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+            htmlElement.lang = lang;
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // Cargar el idioma preferido al iniciar la página
+        const storedLang = localStorage.getItem('preferredLang') || 'es';
+        setLanguage(storedLang);
+
+        // Función auxiliar para configurar los botones de idioma
+        function setupLanguageToggleButton(button) {
+            if (button) {
+                button.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    // console.log('Cambiando idioma a:', newLang); // Puedes descomentar para depurar
+                    setLanguage(newLang);
+
+                    // Opcional: Cerrar el menú móvil si se cambia de idioma desde el botón móvil
+                    if (button.id === 'mobile-lang-toggle-button') {
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+        }
+
+        setupLanguageToggleButton(langToggleButton);
+        setupLanguageToggleButton(mobileLangToggleButton);
+
+        // --- 4. Lógica para el menú móvil ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // Cerrar menú móvil al hacer clic en un enlace interno
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // --- 5. Lógica para el cambio de pestañas en la sección de experiencia ---
+        const tabButtons = document.querySelectorAll('.experience-tab-button');
+        const experienceCategories = document.querySelectorAll('.experience-category');
+
+        function showCategory(targetId) {
+            experienceCategories.forEach(category => {
+                category.classList.add('hidden');
+            });
+            const targetCategory = document.getElementById(targetId);
+            if (targetCategory) {
+                targetCategory.classList.remove('hidden');
+            }
+        }
+
+        function setActiveButton(clickedButton) {
+            tabButtons.forEach(button => {
+                button.classList.remove('active-tab', 'bg-blue-600', 'transform', 'scale-105');
+                button.classList.add('bg-transparent', 'text-white', 'hover:bg-white', 'hover:bg-opacity-10'); // Eliminé hover:scale-105 de aquí para evitar redundancia
+            });
+
+            clickedButton.classList.add('active-tab', 'bg-blue-600', 'transform', 'scale-105');
+            clickedButton.classList.remove('bg-transparent', 'hover:bg-white', 'hover:bg-opacity-10'); // Eliminé hover:scale-105 de aquí
+        }
+
+        // Configurar listeners para las pestañas
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                showCategory(targetId);
+                setActiveButton(button);
+            });
+        });
+
+        // Asegurar que la primera pestaña esté activa visualmente al cargar la página
+        const defaultButton = document.querySelector('.experience-tab-button[data-target="data-analysis-experience"]');
+        if (defaultButton) {
+            showCategory(defaultButton.dataset.target); // Asegura que la categoría por defecto esté visible
+            setActiveButton(defaultButton);             // Establece el botón por defecto como activo visualmente
+        }
+    });
+    </script>
+</body>
+</html>

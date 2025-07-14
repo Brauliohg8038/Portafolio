@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <span class="lang-es">Análisis de Campañas de Marketing </span>
+        <span class="lang-en hidden">Analysis of Marketing Campaigns</span>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            scroll-behavior: smooth;
+        }
+        /* Añade estas reglas para el scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        /* Para asegurar que los elementos ocultos realmente no ocupen espacio */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="dotted-background">
+    <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+            <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                <span class="lang-es text-base font-semibold flex items-center">EN <i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en text-base font-semibold flex items-center">ES <i class="fas fa-globe text-base ml-2"></i></span>
+            </button>
+            <a href="https://github.com/Brauliohg8038/Analisis-de-Marketing/blob/master/Marketing_Analisis.ipynb" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-00 p-6 sm:p-8 text-white text-center rounded-t-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                    <span class="lang-es">Análisis de la eficiencia y el desempeño de las campañas de Marketing</span>
+                    <span class="lang-en hidden">Analysis of the efficiency and performance of marketing campaigns</span>
+                </h1>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Resumen Ejecutivo</span>
+                        <span class="lang-en hidden">Executive Summary</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed">
+                        <span class="lang-es">En un entorno empresarial cada vez más competitivo, las campañas de marketing deben estar respaldadas por decisiones basadas en datos. Este proyecto realiza un análisis integral de campañas de marketing, combinando análisis exploratorio, segmentación de clientes y modelos de machine learning para evaluar el desempeño, entender el comportamiento del consumidor y predecir resultados clave. Los hallazgos permiten optimizar el uso del presupuesto, mejorar la personalización de estrategias y aumentar el retorno de inversión (ROI).</span>
+                        <span class="lang-en hidden">In an increasingly competitive business environment, marketing campaigns must be supported by data-driven decisions. This project conducts a comprehensive analysis of marketing campaigns by combining exploratory analysis, customer segmentation, and machine learning models to evaluate performance, understand consumer behavior, and predict key outcomes. The findings help optimize budget allocation, improve strategy personalization, and increase return on investment (ROI).</span>
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Problema y Objetivos</span>
+                        <span class="lang-en hidden">Problem and Objectives</span>
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">El Problema</span>
+                                <span class="lang-en hidden">The Problem</span>
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                <span class="lang-es">La empresa invierte grandes sumas en campañas de marketing sin comprender con claridad qué estrategias son efectivas, qué canales generan mayor impacto ni cómo se comportan sus clientes en diferentes contextos.</span>
+                                <span class="lang-en hidden">The company invests large sums in marketing campaigns without clearly understanding which strategies are effective, which channels have the greatest impact, or how their customers behave in different contexts.</span>
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Objetivos</span>
+                                <span class="lang-en hidden">Objectives</span>
+                            </h3>
+                                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                    <li>
+                                        <span class="lang-es">Evaluar el rendimiento financiero de las campañas y su ROI.</span>
+                                        <span class="lang-en hidden">Evaluate financial campaign performance and ROI.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Identificar los canales y contenidos más efectivos.</span>
+                                        <span class="lang-en hidden">Identify the most effective channels and content.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Analizar el comportamiento del cliente por ubicación y edad.</span>
+                                        <span class="lang-en hidden">Analyze customer behavior by location and age.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Segmentar a los clientes para personalizar las estrategias.</span>
+                                        <span class="lang-en hidden">Segment customers to personalize strategies.</span>
+                                    </li>
+                                    <li>
+                                        <span class="lang-es">Desarrollar modelos predictivos para anticipar el desempeño de campañas.</span>
+                                        <span class="lang-en hidden">Develop predictive models to anticipate campaign performance.</span>
+                                    </li>
+                                </ul>
+                        </div>
+                    </div>
+                </section>
+<!-- Datos y Metodología -->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Datos y Metodología</span>
+                        <span class="lang-en hidden">Data and Methodology</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="lang-es">El análisis se realizó utilizando un conjunto de datos que incluía información detallada sobre 20 campañas de marketing, métricas de comportamiento online (como clics, registros y compras), datos demográficos (edad, ubicación), participación en programas de lealtad y encuestas de satisfacción. El proceso metodológico comenzó con la limpieza y preparación de los datos, seguido de un análisis exploratorio para detectar patrones y anomalías. Se aplicaron técnicas de segmentación para entender mejor a los clientes, y luego se desarrollaron modelos de regresión (incluyendo regresión polinómica con regularización Ridge) y algoritmos de machine learning como Random Forest y XGBoost. La validación cruzada, el análisis de residuos y el cálculo de VIF aseguraron la robustez de los modelos.</span>
+                        <span class="lang-en hidden">The analysis was conducted using a dataset that included detailed information on 20 marketing campaigns, online behavior metrics (such as clicks, registrations, and purchases), demographic data (age and location), participation in loyalty programs, and customer satisfaction surveys. The methodological process began with data cleaning and preparation, followed by exploratory data analysis to detect patterns and anomalies. Segmentation techniques were applied to better understand customer profiles, and regression models (including polynomial regression with Ridge regularization) as well as machine learning algorithms such as Random Forest and XGBoost were developed. Cross-validation, residual analysis, and VIF calculation ensured the robustness of the models.</span>
+                    </p>
+                    <div class="text-gray-300 leading-relaxed mb-4">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Proceso de Análisis</span>
+                                <span class="lang-en hidden">Analysis Process</span>
+                            </h3>
+                        <ul class="list-disc list-inside text-gray-300 space-y-2">
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Limpieza y recolección de Datos</span>
+                                    <span class="lang-en hidden">Data Cleaning and Collection</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Análisis Exploratorio de Datos (EDA)</span>
+                                    <span class="lang-en hidden">Exploratory Data Analysis (EDA)</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Segmentación de clientes (por edad, ubicación, lealtad).</span>
+                                    <span class="lang-en hidden">Customer Segmentation (by age, location, loyalty).</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Modelos de regresión (lineal, polinómica con Ridge).</span>
+                                    <span class="lang-en hidden">Regression Models (linear, polynomial with Ridge).</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Modelos de Machine Learning (Random Forest y XGBoost).</span>
+                                    <span class="lang-en hidden">Machine Learning Models (Random Forest and XGBoost).</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="font-semibold">
+                                    <span class="lang-es">Validación cruzada, análisis de residuos y evaluación del VIF.</span>
+                                    <span class="lang-en hidden">Cross-validation, residual analysis, and VIF evaluation.</span>
+                                </span>
+                            </li>
+                        </ul>
+                            <h3 class="text-xl font-medium text-white mb-2 mt-6"> <span class="lang-es">Herramientas Utilizadas</span>
+                                <span class="lang-en hidden">Tools Used</span>
+                            </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Python</span>
+                            <span class="bg-green-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Pandas</span>
+                            <span class="bg-purple-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Numpy</span>
+                            <span class="bg-red-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Scikit-learn</span>
+                            <span class="bg-indigo-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Matplotlib</span>
+                            <span class="bg-pink-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Seaborn</span>
+                            <span class="bg-yellow-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">SciPy</span> 
+                            <span class="bg-orange-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">XGBoost</span> 
+                            <span class="bg-yellow-700 text-white text-sm font-medium px-3 py-1 rounded-full
+                                        transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Power BI</span>
+                            <span class="bg-teal-900 text-white text-sm font-medium px-3 py-1 rounded-full
+                                    transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Jupyter</span>
+                        </div>
+                    </div>
+                </div>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Hallazgos Clave y Visualizaciones</span>
+                        <span class="lang-en hidden">Key Findings and Visualizations</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="lang-es">Uno de los principales hallazgos fue que las campañas alineadas con fechas especiales, como San Valentín y el Día de la Madre, obtuvieron los mejores ROI, mientras que otras campañas realizadas en diciembre presentaron bajo rendimiento, posiblemente por saturación del mercado. También se detectó que la mayoría de las campañas excedieron su presupuesto, lo que plantea la necesidad de una planificación más eficiente</span>
+                        <span class="lang-en hidden">One of the main findings was that campaigns aligned with special dates, such as Valentine’s Day and Mother’s Day, achieved the highest ROI, while other campaigns launched in December underperformed—possibly due to market saturation. It was also observed that most campaigns exceeded their budgets, highlighting the need for more efficient planning.</span>
+                    </p>
+
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700">
+                        <h3 class="text-lg font-medium text-white mb-2">
+                            <span class="lang-es">Power BI - General Financiero</span>
+                            <span class="lang-en hidden">Power BI - General Financial</span>
+                        </h3>
+                        <img src="images/Financiero.png"
+                            alt="Captura de pantalla del Dashboard de Power BI - General Financiero"
+                            class="w-full h-auto rounded-md shadow-md object-contain"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6 text-justify mt-6">
+                        <span class="lang-es">En cuanto a los canales de marketing, se comprobó que SEM y Publicidad Pagada son los más rentables y generan mayor interacción, especialmente cuando se utilizan formatos como videos y blogs, que superan ampliamente a los posts simples. A nivel geográfico, Alajuela registró la mayor actividad online; sin embargo, San José continúa siendo el mercado más relevante, lo que sugiere la necesidad de estrategias diferenciadas por región. En términos demográficos, los grupos de edad de 25-34 años y mayores de 55 generaron más ingresos. Por otro lado, los jóvenes de 18-24 años mostraron la mayor actividad online, convirtiéndose en un público clave para estrategias digitales.</span>
+                        <span class="lang-en hidden">Regarding marketing channels, SEM and Paid Advertising were confirmed to be the most profitable and generated the most engagement, especially when using formats like videos and blogs, which significantly outperformed simple posts. Geographically, Alajuela showed the highest level of online activity; however, San José remains the most relevant market, suggesting the need for region-specific strategies. In terms of demographics, the 25–34 and 55+ age groups generated the most revenue. On the other hand, users aged 18–24 had the highest online engagement, making them a key audience for digital marketing strategies.</span>
+                    </p>
+                    <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700">
+                        <h4 class="text-lg font-medium text-white mb-2">
+                            <span class="lang-es">Power BI - General</span>
+                            <span class="lang-en hidden">Power BI - General</span>
+                        </h4>
+                        <img src="images/dashMark.png"
+                            alt="Captura de pantalla del Dashboard de Power BI - General Financiero"
+                            class="w-full h-auto rounded-md shadow-md object-contain"
+                            loading="lazy"
+                            onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6 text-justify mt-6">
+                        <span class="lang-es">Los modelos predictivos confirmaron que la regresión polinómica con regularización Ridge fue el más preciso, explicando el 99% de la varianza del ROI. Aunque modelos como Random Forest y XGBoost también ofrecieron buenos resultados, la regresión polinómica logró capturar mejor los patrones estructurados del dataset.</span>
+                        <span class="lang-en hidden">Predictive modeling confirmed that polynomial regression with Ridge regularization was the most accurate, explaining 99% of the variance in ROI. Although models like Random Forest and XGBoost also performed well, the polynomial model better captured the structured patterns in the dataset.</span>
+                    </p>
+                    <div class="text-center mt-8">
+                        <a href="https://github.com/Brauliohg8038/Analisis-de-Marketing/blob/master/Marketing_Analisis.ipynb" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
+                            <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
+                            <span class="lang-es">Descubre el análisis gráfico completo</span>
+                            <span class="lang-en hidden">Discover the full graphics project analysis</span>
+                        </a>
+                    </div>
+                </section>
+<!--Ultima sección-->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Conclusiones y Recomendaciones</span>
+                        <span class="lang-en hidden">Conclusions and Recommendations</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-justify mb-6">
+                        <span class="lang-es">Este proyecto proporcionó un análisis integral de las campañas de marketing, comportamiento del cliente y la efectividad de diferentes estrategias, permitiendo tomar decisiones estratégicas basadas en datos para optimizar el rendimiento y el retorno de inversión.</span>
+                        <span class="lang-en hidden">This project provided a comprehensive analysis of marketing campaigns, customer behavior, and the effectiveness of different strategies, enabling data-driven strategic decisions to optimize performance and return on investment.</span>
+                    </p>
+
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-white mb-4 border-b border-gray-600 pb-2">
+                                <span class="lang-es">Conclusiones Clave</span>
+                                <span class="lang-en hidden">Key Conclusions</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-4">
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Análisis de Campañas de Marketing:</span>
+                                        <span class="lang-en hidden">Marketing Campaign Analysis:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Las campañas "Love4U" y "Madre_Amor" generaron los mayores ROI, destacando la efectividad de aprovechar eventos especiales.</span>
+                                            <span class="lang-en hidden">1. "Love4U" and "Madre_Amor" campaigns yielded the highest ROI, underscoring the effectiveness of leveraging special events.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. Campañas como "Noche_brindis" y "Fest_Luz" tuvieron peor ROI en diciembre, lo que sugiere posible saturación del mercado o estrategias ineficaces.</span>
+                                            <span class="lang-en hidden">2. Campaigns like "Noche_brindis" and "Fest_Luz" had lower ROI in December, possibly indicating market saturation or ineffective strategies.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">3. La mayoría de las campañas excedieron su presupuesto, lo que señala la necesidad de optimización de costos.</span>
+                                            <span class="lang-en hidden">3. Most campaigns exceeded their budget, indicating a need for cost optimization.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">4. De 20 campañas, 13 obtuvieron ganancias y 7 generaron pérdidas, enfatizando la importancia de la rentabilidad individual.</span>
+                                            <span class="lang-en hidden">4. Out of 20 campaigns, 13 generated profits while 7 resulted in losses, emphasizing the importance of individual profitability.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Canales de Marketing y Contenido:</span>
+                                        <span class="lang-en hidden">Marketing Channels and Content:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Publicidad Pagada y SEM son los canales más rentables y efectivos en interacciones.</span>
+                                            <span class="lang-en hidden">1. Paid Advertising and SEM are the most profitable and effective channels for interactions.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. Videos, blogs y anuncios son los formatos de contenido más eficaces, superando a los posts simples.</span>
+                                            <span class="lang-en hidden">2. Videos, blogs, and ads are the most effective content formats, outperforming simple posts.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">3. Se recomienda mejorar los CTAs en Email y optimizar el SEO para incrementar conversiones.</span>
+                                            <span class="lang-en hidden">3. It is recommended to improve CTAs in Email and optimize SEO to increase conversions.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Comportamiento y Satisfacción por Ubicación:</span>
+                                        <span class="lang-en hidden">Behavior and Satisfaction by Location:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Alajuela muestra la mayor actividad online, mientras Cartago y Guanacaste tienen bajos niveles de interacción.</span>
+                                            <span class="lang-en hidden">1. Alajuela shows the highest online activity, while Cartago and Guanacaste have low interaction levels.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. Guanacaste tiene la mayor satisfacción (4.51), y San José la más baja (2.77), lo que indica áreas de mejora en la capital.</span>
+                                            <span class="lang-en hidden">2. Guanacaste has the highest satisfaction (4.51), and San José the lowest (2.77), indicating areas for improvement in the capital.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">3. San José tiene alta competencia, lo que dificulta la captación de mercado.</span>
+                                            <span class="lang-en hidden">3. San José has high competition, making market acquisition challenging.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Segmentación y Programa de Lealtad:</span>
+                                        <span class="lang-en hidden">Segmentation and Loyalty Program:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Grupos de 25-34 y mayores de 55 generan los mayores ingresos, siendo clave para estrategias específicas.</span>
+                                            <span class="lang-en hidden">1. Age groups 25-34 and 55+ generate the highest revenue, crucial for specific strategies.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. Usuarios de 18-24 tienen mayor actividad online, ideal para formatos digitales.</span>
+                                            <span class="lang-en hidden">2. Users aged 18-24 have the highest online activity, ideal for digital formats.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">3. Clientes leales contribuyen con ingresos significativos, justificando la inversión en fidelización.</span>
+                                            <span class="lang-en hidden">3. Loyal customers contribute significant revenue, justifying investment in retention.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Tendencias Temporales y Correlaciones:</span>
+                                        <span class="lang-en hidden">Temporal Trends and Correlations:</span>
+                                    </span>
+                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Marzo, septiembre y diciembre concentran la mayor actividad (registros, clics, compras).</span>
+                                            <span class="lang-en hidden">1. March, September, and December show the highest activity (registrations, clicks, purchases).</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. No se hallaron correlaciones fuertes entre Interacción, ROI, Compras y CLV.</span>
+                                            <span class="lang-en hidden">2. No strong correlations were found between Total Interaction, ROI, Purchases, and CLV.</span>
+                                        </li>
+                                    </ul>
+                                        <li>
+                                        <span class="font-semibold">
+                                                <span class="lang-es">Evaluación de modelos predictivos:</span>
+                                                <span class="lang-en hidden">Predictive Model Evaluation:</span>
+                                            </span>
+                                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                                <li>
+                                                    <span class="lang-es">1. La Regresión Polinómica con Ridge fue el modelo más preciso (99% de varianza explicada).</span>
+                                                    <span class="lang-en hidden">1. Polynomial Regression with Ridge was the most accurate model (99% of variance explained).</span>
+                                                </li>
+                                                <li>
+                                                    <span class="lang-es">2. La transformación logarítmica de datos fue esencial para mejorar modelos lineales.</span>
+                                                    <span class="lang-en hidden">2. Logarithmic data transformation was essential for improving linear models.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="lang-es">3. Modelos de árboles (Random Forest y XGBoost) tuvieron buen desempeño, pero no superaron la regresión polinómica, sugiriendo patrones estructurados.</span>
+                                                    <span class="lang-en hidden">3. Tree-based models (Random Forest and XGBoost) performed well but did not outperform polynomial regression, suggesting structured patterns.</span>
+                                                </li>
+                                                <li>
+                                                    <span class="lang-es">4. La validación cruzada reveló inestabilidad en la regresión logarítmica entre folds.</span>
+                                                    <span class="lang-en hidden">4. Cross-validation revealed instability in logarithmic regression across folds.</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="text-xl font-semibold text-white mb-4 border-b border-blue-600 pb-2">
+                                <span class="lang-es">Recomendaciones</span>
+                                <span class="lang-en hidden">Recommendations</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-4">
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Optimización de Campañas:</span>
+                                        <span class="lang-en hidden">Campaign Optimization:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Equilibrar la inversión para no exceder costos y mantener la eficacia.</span>
+                                            <span class="lang-en hidden">1. Balance investment to avoid cost overruns while maintaining effectiveness.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">2. Enfocar esfuerzos en SEM y Publicidad Pagada, priorizando videos y blogs.</span>
+                                            <span class="lang-en hidden">2. Focus efforts on SEM and Paid Advertising, prioritizing videos and blogs.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">3. Personalizar estrategias por ubicación y edad para maximizar el impacto.</span>
+                                            <span class="lang-en hidden">3. Personalize strategies by location and age to maximize impact.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Programa de Lealtad:</span>
+                                        <span class="lang-en hidden">Loyalty Program:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Fortalecer el programa de lealtad: la contribución de los clientes fidelizados justifica la inversión.</span>
+                                            <span class="lang-en hidden">1. Strengthen the loyalty program: the contribution of loyal customers justifies the investment.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Planificación Estratégica:</span>
+                                        <span class="lang-en hidden">Strategic Planning:</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">1. Aprovechar los meses de mayor actividad (marzo, septiembre, diciembre) para intensificar campañas.</span>
+                                            <span class="lang-en hidden">1. Leverage months with higher activity (March, September, December) to intensify campaigns.</span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="text-center mt-8">
+        <a href="https://github.com/Brauliohg8038/Analisis-de-Marketing/blob/master/Marketing_Analisis.ipynb" target="_blank" rel="noopener noreferrer"
+        class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
+            <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
+            <span class="lang-es">Ver el Código en GitHub</span>
+            <span class="lang-en hidden">View Code on GitHub</span>
+        </a>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en"></span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar el año en el footer
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = new Date().getFullYear();
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = new Date().getFullYear();
+            }
+
+            // Lógica de traducción para esta página
+            const htmlElement = document.documentElement; // Acceder al <html>
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang; // Actualiza el atributo lang del HTML
+                localStorage.setItem('preferredLang', lang); // Guarda en localStorage
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Función para actualizar el <title> dinámicamente
+            function updateTitle(lang) {
+                const titleEs = document.querySelector('title .lang-es');
+                const titleEn = document.querySelector('title .lang-en');
+                if (titleEs && titleEn) {
+                    if (lang === 'es') {
+                        document.title = titleEs.textContent;
+                    } else {
+                        document.title = titleEn.textContent;
+                    }
+                } else {
+                    // Fallback si no se encuentran los spans dentro del title
+                    document.title = lang === 'es' ? 'Proyecto: Análisis de Sentimientos de Reseñas de Productos' : 'Project: Product Review Sentiment Analysis';
+                }
+            }
+
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma (en la página del proyecto)
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
