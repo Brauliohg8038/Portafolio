@@ -235,14 +235,20 @@
                     </p>
                     <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700">
                         <h4 class="text-lg font-medium text-white mb-2">
-                            <span class="lang-es">Power BI - General</span>
-                            <span class="lang-en hidden">Power BI - General</span>
+                            <span class="lang-es">Dashboard General (Looker Studio)</span>
+                            <span class="lang-en hidden">General Dashboard (Looker Studio)</span>
                         </h4>
-                        <img src="images/dashMark.png"
-                            alt="Captura de pantalla del Dashboard de Power BI - General Financiero"
-                            class="w-full h-auto rounded-md shadow-md object-contain"
-                            loading="lazy"
-                            onerror="this.onerror=null;this.src='https://placehold.co/600x350/1a1a1a/e0e0e0?text=Error+al+cargar+imagen';">
+                        <!-- Contenedor responsivo para el iframe -->
+                        <div class="relative w-full" style="padding-top: 75%;"> <!-- 443 / 600 = 0.738, así que 75% es una buena aproximación para mantener la proporción -->
+                            <iframe
+                                src="https://lookerstudio.google.com/embed/reporting/e21cfb53-ad1a-423a-b55c-1b7dab22143e/page/W1eRF"
+                                frameborder="0"
+                                style="border:0; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                allowfullscreen
+                                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                                class="rounded-md shadow-md"
+                            ></iframe>
+                        </div>
                     </div>
                     <p class="text-gray-300 leading-relaxed mb-6 text-justify mt-6">
                         <span class="lang-es">Los modelos predictivos confirmaron que la regresión polinómica con regularización Ridge fue el más preciso, explicando el 99% de la varianza del ROI. Aunque modelos como Random Forest y XGBoost también ofrecieron buenos resultados, la regresión polinómica logró capturar mejor los patrones estructurados del dataset.</span>
