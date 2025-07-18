@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <span class="lang-es">Análisis de Campañas de Marketing </span>
-        <span class="lang-en hidden">Analysis of Marketing Campaigns</span>
+        <span class="lang-es">Campañas de Marketing </span>
+        <span class="lang-en hidden">Marketing Campaigns</span>
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@
                         <span class="lang-es">Resumen Ejecutivo</span>
                         <span class="lang-en hidden">Executive Summary</span>
                     </h2>
-                    <p class="text-gray-300 leading-relaxed">
+                    <p class="text-gray-300 leading-relaxed text-justify">
                         <span class="lang-es">En un entorno empresarial cada vez más competitivo, las campañas de marketing deben estar respaldadas por decisiones basadas en datos. Este proyecto realiza un análisis integral de campañas de marketing, combinando análisis exploratorio, segmentación de clientes y modelos de machine learning para evaluar el desempeño, entender el comportamiento del consumidor y predecir resultados clave. Los hallazgos permiten optimizar el uso del presupuesto, mejorar la personalización de estrategias y aumentar el retorno de inversión (ROI).</span>
                         <span class="lang-en hidden">In an increasingly competitive business environment, marketing campaigns must be supported by data-driven decisions. This project conducts a comprehensive analysis of marketing campaigns by combining exploratory analysis, customer segmentation, and machine learning models to evaluate performance, understand consumer behavior, and predict key outcomes. The findings help optimize budget allocation, improve strategy personalization, and increase return on investment (ROI).</span>
                     </p>
@@ -131,7 +131,7 @@
                         <span class="lang-es">Datos y Metodología</span>
                         <span class="lang-en hidden">Data and Methodology</span>
                     </h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">
+                    <p class="text-gray-300 leading-relaxed mb-4 text-justify">
                         <span class="lang-es">El análisis se realizó utilizando un conjunto de datos que incluía información detallada sobre 20 campañas de marketing, métricas de comportamiento online (como clics, registros y compras), datos demográficos (edad, ubicación), participación en programas de lealtad y encuestas de satisfacción. El proceso metodológico comenzó con la limpieza y preparación de los datos, seguido de un análisis exploratorio para detectar patrones y anomalías. Se aplicaron técnicas de segmentación para entender mejor a los clientes, y luego se desarrollaron modelos de regresión (incluyendo regresión polinómica con regularización Ridge) y algoritmos de machine learning como Random Forest y XGBoost. La validación cruzada, el análisis de residuos y el cálculo de VIF aseguraron la robustez de los modelos.</span>
                         <span class="lang-en hidden">The analysis was conducted using a dataset that included detailed information on 20 marketing campaigns, online behavior metrics (such as clicks, registrations, and purchases), demographic data (age and location), participation in loyalty programs, and customer satisfaction surveys. The methodological process began with data cleaning and preparation, followed by exploratory data analysis to detect patterns and anomalies. Segmentation techniques were applied to better understand customer profiles, and regression models (including polynomial regression with Ridge regularization) as well as machine learning algorithms such as Random Forest and XGBoost were developed. Cross-validation, residual analysis, and VIF calculation ensured the robustness of the models.</span>
                     </p>
@@ -214,7 +214,7 @@
                         <span class="lang-en hidden">Key Findings and Visualizations</span>
                     </h2>
                     <p class="text-gray-300 leading-relaxed mb-4">
-                        <span class="lang-es">Uno de los principales hallazgos fue que las campañas alineadas con fechas especiales, como San Valentín y el Día de la Madre, obtuvieron los mejores ROI, mientras que otras campañas realizadas en diciembre presentaron bajo rendimiento, posiblemente por saturación del mercado. También se detectó que la mayoría de las campañas excedieron su presupuesto, lo que plantea la necesidad de una planificación más eficiente</span>
+                        <span class="lang-es">Uno de los principales hallazgos fue que las campañas alineadas con fechas especiales, como San Valentín y el Día de la Madre, obtuvieron los mejores ROI, mientras que otras campañas realizadas en diciembre presentaron bajo rendimiento, posiblemente por saturación del mercado. También se detectó que la mayoría de las campañas excedieron su presupuesto, lo que plantea la necesidad de una planificación más eficiente.</span>
                         <span class="lang-en hidden">One of the main findings was that campaigns aligned with special dates, such as Valentine’s Day and Mother’s Day, achieved the highest ROI, while other campaigns launched in December underperformed—possibly due to market saturation. It was also observed that most campaigns exceeded their budgets, highlighting the need for more efficient planning.</span>
                     </p>
 
@@ -250,10 +250,120 @@
                             ></iframe>
                         </div>
                     </div>
-                    <p class="text-gray-300 leading-relaxed mb-6 text-justify mt-6">
-                        <span class="lang-es">Los modelos predictivos confirmaron que la regresión polinómica con regularización Ridge fue el más preciso, explicando el 99% de la varianza del ROI. Aunque modelos como Random Forest y XGBoost también ofrecieron buenos resultados, la regresión polinómica logró capturar mejor los patrones estructurados del dataset.</span>
-                        <span class="lang-en hidden">Predictive modeling confirmed that polynomial regression with Ridge regularization was the most accurate, explaining 99% of the variance in ROI. Although models like Random Forest and XGBoost also performed well, the polynomial model better captured the structured patterns in the dataset.</span>
-                    </p>
+                    <div class="space-y-4 mt-4">
+                    <!-- Título opcional para esta sección de análisis -->
+                    <h3 class="text-xl font-bold text-white mb-2">
+                        <span class="lang-es">Resultados puntuales del Análisis</span>
+                        <span class="lang-en hidden">Key Analysis Findings</span>
+                    </h3>
+
+                    <ul class="list-disc list-inside text-gray-300 mb-6 space-y-4">
+                        <li>
+                            <span class="font-semibold">
+                                <span class="lang-es">Análisis de Campañas de Marketing:</span>
+                                <span class="lang-en hidden">Marketing Campaign Analysis:</span>
+                            </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                <li>
+                                    <span class="lang-es">1. Las campañas "Love4U" y "Madre_Amor" generaron los mayores ROI, destacando la efectividad de aprovechar eventos especiales.</span>
+                                    <span class="lang-en hidden">1. "Love4U" and "Madre_Amor" campaigns yielded the highest ROI, underscoring the effectiveness of leveraging special events.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">2. Campañas como "Noche_brindis" y "Fest_Luz" tuvieron peor ROI en diciembre, lo que sugiere saturación del mercado o estrategias ineficaces.</span>
+                                    <span class="lang-en hidden">2. Campaigns like "Noche_brindis" and "Fest_Luz" had lower ROI in December, indicating market saturation or ineffective strategies.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">3. La mayoría de las campañas excedieron su presupuesto, lo que señala la necesidad de optimización de costos.</span>
+                                    <span class="lang-en hidden">3. Most campaigns exceeded their budget, indicating a need for cost optimization.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">4. De 20 campañas, 13 obtuvieron ganancias y 7 generaron pérdidas, enfatizando la importancia de la rentabilidad individual.</span>
+                                    <span class="lang-en hidden">4. Out of 20 campaigns, 13 generated profits while 7 resulted in losses, emphasizing the importance of individual profitability.</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold">
+                                <span class="lang-es">Canales de Marketing y Contenido:</span>
+                                <span class="lang-en hidden">Marketing Channels and Content:</span>
+                            </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                <li>
+                                    <span class="lang-es">1. Publicidad Pagada y SEM son los canales más rentables y efectivos en interacciones.</span>
+                                    <span class="lang-en hidden">1. Paid Advertising and SEM are the most profitable and effective channels for interactions.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">2. Videos, blogs y anuncios son los formatos de contenido más eficaces, superando a los posts simples.</span>
+                                    <span class="lang-en hidden">2. Videos, blogs, and ads are the most effective content formats, outperforming simple posts.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">3. Se recomienda mejorar los CTAs en Email y optimizar el SEO para incrementar conversiones.</span>
+                                    <span class="lang-en hidden">3. It is recommended to improve CTAs in Email and optimize SEO to increase conversions.</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold">
+                                <span class="lang-es">Comportamiento y Satisfacción por Ubicación:</span>
+                                <span class="lang-en hidden">Behavior and Satisfaction by Location:</span>
+                            </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                <li>
+                                    <span class="lang-es">1. Alajuela muestra la mayor actividad online, mientras Cartago y Guanacaste tienen bajos niveles de interacción.</span>
+                                    <span class="lang-en hidden">1. Alajuela shows the highest online activity, while Cartago and Guanacaste have low interaction levels.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">2. Guanacaste tiene la mayor satisfacción (4.51), y San José la más baja (2.77), lo que indica áreas de mejora en la capital.</span>
+                                    <span class="lang-en hidden">2. Guanacaste has the highest satisfaction (4.51), and San José the lowest (2.77), indicating areas for improvement in the capital.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">3. En San José, la elevada competencia reduce el margen de diferenciación, lo que sugiere la necesidad de un análisis más profundo de las campañas actuales. Esto implica implementar estrategias más agresivas de posicionamiento y fidelización para lograr una captación efectiva del mercado.</span>
+                                    <span class="lang-en hidden">3. In San José, the high level of competition reduces the margin for differentiation, highlighting the need for a deeper analysis of current marketing campaigns. This calls for the implementation of more aggressive positioning and customer retention strategies to effectively capture market share.</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold">
+                                <span class="lang-es">Tendencias Temporales y Correlaciones:</span>
+                                <span class="lang-en hidden">Temporal Trends and Correlations:</span>
+                            </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                <li>
+                                    <span class="lang-es">1. Marzo, septiembre y diciembre concentran la mayor actividad (registros, clics, compras).</span>
+                                    <span class="lang-en hidden">1. March, September, and December show the highest activity (registrations, clicks, purchases).</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">2. No se hallaron correlaciones fuertes entre Interacción, ROI, Compras y CLV.</span>
+                                    <span class="lang-en hidden">2. No strong correlations were found between Total Interaction, ROI, Purchases, and CLV.</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="font-semibold">
+                                <span class="lang-es">Evaluación de modelos predictivos:</span>
+                                <span class="lang-en hidden">Predictive Model Evaluation:</span>
+                            </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                <li>
+                                    <span class="lang-es">1. La Regresión Polinómica con Ridge fue el modelo más preciso (99% de varianza explicada).</span>
+                                    <span class="lang-en hidden">1. Polynomial Regression with Ridge was the most accurate model (99% of variance explained).</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">2. La transformación logarítmica de datos fue esencial para mejorar modelos lineales.</span>
+                                    <span class="lang-en hidden">2. Logarithmic data transformation was essential for improving linear models.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">3. Modelos de árboles (Random Forest y XGBoost) tuvieron buen desempeño, pero no superaron la regresión polinómica, sugiriendo patrones estructurados.</span>
+                                    <span class="lang-en hidden">3. Tree-based models (Random Forest and XGBoost) performed well but did not outperform polynomial regression, suggesting structured patterns.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">4. La validación cruzada reveló inestabilidad en la regresión logarítmica entre folds.</span>
+                                    <span class="lang-en hidden">4. Cross-validation revealed instability in logarithmic regression across folds.</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
                     <div class="text-center mt-8">
                         <a href="https://github.com/Brauliohg8038/Analisis-de-Marketing/blob/master/Marketing_Analisis.ipynb" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
@@ -269,140 +379,82 @@
                         <span class="lang-es">Conclusiones y Recomendaciones</span>
                         <span class="lang-en hidden">Conclusions and Recommendations</span>
                     </h2>
-                    <p class="text-gray-300 leading-relaxed text-justify mb-6">
-                        <span class="lang-es">Este proyecto proporcionó un análisis integral de las campañas de marketing, comportamiento del cliente y la efectividad de diferentes estrategias, permitiendo tomar decisiones estratégicas basadas en datos para optimizar el rendimiento y el retorno de inversión.</span>
-                        <span class="lang-en hidden">This project provided a comprehensive analysis of marketing campaigns, customer behavior, and the effectiveness of different strategies, enabling data-driven strategic decisions to optimize performance and return on investment.</span>
-                    </p>
-
                     <div class="space-y-8">
                         <div>
-                            <h3 class="text-xl font-semibold text-white mb-4 border-b border-gray-600 pb-2">
-                                <span class="lang-es">Conclusiones Clave</span>
-                                <span class="lang-en hidden">Key Conclusions</span>
-                            </h3>
                             <ul class="list-disc list-inside text-gray-300 space-y-4">
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Análisis de Campañas de Marketing:</span>
-                                        <span class="lang-en hidden">Marketing Campaign Analysis:</span>
+                                        <span class="lang-es">Estrategias de Campaña y Rentabilidad</span>
+                                        <span class="lang-en hidden">Campaign Strategies and Profitability</span>
                                     </span>
                                     <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Las campañas "Love4U" y "Madre_Amor" generaron los mayores ROI, destacando la efectividad de aprovechar eventos especiales.</span>
-                                            <span class="lang-en hidden">1. "Love4U" and "Madre_Amor" campaigns yielded the highest ROI, underscoring the effectiveness of leveraging special events.</span>
+                                            <span class="lang-es">El análisis reveló que las campañas alineadas con eventos especiales, como Love4U y Madre_Amor, alcanzaron los mayores niveles de ROI, demostrando la efectividad de aprovechar fechas clave para conectar con la audiencia. En contraste, campañas como Noche_brindis y Fest_Luz presentaron bajos retornos en diciembre, posiblemente debido a la saturación publicitaria o a estrategias menos eficaces.</span>
+                                            <span class="lang-en hidden">The analysis revealed that campaigns tied to special events, such as Love4U and Madre_Amor, achieved the highest ROI, demonstrating the effectiveness of leveraging key dates to connect with the audience. In contrast, campaigns like Noche_brindis and Fest_Luz underperformed in December, likely due to market saturation or less effective strategies.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">2. Campañas como "Noche_brindis" y "Fest_Luz" tuvieron peor ROI en diciembre, lo que sugiere posible saturación del mercado o estrategias ineficaces.</span>
-                                            <span class="lang-en hidden">2. Campaigns like "Noche_brindis" and "Fest_Luz" had lower ROI in December, possibly indicating market saturation or ineffective strategies.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">3. La mayoría de las campañas excedieron su presupuesto, lo que señala la necesidad de optimización de costos.</span>
-                                            <span class="lang-en hidden">3. Most campaigns exceeded their budget, indicating a need for cost optimization.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">4. De 20 campañas, 13 obtuvieron ganancias y 7 generaron pérdidas, enfatizando la importancia de la rentabilidad individual.</span>
-                                            <span class="lang-en hidden">4. Out of 20 campaigns, 13 generated profits while 7 resulted in losses, emphasizing the importance of individual profitability.</span>
+                                            <span class="lang-es">Asimismo, el hecho de que la mayoría de las campañas superaran sus presupuestos asignados pone en evidencia la necesidad urgente de una optimización del gasto y una planificación más precisa. La rentabilidad individual también destaca como factor crítico, dado que solo 13 de las 20 campañas generaron beneficios netos.</span>
+                                            <span class="lang-en hidden">Moreover, the fact that most campaigns exceeded their allocated budgets highlights the urgent need for cost optimization and more accurate planning. Individual profitability also emerged as a critical factor, as only 13 out of 20 campaigns generated net profits.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Canales de Marketing y Contenido:</span>
-                                        <span class="lang-en hidden">Marketing Channels and Content:</span>
+                                        <span class="lang-es">Desempeño de Canales y Formatos de Contenido</span>
+                                        <span class="lang-en hidden">Channel Performance and Content Formats</span>
                                     </span>
                                     <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Publicidad Pagada y SEM son los canales más rentables y efectivos en interacciones.</span>
-                                            <span class="lang-en hidden">1. Paid Advertising and SEM are the most profitable and effective channels for interactions.</span>
+                                            <span class="lang-es">Entre los canales analizados, Publicidad Pagada y SEM se posicionaron como los más rentables y eficaces, tanto en términos de retorno como de interacción. En cuanto al tipo de contenido, se observaron mejores resultados en formatos audiovisuales y estructurados como videos, blogs y anuncios, superando en impacto a publicaciones simples.</span>
+                                            <span class="lang-en hidden">Among the channels analyzed, Paid Advertising and SEM were the most profitable and effective in terms of return and engagement. Regarding content formats, videos, blogs, and ads outperformed simple posts, proving more impactful.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">2. Videos, blogs y anuncios son los formatos de contenido más eficaces, superando a los posts simples.</span>
-                                            <span class="lang-en hidden">2. Videos, blogs, and ads are the most effective content formats, outperforming simple posts.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">3. Se recomienda mejorar los CTAs en Email y optimizar el SEO para incrementar conversiones.</span>
-                                            <span class="lang-en hidden">3. It is recommended to improve CTAs in Email and optimize SEO to increase conversions.</span>
+                                            <span class="lang-es">Se identificaron oportunidades de mejora en Email Marketing, particularmente en la efectividad de los llamados a la acción (CTAs), así como en la optimización de SEO para fortalecer la conversión orgánica.</span>
+                                            <span class="lang-en hidden">Improvement opportunities were identified in Email Marketing, particularly in the effectiveness of calls to action (CTAs), as well as in SEO optimization to boost organic conversions.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Comportamiento y Satisfacción por Ubicación:</span>
-                                        <span class="lang-en hidden">Behavior and Satisfaction by Location:</span>
+                                        <span class="lang-es">Comportamiento del Usuario y Satisfacción por Ubicación</span>
+                                        <span class="lang-en hidden">Behavior and Satisfaction by Location</span>
                                     </span>
                                     <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Alajuela muestra la mayor actividad online, mientras Cartago y Guanacaste tienen bajos niveles de interacción.</span>
-                                            <span class="lang-en hidden">1. Alajuela shows the highest online activity, while Cartago and Guanacaste have low interaction levels.</span>
+                                            <span class="lang-es">El comportamiento de los usuarios varió significativamente según la ubicación. Alajuela se destacó por su alta actividad digital, mientras que Cartago y Guanacaste presentaron niveles de interacción bajos. Curiosamente, Guanacaste reportó la mayor satisfacción promedio (4.51), mientras que San José obtuvo la más baja (2.77), indicando áreas claras de mejora en la capital.</span>
+                                            <span class="lang-en hidden">User behavior varied significantly by location. Alajuela showed the highest level of digital activity, while Cartago and Guanacaste had lower interaction rates. Interestingly, Guanacaste reported the highest satisfaction (4.51), whereas San José had the lowest (2.77), indicating clear areas for improvement in the capital.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">2. Guanacaste tiene la mayor satisfacción (4.51), y San José la más baja (2.77), lo que indica áreas de mejora en la capital.</span>
-                                            <span class="lang-en hidden">2. Guanacaste has the highest satisfaction (4.51), and San José the lowest (2.77), indicating areas for improvement in the capital.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">3. San José tiene alta competencia, lo que dificulta la captación de mercado.</span>
-                                            <span class="lang-en hidden">3. San José has high competition, making market acquisition challenging.</span>
+                                            <span class="lang-es">La elevada competencia en San José limita la diferenciación, lo que subraya la necesidad de realizar un análisis más profundo de las campañas actuales y de implementar estrategias más agresivas de posicionamiento y fidelización para mejorar la captación de mercado.</span>
+                                            <span class="lang-en hidden">The high level of competition in San José limits differentiation, underscoring the need for a deeper analysis of current campaigns and the implementation of more aggressive positioning and customer retention strategies to effectively capture market share.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Segmentación y Programa de Lealtad:</span>
-                                        <span class="lang-en hidden">Segmentation and Loyalty Program:</span>
+                                        <span class="lang-es">Dinámica Temporal y Correlaciones</span>
+                                        <span class="lang-en hidden">Temporal Trends and Correlations</span>
                                     </span>
                                     <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Grupos de 25-34 y mayores de 55 generan los mayores ingresos, siendo clave para estrategias específicas.</span>
-                                            <span class="lang-en hidden">1. Age groups 25-34 and 55+ generate the highest revenue, crucial for specific strategies.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">2. Usuarios de 18-24 tienen mayor actividad online, ideal para formatos digitales.</span>
-                                            <span class="lang-en hidden">2. Users aged 18-24 have the highest online activity, ideal for digital formats.</span>
-                                        </li>
-                                        <li>
-                                            <span class="lang-es">3. Clientes leales contribuyen con ingresos significativos, justificando la inversión en fidelización.</span>
-                                            <span class="lang-en hidden">3. Loyal customers contribute significant revenue, justifying investment in retention.</span>
+                                            <span class="lang-es">Los meses de marzo, septiembre y diciembre concentraron la mayor actividad (clics, registros, compras), lo cual sugiere que las campañas en estos periodos deben diseñarse con especial cuidado. No se identificaron correlaciones significativas entre variables como interacción, ROI, compras y CLV, lo que indica que los resultados no dependen de una sola métrica, sino de una combinación compleja de factores.</span>
+                                            <span class="lang-en hidden">March, September, and December showed peaks in activity (clicks, sign-ups, purchases), suggesting that campaigns during these months should be designed with special attention. No strong correlations were found between variables such as interaction, ROI, purchases, and CLV, indicating that results depend on a complex combination of factors rather than a single metric.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Tendencias Temporales y Correlaciones:</span>
-                                        <span class="lang-en hidden">Temporal Trends and Correlations:</span>
+                                        <span class="lang-es">Evaluación de Modelos Predictivos (evaluación en Github)</span>
+                                        <span class="lang-en hidden">Evaluation of Predictive Models (evaluation on Github)</span>
                                     </span>
                                     <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Marzo, septiembre y diciembre concentran la mayor actividad (registros, clics, compras).</span>
-                                            <span class="lang-en hidden">1. March, September, and December show the highest activity (registrations, clicks, purchases).</span>
+                                            <span class="lang-es">En términos de modelos predictivos, la Regresión Polinómica con Ridge fue la más precisa, explicando el 99% de la varianza. La transformación logarítmica de los datos fue clave para mejorar el rendimiento de modelos lineales. Por su parte, los modelos basados en árboles como Random Forest y XGBoost mostraron un buen desempeño, aunque no lograron superar a la regresión polinómica, lo cual sugiere una estructura de datos con patrones definidos.</span>
+                                            <span class="lang-en hidden">In terms of predictive models, Polynomial Regression with Ridge regularization was the most accurate, explaining 99% of the variance. Logarithmic data transformation was key to improving the performance of linear models. Tree-based models like Random Forest and XGBoost also performed well but did not surpass polynomial regression, suggesting structured patterns within the data.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">2. No se hallaron correlaciones fuertes entre Interacción, ROI, Compras y CLV.</span>
-                                            <span class="lang-en hidden">2. No strong correlations were found between Total Interaction, ROI, Purchases, and CLV.</span>
-                                        </li>
-                                    </ul>
-                                        <li>
-                                        <span class="font-semibold">
-                                                <span class="lang-es">Evaluación de modelos predictivos:</span>
-                                                <span class="lang-en hidden">Predictive Model Evaluation:</span>
-                                            </span>
-                                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
-                                                <li>
-                                                    <span class="lang-es">1. La Regresión Polinómica con Ridge fue el modelo más preciso (99% de varianza explicada).</span>
-                                                    <span class="lang-en hidden">1. Polynomial Regression with Ridge was the most accurate model (99% of variance explained).</span>
-                                                </li>
-                                                <li>
-                                                    <span class="lang-es">2. La transformación logarítmica de datos fue esencial para mejorar modelos lineales.</span>
-                                                    <span class="lang-en hidden">2. Logarithmic data transformation was essential for improving linear models.</span>
-                                                </li>
-                                                <li>
-                                                    <span class="lang-es">3. Modelos de árboles (Random Forest y XGBoost) tuvieron buen desempeño, pero no superaron la regresión polinómica, sugiriendo patrones estructurados.</span>
-                                                    <span class="lang-en hidden">3. Tree-based models (Random Forest and XGBoost) performed well but did not outperform polynomial regression, suggesting structured patterns.</span>
-                                                </li>
-                                                <li>
-                                                    <span class="lang-es">4. La validación cruzada reveló inestabilidad en la regresión logarítmica entre folds.</span>
-                                                    <span class="lang-en hidden">4. Cross-validation revealed instability in logarithmic regression across folds.</span>
-                                                </li>
-                                            </ul>
+                                            <span class="lang-es">Sin embargo, la validación cruzada reveló inestabilidad en la regresión logarítmica entre los distintos folds, indicando posibles problemas de generalización que deben considerarse en futuros análisis.</span>
+                                            <span class="lang-en hidden">However, cross-validation revealed instability in the logarithmic regression across folds, indicating potential generalization issues to consider in future analyses.</span>
                                         </li>
                                     </ul>
                                 </li>
@@ -417,45 +469,64 @@
                             <ul class="list-disc list-inside text-gray-300 space-y-4">
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Optimización de Campañas:</span>
-                                        <span class="lang-en hidden">Campaign Optimization:</span>
+                                        <span class="lang-es">Optimizar la Planificación de Campañas:</span>
+                                        <span class="lang-en hidden">Optimize Campaign Planning</span>
                                     </span>
                             <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Equilibrar la inversión para no exceder costos y mantener la eficacia.</span>
-                                            <span class="lang-en hidden">1. Balance investment to avoid cost overruns while maintaining effectiveness.</span>
+                                            <span class="lang-es">Aprovechar fechas especiales (como el Día del Amor o el Día de la Madre) con campañas planificadas anticipadamente, ya que demostraron ser las más rentables.</span>
+                                            <span class="lang-en hidden">Leverage special dates (such as Valentine’s Day and Mother’s Day) with well-prepared campaigns, as these proved to be the most profitable.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">2. Enfocar esfuerzos en SEM y Publicidad Pagada, priorizando videos y blogs.</span>
-                                            <span class="lang-en hidden">2. Focus efforts on SEM and Paid Advertising, prioritizing videos and blogs.</span>
+                                            <span class="lang-es">Evitar la sobresaturación en épocas de alta competencia como diciembre, mejorando la segmentación y diferenciación creativa.</span>
+                                            <span class="lang-en hidden">Avoid oversaturation during high-competition periods like December by improving segmentation and creative differentiation.</span>
                                         </li>
                                         <li>
-                                            <span class="lang-es">3. Personalizar estrategias por ubicación y edad para maximizar el impacto.</span>
-                                            <span class="lang-en hidden">3. Personalize strategies by location and age to maximize impact.</span>
+                                            <span class="lang-es">Personalizar estrategias por ubicación y edad para maximizar el impacto.</span>
+                                            <span class="lang-en hidden">Personalize strategies by location and age to maximize impact.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">Evaluar la rentabilidad individual de cada campaña antes de reinvertir, priorizando aquellas con mayor ROI y menores costos por adquisición.</span>
+                                            <span class="lang-en hidden">Evaluate the individual profitability of each campaign before reinvesting, prioritizing those with higher ROI and lower customer acquisition costs.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Programa de Lealtad:</span>
-                                        <span class="lang-en hidden">Loyalty Program:</span>
+                                        <span class="lang-es">Reforzar Canales y Formatos Más Eficaces</span>
+                                        <span class="lang-en hidden">Strengthen the Most Effective Channels and Formats</span>
                                     </span>
                             <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Fortalecer el programa de lealtad: la contribución de los clientes fidelizados justifica la inversión.</span>
-                                            <span class="lang-en hidden">1. Strengthen the loyalty program: the contribution of loyal customers justifies the investment.</span>
+                                            <span class="lang-es">Continuar priorizando SEM y Publicidad Pagada, reforzando su uso con estrategias orientadas a conversión.</span>
+                                            <span class="lang-en hidden">Continue prioritizing SEM and Paid Advertising, focusing on conversion-driven strategies.</span>
+                                        </li>
+                                        <li>
+                                            <span class="lang-es">Potenciar formatos como videos, blogs y anuncios gráficos, que demostraron mayor efectividad en comparación con publicaciones simples.</span>
+                                            <span class="lang-en hidden">Invest in videos, blogs, and graphic ads, which showed greater effectiveness compared to simple posts.</span>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
                                     <span class="font-semibold">
-                                        <span class="lang-es">Planificación Estratégica:</span>
-                                        <span class="lang-en hidden">Strategic Planning:</span>
+                                        <span class="lang-es">Diseñar Estrategias Locales Personalizadas</span>
+                                        <span class="lang-en hidden">Design Location-Specific Strategies</span>
                                     </span>
                             <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
                                         <li>
-                                            <span class="lang-es">1. Aprovechar los meses de mayor actividad (marzo, septiembre, diciembre) para intensificar campañas.</span>
-                                            <span class="lang-en hidden">1. Leverage months with higher activity (March, September, December) to intensify campaigns.</span>
+                                            <span class="lang-es">Enfocar estrategias diferenciadas según la ubicación.<span class="text-white">Alajuela:</span> mantener e intensificar esfuerzos, dado su alto nivel de actividad online.<span class="text-white">Cartago y Guanacaste</span> investigar causas de baja interacción y explorar acciones para incrementar la participación.<span class="text-white">San José</span> aplicar tácticas más agresivas de fidelización y posicionamiento para destacar en un entorno altamente competitivo y con baja satisfacción.</span>
+                                            <span class="lang-en hidden"><span class="text-white">Alajuela:</span> maintain and intensify efforts due to its high level of online activity.<span class="text-white">Cartago and Guanacaste:</span> investigate the causes of low interaction and explore actions to increase engagement.<span class="text-white">San José:</span> implement more aggressive loyalty and positioning tactics to stand out in a highly competitive environment with low satisfaction levels.</span>
+                                        </li>
+                                    </ul>
+                                <li>
+                                    <span class="font-semibold">
+                                        <span class="lang-es">Aprovechar Temporadas de Alta Actividad</span>
+                                        <span class="lang-en hidden">Capitalize on High-Activity Periods</span>
+                                    </span>
+                            <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
+                                        <li>
+                                            <span class="lang-es">Preparar campañas específicas para los meses de <span class="text-white">marzo, septiembre y diciembre</span>, reforzando la inversión publicitaria y el diseño creativo durante esos picos de comportamiento.</span>
+                                            <span class="lang-en hidden">Prepare specific campaigns for <span class="text-white">March, September, and December</span>, reinforcing ad investment and creative design during these activity peaks.</span>
                                         </li>
                                     </ul>
                                 </li>
