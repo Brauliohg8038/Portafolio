@@ -4,11 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Data Analysis-BHG</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Estructura general */
+        body.preload {
+            overflow: hidden;
+            height: 100vh;
+        }
+        #data-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            background-color: #0d0d0d;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+        .data-loader-content {
+            width: 90%;
+            max-width: 260px;
+            text-align: center;
+            cursor: default;
+        }
+        .loader-logo {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #6fafeb;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+            position: relative;
+            display: inline-block;
+            padding: 0 10px;
+        }
+        .loader-logo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(111, 175, 235, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .loader-logo:hover::after {
+            opacity: 1;
+        }
+        .progress-container {
+            height: 2px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.1);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #0d0d0d, #6fafeb);
+            animation: progress 1.3s ease-in-out forwards;
+        }
+        .loading-text {
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out 0.3s forwards;
+            position: relative;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .loading-text:hover {
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 0 8px rgba(111, 175, 235, 0.6);
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        @keyframes progress {
+            to { width: 100%; }
+        }
+        @media (hover: none) {
+            .loader-logo, .loading-text {
+                animation: pulseGlow 4s infinite ease-in-out;
+            }
+            @keyframes pulseGlow {
+                0%, 100% { opacity: 1; }
+                50% {
+                    opacity: 0.8;
+                    text-shadow: 0 0 8px rgba(111, 175, 235, 0.6);
+                }
+            }
+        }
+        /* 2. ESTILOS DE TU SITIO (después de los estilos críticos) */
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
@@ -19,37 +110,28 @@
             min-height: 100vh;
             margin: 0;
         }
-
         main {
             flex-grow: 1;
         }
-
         footer {
             margin-top: auto;
             padding: 1rem 0;
         }
-
-        /* Scrollbar personalizada */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: #1a1a1a;
             border-radius: 10px;
         }
-
         ::-webkit-scrollbar-thumb {
             background: #4a4a4a;
             border-radius: 10px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: #6a6a6a;
         }
-
-        /* Fondo animado de estrellas */
         .stars {
             position: fixed;
             width: 100%;
@@ -58,7 +140,6 @@
             pointer-events: none;
             z-index: 0;
         }
-
         .star {
             position: absolute;
             width: 2px;
@@ -68,7 +149,6 @@
             opacity: 0.1;
             animation: pulse 2s infinite ease-in-out;
         }
-
         @keyframes pulse {
             0%, 100% {
                 opacity: 0.2;
@@ -79,17 +159,32 @@
                 transform: scale(1.5);
             }
         }
-</style>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-KMHMXGQ301');
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
     </script>
 </head>
-<body class="flex flex-col min-h-screen m-0 p-0 dotted-background">
+<body class="preload bg-[#0d0d0d]">
+
+<div id="data-loader">
+    <div class="data-loader-content">
+        <div class="loader-logo">BHG</div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="loading-text">
+            <span class="lang-es">Loading...</span>
+        </div>
+    </div>
+</div>
+<div id="page-content" class="hidden">
     <div class="stars" id="stars-container"></div>
     <main class="flex-grow relative z-10"> 
 <!--Barra izquierda-->
@@ -199,8 +294,8 @@
         </div>
     </header>
 <!-- Inicio Section -->
-    <section id="inicio" class="pt-4 relative min-h-screen flex items-center justify-center min-h-screen bg-stars bg-cover bg-center text-white overflow-hidden scroll-mt-10 pt-1">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center h-full">
+    <section id="inicio" class="pt-24 relative flex items-center justify-center bg-stars bg-cover bg-center text-white overflow-hidden scroll-mt-10">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
             <div class="inline-flex items-center bg-green-600 bg-opacity-20 text-black-300 text-sm font-medium px-4 py-1 rounded-full mb-8 border border-green-700 shadow-md -mt-4">
                 <span class="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></span>
                 <span class="lang-es">¡Disponible para trabajar!</span>
@@ -810,7 +905,40 @@
 
     <!-- JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const loader = document.getElementById('data-loader');
+        const pageContent = document.getElementById('page-content');
+        
+        function hideLoaderAndShowContent() {
+            if (loader) {
+                loader.style.opacity = '0';
+                
+                setTimeout(() => {
+                    loader.remove();
+                    document.body.classList.remove('preload');
+                    pageContent.classList.remove('hidden');
+
+                    // --- CÓDIGO AÑADIDO PARA LA CORRECCIÓN ---
+                    const hash = window.location.hash;
+                    if (hash) {
+                        const targetElement = document.querySelector(hash);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                    // --- FIN DEL CÓDIGO AÑADIDO ---
+                    
+                }, 500);
+            }
+        }
+        
+        setTimeout(hideLoaderAndShowContent, 1300);
+
+        window.addEventListener('load', () => {
+            setTimeout(hideLoaderAndShowContent, 500);
+        });
+        // --- FIN DEL CÓDIGO DEL PRELOADER ---
+        
         // --- 1. Para las estrellas animadas ---
         const starsContainer = document.getElementById('stars-container');
         const numStars = 100;
@@ -856,7 +984,6 @@
                 button.addEventListener('click', () => {
                     const currentLang = htmlElement.lang;
                     const newLang = currentLang === 'es' ? 'en' : 'es';
-                    // console.log('Cambiando idioma a:', newLang); // Puedes descomentar para depurar
                     setLanguage(newLang);
 
                     // Opcional: Cerrar el menú móvil si se cambia de idioma desde el botón móvil
@@ -906,14 +1033,13 @@
         function setActiveButton(clickedButton) {
             tabButtons.forEach(button => {
                 button.classList.remove('active-tab', 'bg-blue-600', 'transform', 'scale-105');
-                button.classList.add('bg-transparent', 'text-white', 'hover:bg-white', 'hover:bg-opacity-10'); // Eliminé hover:scale-105 de aquí para evitar redundancia
+                button.classList.add('bg-transparent', 'text-white', 'hover:bg-white', 'hover:bg-opacity-10');
             });
 
             clickedButton.classList.add('active-tab', 'bg-blue-600', 'transform', 'scale-105');
-            clickedButton.classList.remove('bg-transparent', 'hover:bg-white', 'hover:bg-opacity-10'); // Eliminé hover:scale-105 de aquí
+            clickedButton.classList.remove('bg-transparent', 'hover:bg-white', 'hover:bg-opacity-10');
         }
 
-        // Configurar listeners para las pestañas
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.dataset.target;
@@ -922,11 +1048,10 @@
             });
         });
 
-        // Asegurar que la primera pestaña esté activa visualmente al cargar la página
         const defaultButton = document.querySelector('.experience-tab-button[data-target="data-analysis-experience"]');
         if (defaultButton) {
-            showCategory(defaultButton.dataset.target); // Asegura que la categoría por defecto esté visible
-            setActiveButton(defaultButton);             // Establece el botón por defecto como activo visualmente
+            showCategory(defaultButton.dataset.target);
+            setActiveButton(defaultButton);
         }
     });
     </script>
