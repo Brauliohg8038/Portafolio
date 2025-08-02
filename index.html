@@ -144,19 +144,19 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #6fafeb;
+            background: #047beb; /* Cambiado a blanco para que sea más visible */
             border-radius: 100%;
-            opacity: 0.1;
-            animation: pulse 2s infinite ease-in-out;
+            /* Quitamos la opacidad inicial para que la animación la controle */
+            animation: pulse 1s infinite ease-in-out;
         }
         @keyframes pulse {
             0%, 100% {
-                opacity: 0.2;
+                opacity: 0.1; /* Opacidad inicial y final más baja */
                 transform: scale(1);
             }
             50% {
-                opacity: 0.8;
-                transform: scale(1.5);
+                opacity: 1; /* Opacidad al 100% en el pico */
+                transform: scale(1.8); /* Aumento del tamaño más notorio */
             }
         }
     </style>
@@ -315,16 +315,16 @@
                     <span class="lang-es">Aplico pensamiento analítico y visión estratégica para transformar datos en decisiones que impulsan resultados reales en los negocios</span>
                     <span class="lang-en">I apply analytical thinking and strategic vision to turn data into decisions that drive real business results.</span>
                 </p>
-                <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10">
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Power BI</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointerhover: bg-opacity-40">SQL</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Python</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Excel</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">DAX</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">ETL & Modeling</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Machine Learning</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Looker Studio</span>
-                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition hover:scale-105 cursor-pointer hover: bg-opacity-40">Lean Six Sigma</span>
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-2 mb-10">
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Power BI</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">SQL</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Python</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Excel</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">DAX</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">ETL & Modeling</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Machine Learning</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Looker Studio</span>
+                    <span class="skill-badge bg-gray-700 text-white px-4 py-2 rounded-full text-sm sm:text-base transform transition cursor-pointer bg-opacity-10 border border-gray-700 hover:border-blue-500 hover:scale-105">Lean Six Sigma</span>
                 </div>
                 <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                     <a href="#contacto" class="px-8 py-3 border border-gray-500 text-white rounded-full text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:border-blue-500 hover:shadow-xl">
@@ -899,7 +899,7 @@
     <!-- Footer Section -->
     <footer class="bg-gray-900 text-white py-6 text-center border-t border-gray-700">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-semibold mb-4">
+            <p class="text-sm mb-4">
                 &copy; <span id="current-year"></span> Braulio HG. Todos los derechos reservados.
             </p>
         </div>
