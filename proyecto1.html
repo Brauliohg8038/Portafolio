@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <span class="lang-es">Campañas de Marketing </span>
+        <span class="lang-es">Campañas de Marketing</span>
         <span class="lang-en hidden">Marketing Campaigns</span>
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -553,7 +553,25 @@
             <span class="lang-en hidden">View Code on GitHub</span>
         </a>
     </div>
-
+    <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4">
+                <span class="lang-es">¿Qué te pareció este proyecto? ¡Califícalo!</span>
+                <span class="lang-en">How would you rate this project? Give it your score!</span>
+            </h3>
+            <div id="stars-rating-container" class="flex justify-center space-x-2">
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="1">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="2">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="3">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="4">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="5">&#9733;</span>
+            </div>
+            <p id="calificacion-gracias" class="text-sm mt-4 text-gray-400 hidden">
+                <span class="lang-es">¡Gracias por tu calificación!</span>
+                <span class="lang-en">Thank you for your rating!</span>
+            </p>
+        </div>
+    </section>
     <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
         <p>
             <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
@@ -597,7 +615,7 @@
                     }
                 } else {
                     // Fallback si no se encuentran los spans dentro del title
-                    document.title = lang === 'es' ? 'Proyecto: Análisis de Sentimientos de Reseñas de Productos' : 'Project: Product Review Sentiment Analysis';
+                    document.title = lang === 'es' ? 'Campañas de Marketing' : 'Marketing Campaigns';
                 }
             }
 
@@ -612,6 +630,70 @@
                     const currentLang = htmlElement.lang;
                     const newLang = currentLang === 'es' ? 'en' : 'es';
                     setLanguage(newLang);
+                });
+            }
+            // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
+
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
+
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
+                });
+
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Campañas_Marketing', 
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
                 });
             }
         });
