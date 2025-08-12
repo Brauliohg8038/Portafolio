@@ -3,8 +3,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <span class="lang-es">Análisis de cotizaciones en Bolsa Empresas tecnológicas </span>
-        <span class="lang-en hidden">Analysis of Stock Market Quotes for Tech Companies</span>
+        <span class="lang-es">Caso de Análisis - IMT Licitaciones</span>
+        <span class="lang-en hidden">Analysis case - IMT Electrical Licitations</span>
     </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -39,33 +39,35 @@
             display: none !important;
         }
     </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
+    </script>
 </head>
 <body class="dotted-background">
     <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
         <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
-            <a href="index.html" class="text-xl font-bold text-gray-400 hover:text-white transition duration-200">
+            <a href="index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
                 <i class="fas fa-arrow-left mr-2"></i>
-                <span class="lang-es">Volver</span>
-                <span class="lang-en hidden">Back</span>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
             </a>
             <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
                 <span class="lang-es text-base font-semibold flex items-center">EN<i class="fas fa-globe text-base ml-2"></i></span>
                 <span class="lang-en text-base font-semibold flex items-center">ES<i class="fas fa-globe text-base ml-2"></i></span>
             </button>
-            <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
-                <i class="fab fa-github mr-2"></i>
-                <span class="lang-es">GitHub</span>
-                <span class="lang-en hidden">GitHub</span>
-            </a>
         </nav>
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
-        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-700">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
             <div class="bg-gradient-to-r from-blue-900 to-indigo-00 p-6 sm:p-8 text-white text-center rounded-t-xl">
                 <h1 class="text-3xl sm:text-4xl font-bold mb-2">
-                    <span class="lang-es">Análisis de cotizaciones en Bolsa Empresas tecnológicas desde 2023 a 2025.</span>
-                    <span class="lang-en hidden">Analysis of Stock Market Quotes for Tech Companies from 2023 to 2025</span>
+                    <span class="lang-es">Análisis de Licitaciones para IMT</span>
+                    <span class="lang-en hidden">Analysis of Licitations</span>
                 </h1>
             </div>
 
@@ -76,24 +78,43 @@
                         <span class="lang-en hidden">Executive Summary</span>
                     </h2>
                    <p class="text-gray-300 leading-relaxed text-justify mb-2">
-                        <span class="lang-es">Este informe presenta un análisis exploratorio y descriptivo de la evolución de los precios de cierre mensuales de siete de las principales empresas del sector tecnológico a nivel mundial: <span class="text-white">Apple Inc, Microsoft Corp, Google (Alphabet Inc), Amazon Inc, Meta Inc(Facebook), Nvidia Corp y Tesla Inc</span>, durante el período comprendido entre enero de 2023 y enero de 2025.</span>
+                        <span class="lang-es">La compañía de instalaciones eléctricas <strong>IMT</strong> evalúa participar en dos licitaciones públicas: <strong>A</strong> (un edificio) y <strong>B</strong> (una fábrica). No puede obtener la garantía de participación en ambas simultáneamente.</span>
+                        <span class="lang-en hidden">The electrical installation company <strong>IMT</strong> is evaluating participation in two public bids: <strong>A</strong> (a building) and <strong>B</strong> (a factory). It cannot obtain the participation guarantee for both simultaneously.</span>
                     </p>
                     <p class="text-gray-300 leading-relaxed text-justify mb-2">
-                        <span class="lang-es">La metodología se basó en herramientas de análisis de datos en Python, incluyendo Pandas, NumPy, Matplotlib y Seaborn, y en datos obtenidos mediante la API de Alpha Vantage. El estudio no solo examinó el comportamiento histórico de los precios, sino que también incluyó el cálculo de métricas clave como retorno, volatilidad y riesgo, además de la aplicación de simulaciones Monte Carlo para proyectar posibles escenarios futuros.</span>
+                        <span class="lang-es"> <span class='text-white'>Para la licitación A:</span> la preparación cuesta ¢200.000. El costo estimado de las obras es de ¢46.000.000. Con una cotización de ¢55.000.000, la probabilidad de adjudicación es 30%. Si cotiza ¢57.000.000, la probabilidad baja al 20%.</span>
+                        <span class="lang-en hidden"> <span class='text-white'>For bid A:</span> costs ¢200,000. Estimated work cost is ¢46,000,000.  With a bid of ¢55,000,000, the award probability is 30%. If bidding ¢57,000,000, probability drops to 20%.</span>
                     </p>
                     <p class="text-gray-300 leading-relaxed text-justify">
-                        <span class="lang-es">El objetivo principal de este análisis es ofrecer insights útiles para la toma de decisiones de inversión, proporcionando una visión comparativa de la relación riesgo-retorno entre las distintas compañías analizadas.</span>
+                        <span class="lang-es">Con ¢700.000 en espionaje industrial, IMT podría saber con 85% de certeza el precio máximo ganador (¢50.000.000). Existe la opción de que un competidor haga una oferta ganadora (prob. 10%) y le ofrezca ¢1.000.000 más reembolso de gastos.</span>
+                         <span class="lang-en hidden">With ¢700,000 in industrial espionage, IMT could know with 85% certainty the winning maximum price (¢50,000,000). There's a chance (10%) a competitor wins and offers ¢1,000,000 plus reimbursement of expenses.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-es"><span class='text-white'>La licitación B:</span> el costo de preparación es ¢100.000.</span>
+                        <span class="lang-en hidden"><span class='text-white'>For bid B:</span> preparation cost is ¢100,000.</span>
                     </p>
             
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                        <span class="lang-en hidden">This report presents an exploratory and descriptive analysis of the monthly closing price trends of seven leading global technology companies: <span class="text-white">Apple Inc., Microsoft Corp., Google (Alphabet Inc.), Amazon Inc., Meta Inc. (Facebook), Nvidia Corp., and Tesla Inc.</span>, over the period from January 2023 to January 2025.</span>
-                    </p>
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                        <span class="lang-en hidden">The methodology was based on data analysis tools in Python, including Pandas, NumPy, Matplotlib, and Seaborn, using data retrieved through the Alpha Vantage API. The study examined not only the historical behavior of stock prices but also included the calculation of key metrics such as return, volatility, and risk, along with the application of Monte Carlo simulations to project potential future scenarios.</span>
-                    </p>
-                    <p class="text-gray-300 leading-relaxed text-justify">
-                        <span class="lang-en hidden">The primary objective of this analysis is to provide actionable insights to support investment decision-making by offering a comparative view of the risk-return profiles of the companies analyzed.</span>
-                    </p>
+                    <table class="table-auto border border-gray-700 w-full mb-8 mt-4">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <th class="border px-4 py-2">Bid Price</th>
+                                <th class="border px-4 py-2">Budget</th>
+                                <th class="border px-4 py-2">Success %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">¢8,000,000</td>
+                                <td class="border px-4 py-2">¢5,000,000</td>
+                                <td class="border px-4 py-2">80%</td>
+                            </tr>
+                            <tr>
+                                <td class="border px-4 py-2">¢11,000,000</td>
+                                <td class="border px-4 py-2">¢5,000,000</td>
+                                <td class="border px-4 py-2">40%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
 
                 <section>
@@ -146,7 +167,7 @@
 <!-- Datos y Metodología -->
                 <section>
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
-                        <span class="lang-es">Datos y Metodología</span>
+                        <span class="lang-es">Datos y Supuestos</span>
                         <span class="lang-en hidden">Data and Methodology</span>
                     </h2>
                     <p class="text-gray-300 leading-relaxed mb-4">
@@ -216,7 +237,7 @@
 
                 <section>
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
-                        <span class="lang-es">Hallazgos Clave y Visualizaciones</span>
+                        <span class="lang-es">Metodología y Análisis</span>
                         <span class="lang-en hidden">Key Findings and Visualizations</span>
                     </h2>
                     <p class="text-gray-300 leading-relaxed mb-4">
@@ -285,18 +306,14 @@
                     </button>
 
                     <div id="volatilidadContent" class="hidden mt-2 p-4 bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-lg shadow-inner border border-gray-700">
-                        <ul class="list-disc list-inside ml-4 text-gray-400 space-y-2">
+                        <ul class="list-inside ml-4 text-gray-400 space-y-2">
                             <li>
                                 <span class="text-gray-300 leading-relaxed">
                                     <span class="lang-es">
-                                        Volatilidad: Es una medida de la dispersión de los retornos de un instrumento financiero, indicando qué tan rápido y en qué medida cambia su precio. Una alta volatilidad implica mayor riesgo y potencial de ganancias o pérdidas. Se calcula comúnmente a través de la desviación estándar de los retornos históricos, cuya fórmula es:
-                                        $$ \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}} $$
-                                        Donde: $$\sigma$$ es la desviación estándar (volatilidad), $$x_i$$ es cada retorno individual, $$\bar{x}$$ es la media de los retornos, y $$n$$ es el número de retornos.
+                                        Volatilidad: Es una medida de la dispersión de los retornos de un instrumento financiero, indicando qué tan rápido y en qué medida cambia su precio. Una alta volatilidad implica mayor riesgo y potencial de ganancias o pérdidas.
                                     </span>
                                     <span class="lang-en hidden">
-                                        Volatility: It is a measure of the dispersion of financial instrument returns, indicating how quickly and to what extent its price changes. High volatility implies greater risk and potential for gains or losses. It is commonly calculated using the standard deviation of historical returns, whose formula is:
-                                        $$ \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}} $$
-                                        Where $$\sigma$$ is the standard deviation (volatility), $$x_i$$ is each individual return, $$\bar{x}$$ is the mean of the returns, and $$n$$ is the number of returns.
+                                        Volatility: It is a measure of the dispersion of financial instrument returns, indicating how quickly and to what extent its price changes. High volatility implies greater risk and potential for gains or losses.
                                     </span>
                                 </span>
                             </li>
@@ -433,7 +450,7 @@
 <!--Simulacion Monte Carlo-->
                 <section>
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
-                        <span class="lang-es">Simulación Monte Carlo</span>
+                        <span class="lang-es">Resultados obtenidos</span>
                         <span class="lang-en hidden">Monte Carlo Simulation</span>
                     </h2>
                     <p class="text-gray-300 leading-relaxed mb-6">
@@ -478,7 +495,7 @@
                     <div class="bg-gray-900 p-4 rounded-lg shadow-sm border border-gray-700 mt-4 mb-4">
                     <h6 class="text-lg font-medium text-white mb-2">
                         <span class="lang-es">Resumen de Simulaciones Monte Carlo</span>
-                        <span class="lang-en hidden">Monte Carlo Simulations Summary)</span>
+                        <span class="lang-en hidden">Monte Carlo Simulations Summary</span>
                     </h6>
                     <img src="images/MonteResumen.png"
                         alt="resumen mot"
@@ -492,7 +509,7 @@
                     </p>
                     <div class="text-center mt-8">
                         <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer"
-                        class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
+                        class="inline-flex items-center px-6 py-3 border border-blue-300 text-white hover:bg-gray-500 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
                             <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
                             <span class="lang-es">Ver Gráficos completos</span>
                             <span class="lang-en hidden">See full graphics</span>
@@ -656,6 +673,26 @@
             <span class="lang-en hidden">View Code on GitHub</span>
         </a>
     </div>
+<!--Calificación del proyecto-->    
+    <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4">
+                <span class="lang-es">¿Qué te pareció este proyecto? ¡Califícalo!</span>
+                <span class="lang-en">How would you rate this project? Give it your score!</span>
+            </h3>
+            <div id="stars-rating-container" class="flex justify-center space-x-2">
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="1">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="2">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="3">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="4">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="5">&#9733;</span>
+            </div>
+            <p id="calificacion-gracias" class="text-sm mt-4 text-gray-400 hidden">
+                <span class="lang-es">¡Gracias por tu calificación!</span>
+                <span class="lang-en">Thank you for your rating!</span>
+            </p>
+        </div>
+    </section>
 
     <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
         <p>
@@ -667,8 +704,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- 1. Actualizar el año en el footer ---
-            // Se puede optimizar si ambos elementos comparten el mismo ID o una clase común.
-            // Asumiendo que pueden ser diferentes o necesitar IDs separados, la forma actual es clara.
             const currentYearEsElement = document.getElementById('current-year-project-es');
             const currentYearEnElement = document.getElementById('current-year-project-en');
             const currentYear = new Date().getFullYear();
@@ -695,7 +730,7 @@
                 } else {
                     // Fallback si los spans dentro del title no se encuentran
                     // Asegúrate de que este fallback sea apropiado para la página actual
-                    document.title = (lang === 'es') ? 'Proyecto: Análisis de Sentimientos de Reseñas de Productos' : 'Project: Product Review Sentiment Analysis';
+                    document.title = (lang === 'es') ? 'Análisis de cotizaciones en Bolsa Empresas tecnológicas' : 'Analysis of Stock Market Quotes for Technology Companies';
                 }
             }
 
@@ -720,39 +755,69 @@
                 });
             }
 
-            // --- 3. Lógica para los toggles de Volatilidad y Correlación ---
+            // --- 3. Lógica de calificación con estrellas ---
+        // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
 
-            // Elementos de Volatilidad
-            // Se corrigió el ID del icono de flecha aquí, era 'arrowIcon' y debería ser 'arrowIconVolatilidad' según tu HTML más reciente.
-            const toggleButtonVolatilidad = document.getElementById('toggleVolatilidad');
-            const volatilidadContent = document.getElementById('volatilidadContent');
-            const arrowIconVolatilidad = document.getElementById('arrowIcon'); 
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
 
-            // Elementos de Correlación
-            const toggleButtonCorrelacion = document.getElementById('toggleCorrelacion');
-            const correlacionContent = document.getElementById('correlacionContent');
-            const arrowIconCorrelacion = document.getElementById('arrowIconCorrelacion');
-
-            // Función reutilizable para alternar contenido y rotar flecha
-            function toggleSection(button, contentElement, arrowElement) {
-                contentElement.classList.toggle('hidden');
-                if (contentElement.classList.contains('hidden')) {
-                    arrowElement.style.transform = 'rotate(0deg)'; // Flecha hacia abajo (contenido oculto)
-                } else {
-                    arrowElement.style.transform = 'rotate(180deg)'; // Flecha hacia arriba (contenido visible)
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
                 }
-            }
 
-            // Asignar event listeners solo si los elementos existen
-            if (toggleButtonVolatilidad && volatilidadContent && arrowIconVolatilidad) {
-                toggleButtonVolatilidad.addEventListener('click', function() {
-                    toggleSection(this, volatilidadContent, arrowIconVolatilidad);
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
                 });
-            }
 
-            if (toggleButtonCorrelacion && correlacionContent && arrowIconCorrelacion) {
-                toggleButtonCorrelacion.addEventListener('click', function() {
-                    toggleSection(this, correlacionContent, arrowIconCorrelacion);
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Analisis_Licitaciones',
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
                 });
             }
         });
