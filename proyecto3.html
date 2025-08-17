@@ -150,6 +150,49 @@
             padding: 1rem;
             border-radius: 0.5rem;
         }
+        
+        .sensitivity-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        }
+
+        .reset-btn {
+        background-color: #6b7280;
+        color: white;
+        border: none;
+        padding: 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s;
+        }
+
+        .reset-btn:hover {
+        background-color: #4b5563;
+        }
+
+        .reset-icon {
+        width: 20px;
+        height: 20px;
+        }
+
+        /* Tooltip para el ícono */
+        .reset-btn:hover::after {
+        content: attr(title);
+        position: absolute;
+        background-color: #333;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        margin-top: 30px;
+        white-space: nowrap;
+        z-index: 100;
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
     <script>
@@ -435,7 +478,7 @@
                             <span class="bg-blue-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Python</span>
                             <span class="bg-green-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Decision Tree</span>
                             <span class="bg-purple-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Numpy</span>
-                            <span class="bg-indigo-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Matplotlib</span>
+                            <span class="bg-indigo-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">JavaScript</span>
                         </div>
                     </div>
                 </section>
@@ -1024,6 +1067,9 @@
                 htmlElement.lang = lang;
                 localStorage.setItem('preferredLang', lang);
                 updateTitle(lang); // Llama a la función para actualizar el título
+                if (typeof window.setSensitivityLanguage === 'function') {
+                    window.setSensitivityLanguage(lang);
+                }
             }
 
             // Cargar el idioma preferido al iniciar la página
@@ -1496,140 +1542,158 @@
                 .text(d => d.data.value);
         }
 
-        // Función principal para renderizar el análisis de sensibilidad
-        function renderSensitivityAnalysis() {
-            const container = document.getElementById('sensitivity-container');
-            container.innerHTML = '';
-            
-            // Datos base para cada escenario
-            const scenarios = {
-                'A1 - Sin estudio (₡55M)': { 
-                    cost: 46, bid: 55, prepCost: 0.2, 
-                    winProb: 0.3, winValue: 8.8, loseValue: -0.2 
-                },
-                'A2 - Sin estudio (₡57M)': { 
-                    cost: 46, bid: 57, prepCost: 0.2, 
-                    winProb: 0.2, winValue: 10.8, loseValue: -0.2 
-                },
-                'A3 - Con estudio (₡50M)': { 
-                    cost: 46, bid: 50, prepCost: 0.9, 
-                    winProb: 0.8, winValue: 3.1, loseValue: -0.9 
-                },
-                'A4 - Compensación (₡60M)': { 
-                    cost: 46, bid: 60, prepCost: 0.9, 
-                    winProb: 0.4, winValue: 1.9, loseValue: -0.9 
-                },
-                'B1 - Oferta básica (₡8M)': { 
-                    cost: 5, bid: 8, prepCost: 0.1, 
-                    winProb: 0.8, winValue: 2.9, loseValue: -0.1 
-                },
-                'B2 - Oferta premium (₡11M)': { 
-                    cost: 5, bid: 11, prepCost: 0.1, 
-                    winProb: 0.4, winValue: 5.9, loseValue: -0.1 
-                }
-            };
-            
-            // Crear controles para cada escenario
-            Object.entries(scenarios).forEach(([key, scenario]) => {
-                createScenarioControl(container, key, scenario);
-            });
-            
-            // Inicializar gráfico
-            updateSensitivityChart(scenarios);
+    // Análisis de sensibilidad
+    const languageStrings = {
+        es: {
+            sensitivityTitle: "Análisis de Sensibilidad",
+            description: "Modifica las probabilidades para ver cómo cambia el Valor Esperado (VE) de cada opción:",
+            winProbability: "Probabilidad de Ganar",
+            expectedValue: "Valor Esperado",
+            million: "M",
+            resetTooltip: "Restablecer valores",
+            options: {
+                'A1': "A1 (₡55M)",
+                'A2': "A2 (₡57M)",
+                'A3': "A3 (₡50M)",
+                'A4': "A4 (₡60M)",
+                'B1': "B1 (₡8M)",
+                'B2': "B2 (₡11M)"
+            }
+        },
+        en: {
+            sensitivityTitle: "Sensitivity Analysis",
+            description: "Adjust probabilities to see how the Expected Value (EV) changes for each option:",
+            winProbability: "Win Probability",
+            expectedValue: "Expected Value",
+            million: "M",
+            resetTooltip: "Reset values",
+            options: {
+                'A1': "A1 (₡55M)",
+                'A2': "A2 (₡57M)",
+                'A3': "A3 (₡50M)",
+                'A4': "A4 (₡60M)",
+                'B1': "B1 (₡8M)",
+                'B2': "B2 (₡11M)"
+            }
         }
+    };
 
-        // Función para crear los controles de cada escenario
-        function createScenarioControl(container, key, scenario) {
+    // Datos originales para el reset
+    const originalScenarios = {
+        'A1': { cost: 46, bid: 55, prepCost: 0.2, winProb: 0.3, winValue: 8.8, loseValue: -0.2 },
+        'A2': { cost: 46, bid: 57, prepCost: 0.2, winProb: 0.2, winValue: 10.8, loseValue: -0.2 },
+        'A3': { cost: 46, bid: 50, prepCost: 0.9, winProb: 0.8, winValue: 3.1, loseValue: -0.9 },
+        'A4': { cost: 46, bid: 60, prepCost: 0.9, winProb: 0.4, winValue: 1.9, loseValue: -0.9 },
+        'B1': { cost: 5, bid: 8, prepCost: 0.1, winProb: 0.8, winValue: 2.9, loseValue: -0.1 },
+        'B2': { cost: 5, bid: 11, prepCost: 0.1, winProb: 0.4, winValue: 5.9, loseValue: -0.1 }
+    };
+
+    let currentScenarios = JSON.parse(JSON.stringify(originalScenarios));
+    let currentLanguage = localStorage.getItem('preferredLang') || 'es';
+
+    // Función para restablecer valores
+    function resetProbabilities() {
+        currentScenarios = JSON.parse(JSON.stringify(originalScenarios));
+        renderSensitivityAnalysis();
+    }
+
+    // Función para calcular Valor Esperado
+    function calculateVE(scenario) {
+        return scenario.winProb * scenario.winValue + (1 - scenario.winProb) * scenario.loseValue;
+    }
+
+    // Función principal para renderizar el análisis de sensibilidad
+    function renderSensitivityAnalysis() {
+        const container = document.getElementById('sensitivity-container');
+        const lang = languageStrings[currentLanguage];
+
+        container.innerHTML = `
+            <div class="sensitivity-header">
+                <div>
+                    <h2>${lang.sensitivityTitle}</h2>
+                    <p>${lang.description}</p>
+                </div>
+                <button id="reset-probabilities-btn" class="reset-btn" title="${lang.resetTooltip}">
+                    <svg class="reset-icon" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12,4C14.1,4 16.1,4.8 17.6,6.3C20.7,9.4 20.7,14.5 17.6,17.6C15.8,19.5 13.3,20.2 10.9,19.9L11.4,17.9C13.1,18.1 14.9,17.5 16.2,16.2C18.5,13.9 18.5,10.1 16.2,7.8C15.1,6.7 13.5,6 12,6V10.6L7,5.6L12,0.6V4M6.3,17.6C3.7,15 3.3,11 5.1,7.9L6.6,9.4C5.5,11.6 5.9,14.4 7.8,16.2C9,17.5 10.9,18.1 12.6,17.9L13.1,19.9C10.7,20.2 8.2,19.5 6.3,17.6Z"/>
+                    </svg>
+                </button>
+            </div>
+        `;
+
+        // Crear controles para cada escenario
+        Object.keys(currentScenarios).forEach(key => {
+            const scenario = currentScenarios[key];
             const scenarioDiv = document.createElement('div');
             scenarioDiv.className = 'scenario';
-            
             scenarioDiv.innerHTML = `
-                <h4>${key}</h4>
-                <div class="lang-es slider-container mb-4">
-                    <label>
-                        Probabilidad de Ganar: 
+                <h4>${lang.options[key]}</h4>
+                <div class="slider-container">
+                    <label>${lang.winProbability}: 
                         <span class="prob-value">${Math.round(scenario.winProb * 100)}%</span>
                     </label>
                     <input type="range" min="0" max="100" value="${scenario.winProb * 100}" 
                         class="prob-slider" data-scenario="${key}">
                 </div>
-                <div class="lang-es ve-container">
-                    Valor Esperado: <span class="ve-value">${calculateVE(scenario).toFixed(2)}</span> M
-                </div>
-                <div class="lang-en hidden slider-container mb-4">
-                    <label>
-                        Winning Probability: 
-                        <span class="prob-value">${Math.round(scenario.winProb * 100)}%</span>
-                    </label>
-                    <input type="range" min="0" max="100" value="${scenario.winProb * 100}" 
-                        class="prob-slider" data-scenario="${key}">
-                </div>
-                <div class="ve-container lang-en hidden">
-                    Expected value: <span class="ve-value">${calculateVE(scenario).toFixed(2)}</span> M
+                <div class="ve-container">
+                    ${lang.expectedValue}: 
+                    <span class="ve-value">${calculateVE(scenario).toFixed(2)}</span> ${lang.million}
                 </div>
             `;
-            
             container.appendChild(scenarioDiv);
-            
-            // Event listener para el slider
+
+            // Evento para el slider
             scenarioDiv.querySelector('.prob-slider').addEventListener('input', function() {
                 const newProb = parseInt(this.value) / 100;
-                scenario.winProb = newProb;
-                
-                // Actualizar visualización
-                this.closest('.scenario').querySelector('.prob-value').textContent = `${this.value}%`;
-                this.closest('.scenario').querySelector('.ve-value').textContent = calculateVE(scenario).toFixed(2);
-                
-                // Actualizar gráfico
-                updateSensitivityChart(scenarios);
+                currentScenarios[key].winProb = newProb;
+                this.parentElement.querySelector('.prob-value').textContent = `${this.value}%`;
+                this.closest('.scenario').querySelector('.ve-value').textContent = calculateVE(currentScenarios[key]).toFixed(2);
+                updateSensitivityChart();
             });
+        });
+
+        // Event listener para el botón de reset
+        document.getElementById('reset-probabilities-btn').addEventListener('click', resetProbabilities);
+
+        // Actualizar gráfico
+        updateSensitivityChart();
+    }
+
+    // Función para actualizar el gráfico
+    function updateSensitivityChart(scenarios) {
+        scenarios = scenarios || currentScenarios;
+        const ctx = document.getElementById('sensitivity-chart').getContext('2d');
+        const lang = languageStrings[currentLanguage];
+
+        if (window.sensitivityChart) {
+            window.sensitivityChart.destroy();
         }
 
-        // Función para actualizar el gráfico
-        function updateSensitivityChart(scenarios) {
-            const ctx = document.getElementById('sensitivity-chart').getContext('2d');
-            
-            // Destruir gráfico anterior si existe
-            if (window.sensitivityChart) {
-                window.sensitivityChart.destroy();
-            }
-            
-            // Preparar datos para el gráfico
-            const labels = Object.keys(scenarios);
-            const data = labels.map(key => calculateVE(scenarios[key]));
-            const backgroundColors = labels.map(key => 
-                key.startsWith('A1') ? '#3b82f6' : 
-                key.startsWith('A2') ? '#2563eb' :
-                key.startsWith('A3') ? '#10b981' :
-                key.startsWith('A4') ? '#059669' :
-                key.startsWith('B1') ? '#ef4444' : '#dc2626'
-            );
-            
-            // Crear nuevo gráfico
-            window.sensitivityChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Valor Esperado (₡ M)',
-                        data: data,
-                        backgroundColor: backgroundColors,
-                        borderColor: backgroundColors.map(c => c.replace('0.6', '1')),
-                        borderWidth: 1
-                    }]
-                },
-                options: getChartOptions()
-            });
-        }
+        // Configurar tamaño del canvas
+        const chartContainer = document.querySelector('.chart-container');
+        chartContainer.style.height = '300px';
+        chartContainer.style.width = '100%';
 
-        // Función para calcular el Valor Esperado
-        function calculateVE(scenario) {
-            return (scenario.winProb * scenario.winValue) + ((1 - scenario.winProb) * scenario.loseValue);
-        }
+        const labels = Object.keys(scenarios);
+        const data = labels.map(key => calculateVE(scenarios[key]));
 
-        // Opciones del gráfico
-        function getChartOptions() {
-            return {
+        window.sensitivityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: `${lang.expectedValue} (₡ ${lang.million})`,
+                    data: data,
+                    backgroundColor: [
+                        '#3b82f6', '#2563eb', '#10b981', '#059669', '#ef4444', '#dc2626'
+                    ],
+                    borderColor: [
+                        '#1d4ed8', '#1e40af', '#047857', '#065f46', '#b91c1c', '#991b1b'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
@@ -1637,7 +1701,7 @@
                         beginAtZero: true,
                         title: {
                             display: true,
-                            text: 'Valor Esperado (₡ M)',
+                            text: `${lang.expectedValue} (₡ ${lang.million})`,
                             color: '#f3f4f6'
                         },
                         ticks: {
@@ -1653,28 +1717,41 @@
                     x: {
                         ticks: {
                             color: '#f3f4f6',
-                            maxRotation: 45,
-                            minRotation: 45
+                            font: {
+                                size: 12
+                            }
                         }
                     }
                 },
                 plugins: {
                     legend: {
-                        display: false
+                        labels: {
+                            color: '#f3f4f6',
+                            font: {
+                                size: 12
+                            }
+                        }
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `VE: ₡${context.raw.toFixed(2)}M`;
+                                return `${lang.expectedValue}: ₡${context.raw.toFixed(2)}${lang.million}`;
                             }
                         }
                     }
                 }
-            };
-        }
+            }
+        });
+    }
 
-        // Inicializar cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', renderSensitivityAnalysis);
+    // Para sincronizar el idioma al cambiarlo en la página:
+    window.setSensitivityLanguage = function(lang) {
+        currentLanguage = lang;
+        renderSensitivityAnalysis();
+    };
+
+    // Inicializar al cargar el DOM
+    renderSensitivityAnalysis();
     </script>
 </body>
 </html>
