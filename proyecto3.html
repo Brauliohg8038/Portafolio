@@ -94,6 +94,62 @@
             background-color: #374151;
             border-bottom: 2px solid #3b82f6;
         }
+        /* Estilos para el análisis de sensibilidad */
+        #sensitivity-analysis {
+            background-color: #1f2937;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #sensitivity-container {
+            margin: 1.5rem 0;
+        }
+
+        .scenario {
+            background-color: #374151;
+            border-radius: 0.375rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario h4 {
+            margin-top: 0;
+            color: #f3f4f6;
+            font-size: 1.125rem;
+        }
+
+        .slider-container {
+            margin: 1rem 0;
+        }
+
+        .slider-container label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e5e7eb;
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .ve-container {
+            display: inline-block;
+            background-color: #4b5563;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            color: #f9fafb;
+        }
+
+        .chart-container {
+            margin-top: 2rem;
+            background-color: #374151;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
     <script>
@@ -440,6 +496,53 @@
                         </li>
                     </ol>
                 </div>
+                <div class="mb-4">
+                <h3 class="text-xl font-medium text-white mb-2">
+                    <span class="lang-es">Estructura del Árbol de Decisiones</span>
+                    <span class="lang-en hidden">Decision Tree Structure</span>
+                </h3>
+                <ul class="list-disc list-inside ml-4"">
+                    <li>
+                        <strong>Nodos de Decisión (cuadrados):</strong>
+                        <span class="lang-es">Representan las opciones (Participar en Licitación A o B).</span>
+                        <span class="lang-en hidden">Choices (e.g., bid on Tender A or B).</span>
+                    </li>
+                    <li>
+                        <strong>Nodos de Probabilidad (círculos):</strong>
+                        <span class="lang-es">Ramifican los resultados posibles (éxito/fracaso) con sus probabilidades.</span>
+                        <span class="lang-en hidden">Possible outcomes (success/failure) with probabilities.</span>
+                    </li>
+                    <li>
+                        <strong>Nodos Finales (triángulos):</strong>
+                        <span class="lang-es">Muestran los resultados financieros (utilidad o pérdida).</span>
+                        <span class="lang-en hidden">Financial results (profit/loss).</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="mb-4">
+                <h4 class="text-xl font-medium text-white mb-2">
+                    <span class="lang-es">Fórmula y Ejemplo de Valor Esperado (VE)</span>
+                    <span class="lang-en hidden">Expected Value (EV) Formula and Example</span>
+                </h4>
+                <p class="text-gray-300 leading-relaxed text-justify">
+                    <span class="lang-es">
+                        La fórmula del Valor Esperado (VE) es: $$VE = (\text{Probabilidad de Éxito} \times \text{Beneficio Neto}) - (\text{Probabilidad de Fracaso} \times \text{Costos})$$
+                        <br>
+                        Para la Licitación A (sin estudio, Licitación 55M, Preparación): $$VE_{A} = (0.30 \times 8.8M) - (0.70 \times 0.2M) = \text{₡2.5M}$$
+                        <br>
+                        Con estudio de mercado (₡700k, Licitación 50M, Preparación): $$VE_{A\text{ con estudio}} = (0.8 \times 3.1M) - (0.2 \times 0.9M) = \text{₡2.3M}$$
+                    </span>
+                    <span class="lang-en hidden">
+                        The Expected Value (EV) formula is: $$EV = (\text{Probability of Success} \times \text{Net Benefit}) - (\text{Probability of Failure} \times \text{Costs})$$
+                        <br>
+                        For Tender A (without study, Bid 55M, Preparation): $$EV_{A} = (0.3 \times 8.8M) - (0.7 \times 0.2M) = \text{₡2.5M}$$
+                        <br>
+                        With market study (₡700k, Bid 50M, Preparation): $$EV_{A\text{ with study}} = (0.8 \times 3.1M) - (0.2 \times 0.9M) = \text{₡2.3M}$$
+                    </span>
+                </p>
+            </div>
+                
 
                 <hr class="my-6 border-gray-700">
                 <div class="max-w-7xl mx-auto">
@@ -448,8 +551,8 @@
                     
                     <!-- Pestañas para diferentes visualizaciones -->
                     <div class="flex mb-6 border-b border-gray-700">
-                        <button class="tab-button px-4 py-2 font-medium active lang-es" data-tab="tree">Árbol Interactivo</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tree">Interactive Tree</button>
+                        <button class="tab-button px-4 py-2 font-medium active lang-es" data-tab="tree">Árbol de decisiones</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tree">Decision Tree</button>
                         <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="comparison">Comparación Visual</button>
                         <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="comparison">Visual Comparison</button>
                         <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="tables">Tablas Detalladas</button>
@@ -459,8 +562,8 @@
                     <!-- Contenido de las pestañas -->
                     <div class="tab-content active" id="tree-tab">
                         <div class="bg-gray-800 p-4 rounded-lg mb-6">
-                            <h2 class="text-xl font-semibold mb-4 lang-es">Árbol de Decisión Completo</h2>
-                            <h2 class="text-xl font-semibold mb-4 lang-en hidden">Full Decision Tree</h2>
+                            <h2 class="text-xl font-semibold mb-4 lang-es">Árbol de Decisión</h2>
+                            <h2 class="text-xl font-semibold mb-4 lang-en hidden">Decision Tree</h2>
                             <div id="tree-container"></div>
                         </div>
                     </div>
@@ -738,401 +841,68 @@
                 </div>
                 </section>
 
-
-<!--Aquí va un análisis-->
-<!--Inicio del arboooooool--> 
-
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Análisis de los Resultado</span>
+                        <span class="lang-en hidden">Analysis of results</span>
+                    </h2>
+                <ul class="list-disc list-inside ml-4 text-gray-300 text-justify">
+                    <li class="mb-4">
+                        <span class="lang-es mb">El análisis muestra que la Licitación A sin estudio de mercado y con oferta de ₡55M presenta el mayor valor esperado (₡2,50 M), convirtiéndose en la alternativa más atractiva desde una perspectiva puramente cuantitativa. Sin embargo, esta opción implica una probabilidad relativamente baja de adjudicación (30%) y una elevada variabilidad en los resultados, ya que en caso de éxito la ganancia sería de ₡8,8 M, mientras que la probabilidad de fracaso sigue siendo alta.</span>
+                        <span class="lang-en hidden">The analysis shows that Bid A without a market study and with an offer of ₡55M achieves the highest expected value (₡2.50 M), making it the most attractive option from a purely quantitative perspective. However, this choice involves a relatively low probability of success (30%) and higher outcome variability, since a win would yield ₡8.8 M but the chances of failure remain significant.</span>
+                    </li>
+                    <li class="mb-4">
+                        <span class="lang-es">Por otro lado, la opción de realizar el estudio de mercado y ofertar ₡50M incrementa de forma notable la probabilidad de éxito (80% frente a 30%), aunque a costa de un menor valor esperado (₡2,30 M) y una pérdida más pronunciada en caso de no adjudicarse (−₡0,9 M). Esta estrategia reduce el potencial de ganancia, pero ofrece un escenario más estable y predecible, con menos volatilidad en los resultados.</span>
+                        <span class="lang-en hidden">Alternatively, the option of conducting the market study and bidding ₡50M significantly increases the probability of success (80% vs. 30%), but at the cost of a lower expected value (₡2.30 M) and a higher loss in the event of failure (−₡0.9 M). This strategy reduces the potential upside but provides a more stable and predictable scenario with less volatility in returns.</span>
+                    </li>
+                    <li class="mb-4">
+                        <span class="lang-es">La Licitación B con una oferta de ₡8M se perfila como la opción más conservadora: presenta un valor esperado de ₡2,30 M, un 80% de probabilidad de éxito y la pérdida más baja en caso de fracaso (−₡0,1 M). Esto la convierte en la alternativa más adecuada para un perfil de riesgo bajo que priorice estabilidad y limitación de pérdidas.</span>
+                        <span class="lang-en hidden">Bid B with an offer of ₡8M stands out as the most conservative option: it delivers an expected value of ₡2.30 M, an 80% success rate, and the lowest loss if unsuccessful (−₡0.1 M). This makes it the most suitable alternative for a risk-averse profile prioritizing stability and limited downside.</span>
+                    </li>
+                </ul>
+                </section>
+<!--Analisis de sensibilidad-->
                 <hr class="my-6 border-gray-700">
                 <div class="text-gray-300 leading-relaxed mt-4">
                     <h3 class="text-xl font-medium text-white mb-2">
-                        <span class="lang-es">Análisis de Sensibilidad</span>
-                        <span class="lang-en hidden"> Sensitivity Analysis</span>
+                        <span class="lang-es">Análisis de Sensibilidad y Escenarios Alternativos</span>
+                        <span class="lang-en hidden">Sensitivity analysis and alternative scenarios</span>
                     </h3> 
-
-<!--explicar en qué variaciones se harán-->
-
-
-
-
-                <section class="max-w-4xl mx-auto my-8 p-6 bg-gray-800 bg-opacity-60 rounded-xl border border-gray-700 text-white">
-                    <div class="mb-4">
-                        <h2 class="text-2xl font-semibold">
-                            <span class="lang-es">Licitación A Sin Estudio</span>
-                            <span class="lang-en hidden">Bid A: Without Study</span>
-                        </h2>
-                        <p class="text-sm text-gray-300 mt-2">
-                            <span class="lang-es">Estrategias y Valores Esperados (VE). Montos en millones de colones (₡ M).</span>
-                            <span class="lang-en hidden">Strategies and Expected Values (EV). Amounts in million colones (₡ M).</span>
-                        </p>
-                    </div>
-                    <div class="lang-es">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">Tabla de la rama Sin estudio — Español</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Estrategia</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Escenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probabilidad</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Valor Neto (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">VE Parcial (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡55 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Ganar</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">30% (0,30)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">8,8</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,64</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Perder</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">70% (0,70)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,2</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,14</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2,50</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡57 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Ganar</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0,20)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">10,8</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,16</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Perder</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0,80)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,2</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,16</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2,00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Mejor dentro de “Sin estudio”:</p>
-                            <p>Ofertar <strong>₡55 M</strong> → <strong>VE = ₡2,50 M</strong> (vs. ₡2M de ofertar ₡57M).</p>
-                        </div>
-                    </div>
-    <!-- Tabla 1 en Inglés -->
-                    <div class="lang-en">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">"Without study" branch table — English</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Strategy</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Scenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probability</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Net Value (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Partial EV (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡55 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Win</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">30% (0.30)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">8.8</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.64</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Lose</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">70% (0.70)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.2</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.14</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2.50</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡57 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Win</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0.20)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">10.8</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.16</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Lose</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0.80)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.2</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.16</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Best within “Without study”:</p>
-                            <p>Bid <strong>₡55 M</strong> → <strong>EV = ₡2.50 M</strong> (vs. ₡2M from bidding ₡57M).</p>
-                        </div>
+                <p class="mb-4 text-justify">
+                    <span class="lang-es">Para evaluar la solidez de la decisión estratégica, se realiza un análisis de sensibilidad que explora cómo cambios en las probabilidades o en los resultados financieros afectan el Valor Esperado (VE). Esto permite identificar qué variables son más críticas y hasta qué punto la decisión final se mantiene robusta frente a variaciones en el entorno competitivo.</span>
+                    <span class="lang-en hidden">To assess the robustness of a strategic decision, a sensitivity analysis is performed to explore how changes in probabilities or financial outcomes affect the Expected Value (EV). This allows us to identify the most critical variables and the degree of robustness of the final decision to variations in the competitive environment.</span>
+                </p>
+                <p class="mb-4">
+                    <span class="lang-es">En este caso, se simulan dos escenarios alternativos:</span>
+                    <span class="lang-en hidden">In this case, two alternative scenarios are simulated:</span>
+                </p>
+                <ul class="list-disc list-inside ml-4 text-gray-300 text-justify mb-4">
+                    <li class="mb-2">
+                        <span class="lang-es">Escenario 1: Aumento en la probabilidad de éxito de la Licitación (A sin estudio) de 30% a 45%) debido a una mejora en la percepción del cliente sobre la empresa.</span>
+                        <span class="lang-en hidden">Scenario 1: Increase in the probability of success of Bid A without study (from 30% to 40%) due to an improvement in the client's perception of the company.</span>
+                    </li>
+                    <li class="mb-2">
+                        <span class="lang-es">Escenario 2: Disminución en la probabilidad de éxito de la Licitación B de 80% a 60% debido al ingreso de nuevos competidores.</span>
+                        <span class="lang-en hidden">Scenario 2: Reduction in the net value of winning Bid B (from ₡2.9 M to ₡2.5 M) due to increased market competition putting pressure on margins.</span>
+                    </li>
+                </ul>
+                </section>
+                <section id="sensitivity-analysis">
+                    <h2 class="lang-es text-xl font-medium text-white mb-2">Análisis de Sensibilidad</h2>
+                    <h2 class="lang-en hidden text-xl font-medium text-white mb-2">Sensitivity Analysis</h2>
+                    <p class="lang-es">Modifica las probabilidades para ver cómo cambia el Valor en cada opción:</p>
+                    <p class="lang-en hidden">Adjust the probabilities to see how the Value changes for each option:</p>
+                    <div class="mt-4></div>
+                        
+                    <div class="flex items
+                    <!-- Contenedor dinámico donde se generarán los controles -->
+                    <div id="sensitivity-container"></div>
+                    
+                    <!-- Gráfico de resultados -->
+                    <div class="chart-container">
+                        <canvas id="sensitivity-chart"></canvas>
                     </div>
                 </section>
-<!-- Tabla2 Rama "Con estudio" -->
-                <section class="max-w-4xl mx-auto my-8 p-6 bg-gray-800 bg-opacity-60 rounded-xl border border-gray-700 text-white">
-                    <div class="mb-4">
-                        <h2 class="text-2xl font-semibold">
-                            <span class="lang-es">Licitación A: Con Estudio</span>
-                            <span class="lang-en hidden">Bid A: With Study</span>
-                        </h2>
-                        <p class="text-sm text-gray-300 mt-2">
-                            <span class="lang-es">Estrategias y Valores Esperados (VE). Montos en millones de colones (₡ M).</span>
-                            <span class="lang-en hidden">Strategies and Expected Values (EV). Amounts in million colones (₡ M).</span>
-                        </p>
-                    </div>
-                    <div class="lang-es">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">Tabla de la rama Con estudio — Español</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Estrategia</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Escenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probabilidad</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Valor Neto (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">VE Parcial (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡50 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Ganar</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0,80)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">3,10</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,48</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Perder</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0,20)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,90</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,18</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2,30</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡60 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Competidor gana (compensado)</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">40% (0,40)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">1,90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">0,76</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Competidor no gana (sin compensación)</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">60% (0,60)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,90</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,54</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">0,22</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Mejor dentro de “Con estudio”:</p>
-                            <p>Ofertar <strong>₡50 M</strong> → <strong>VE = ₡2,30 M</strong> (vs. ₡0,22 M del precio perdedor).</p>
-                        </div>
-                    </div>
-                    <div class="lang-en">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">"With study" branch table — English</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Strategy</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Scenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probability</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Net Value (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Partial EV (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡50 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Win</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0.80)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">3.10</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.48</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Lose</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0.20)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.90</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.18</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2.30</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡60 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Competitor wins (compensated)</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">40% (0.40)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">1.90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">0.76</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Competitor does not win (no compensation)</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">60% (0.60)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.90</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.54</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">0.22</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Best within “With study”:</p>
-                            <p>Bid <strong>₡50 M</strong> → <strong>EV = ₡2.30 M</strong> (vs. ₡0.22 M of the losing price).</p>
-                        </div>
-                    </div>
-                </section>
-    <!-- Licitación B --> 
-                <section class="max-w-4xl mx-auto my-8 p-6 bg-gray-800 bg-opacity-60 rounded-xl border border-gray-700 text-white">
-                    <div class="mb-4">
-                        <h2 class="text-2xl font-semibold">
-                            <span class="lang-es">Licitación B — Cálculos</span>
-                            <span class="lang-en hidden">Bid B— Calculations</span>
-                        </h2>
-                        <p class="text-sm text-gray-300 mt-2">
-                            <span class="lang-es">Estrategias y Valores Esperados (VE). Montos en millones de colones (₡ M).</span>
-                            <span class="lang-en hidden">Strategies and Expected Values (EV). Amounts in million colones (₡ M).</span>
-                        </p>
-                    </div>
-                    <div class="lang-es">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">Tabla de la rama Licitación B — Español</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Estrategia</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Escenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probabilidad</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Valor Neto (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">VE Parcial (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡8 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Ganar</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0,80)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,32</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Perder</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0,20)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,10</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,02</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2,30</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Ofertar ₡11 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Ganar</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">40% (0,40)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">5,90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2,36</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Perder</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">60% (0,60)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0,10</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0,06</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Valor Esperado (VE) Total</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2,30</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Mejor dentro de “Licitación B”:</p>
-                            <p>Ambas estrategias tienen el mismo Valor Esperado de <strong>₡2,30 M</strong>, lo que sugiere que no hay una opción claramente superior desde el punto de vista puramente probabilístico.</p>
-                        </div>
-                    </div>
-                    <div class="lang-en">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-sm divide-y divide-gray-700">
-                                <caption class="sr-only">"Bid B" branch table — English</caption>
-                                <thead class="bg-gray-900">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-gray-300">Strategy</th>
-                                        <th class="px-4 py-2 text-left text-gray-300">Scenario</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Probability</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Net Value (₡ M)</th>
-                                        <th class="px-4 py-2 text-right text-gray-300">Partial EV (₡ M)</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-gray-800 divide-y divide-gray-700">
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡8 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Win</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">80% (0.80)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Lose</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">20% (0.20)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.10</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.02</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2.30</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200 font-medium" rowspan="3">Bid ₡11 M</td>
-                                        <td class="px-4 py-3 text-gray-200">Win</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">40% (0.40)</td>
-                                        <td class="px-4 py-3 text-right text-green-300">5.90</td>
-                                        <td class="px-4 py-3 text-right text-green-300">2.36</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-4 py-3 text-gray-200">Lose</td>
-                                        <td class="px-4 py-3 text-right text-gray-200">60% (0.60)</td>
-                                        <td class="px-4 py-3 text-right text-red-300">−0.10</td>
-                                        <td class="px-4 py-3 text-right text-red-200">−0.06</td>
-                                    </tr>
-                                    <tr class="bg-gray-900">
-                                        <td colspan="3" class="px-4 py-3 text-gray-200 font-medium text-right">Total Expected Value (EV)</td>
-                                        <td class="px-4 py-3 text-right text-yellow-300 font-semibold">2.30</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-4 text-gray-300">
-                            <p class="font-semibold">Best within “Bid B”:</p>
-                            <p>Both strategies have the same Expected Value of <strong>₡2.30 M</strong>, suggesting there is no clearly superior option from a purely probabilistic perspective.</p>
-                        </div>
-                    </div>
-                </section>
-                <body class="bg-gray-900 text-gray-200 p-6">
-                
-
-
 
 <!--Ultima sección-->
                 <section>
@@ -1334,240 +1104,305 @@
                     }
                 });
             }
-            // Funcionalidad de pestañas
-        document.querySelectorAll('.tab-button').forEach(button => {
-            button.addEventListener('click', () => {
-                // Desactivar todas las pestañas
-                document.querySelectorAll('.tab-button').forEach(btn => {
-                    btn.classList.remove('active');
-                });
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.remove('active');
-                });
+                // Activar la pestaña del árbol por defecto
+                document.querySelector('[data-tab="tree"]').classList.add('active');
+                document.getElementById('tree-tab').classList.add('active');
                 
-                // Activar la pestaña seleccionada
-                button.classList.add('active');
-                const tabId = button.getAttribute('data-tab');
-                document.getElementById(`${tabId}-tab`).classList.add('active');
+                // Resto de la inicialización
+                renderDecisionTree();
+                renderCharts();
+            });
+
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    // Desactivar todas las pestañas
+                    document.querySelectorAll('.tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Activar la pestaña seleccionada
+                    button.classList.add('active');
+                    const tabId = button.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Redibujar gráficos cuando se muestran
+                    if (tabId === 'comparison') {
+                        renderCharts();
+                    } else if (tabId === 'tree') {
+                        renderDecisionTree();
+                    }
+                });
+            });
+
+            // Gráficos de comparación con colores claros para fondo oscuro
+            function renderCharts() {
+                // Colores optimizados para fondo oscuro
+                const successColor = 'rgba(100, 255, 150, 0.8)';  // Verde más claro
+                const warningColor = 'rgba(255, 200, 100, 0.8)';  // Amarillo/naranja
+                const dangerColor = 'rgba(255, 100, 100, 0.8)';   // Rojo claro
+                const infoColor = 'rgba(100, 200, 255, 0.8)';     // Azul claro
                 
-                // Redibujar gráficos cuando se muestran
-                if (tabId === 'comparison') {
-                    renderCharts();
-                } else if (tabId === 'tree') {
-                    renderDecisionTree();
-                }
-            });
-        });
-        
-        // Gráficos de comparación
-        function renderCharts() {
-            // Licitación A - Sin Estudio
-            const ctxA1 = document.getElementById('chartA1').getContext('2d');
-            new Chart(ctxA1, {
-                type: 'bar',
-                data: {
-                    labels: ['Bid ₡55M', 'Bid ₡57M'],
-                    datasets: [{
-                        label: 'Expected Value (₡ M)',
-                        data: [2.5, 2.0],
-                        backgroundColor: [
-                            'rgba(74, 222, 128, 0.7)',
-                            'rgba(248, 113, 113, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(74, 222, 128, 1)',
-                            'rgba(248, 113, 113, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Expected Value (₡ M)'
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Licitación A - Con Estudio
-            const ctxA2 = document.getElementById('chartA2').getContext('2d');
-            new Chart(ctxA2, {
-                type: 'bar',
-                data: {
-                    labels: ['Bid ₡50M', 'Bid ₡60M'],
-                    datasets: [{
-                        label: 'Expected value (₡ M)',
-                        data: [2.3, 0.22],
-                        backgroundColor: [
-                            'rgba(74, 222, 128, 0.7)',
-                            'rgba(248, 113, 113, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(74, 222, 128, 1)',
-                            'rgba(248, 113, 113, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Expected Value (₡ M)'
-                            }
-                        }
-                    }
-                }
-            });
-            
-            // Licitación B
-            const ctxB = document.getElementById('chartB').getContext('2d');
-            new Chart(ctxB, {
-                type: 'bar',
-                data: {
-                    labels: ['Bid ₡8M', 'Bid ₡11M'],
-                    datasets: [{
-                        label: 'Expected Value (₡ M)',
-                        data: [2.3, 2.3],
-                        backgroundColor: [
-                            'rgba(74, 222, 128, 0.7)',
-                            'rgba(96, 165, 250, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(74, 222, 128, 1)',
-                            'rgba(96, 165, 250, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Expected Value (₡ M)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-        
-        // Árbol de decisiones
-        function renderDecisionTree() {
-            const container = document.getElementById('tree-container');
-            container.innerHTML = '';
-            
-            // Datos para el árbol de decisiones
-            const treeData = {
-                name: "Decisión Inicial",
-                value: "",
-                children: [
-                    {
-                        name: "A",
-                        value: "",
-                        children: [
-                            {
-                                name: "A1",
-                                value: "",
-                                children: [
-                                    {
-                                        name: "₡55M",
-                                        value: "VE: ₡2.50M",
-                                        children: [
-                                            { name: "Win (30%)", value: "₡8.8M" },
-                                            { name: "Lose (70%)", value: "-₡0.2M" }
-                                        ]
-                                    },
-                                    {
-                                        name: "₡57M",
-                                        value: "VE: ₡2.00M",
-                                        children: [
-                                            { name: "Win (20%)", value: "₡10.8M" },
-                                            { name: "Lose (80%)", value: "-₡0.2M" }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {
-                                name: "A2",
-                                value: "",
-                                children: [
-                                    {
-                                        name: "₡50M",
-                                        value: "VE: ₡2.30M",
-                                        children: [
-                                            { name: "Win (80%)", value: "₡3.10M" },
-                                            { name: "Lose (20%)", value: "-₡0.90M" }
-                                        ]
-                                    },
-                                    {
-                                        name: "₡60M",
-                                        value: "VE: ₡0.22M",
-                                        children: [
-                                            { name: "Win C (40%)", value: "₡1.90M" },
-                                            { name: "Lose C (60%)", value: "-₡0.90M" }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
+                // Licitación A - Sin Estudio
+                const ctxA1 = document.getElementById('chartA1').getContext('2d');
+                new Chart(ctxA1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Bid ₡55M', 'Bid ₡57M'],
+                        datasets: [{
+                            label: 'Expected Value (₡ M)',
+                            data: [2.5, 2.0],
+                            backgroundColor: [successColor, dangerColor],
+                            borderColor: [successColor, dangerColor],
+                            borderWidth: 1
+                        }]
                     },
-                    {
-                        name: "B",
-                        value: "",
-                        children: [
-                            {
-                                name: "₡8M",
-                                value: "VE: ₡2.30M",
-                                children: [
-                                    { name: "Win (80%)", value: "₡2.90M" },
-                                    { name: "Lose (20%)", value: "-₡0.10M" }
-                                ]
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Expected Value (₡ M)',
+                                    color: '#ffffff'  // Texto blanco para mejor contraste
+                                },
+                                ticks: {
+                                    color: '#ffffff'  // Texto blanco para mejor contraste
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'  // Líneas de grid sutiles
+                                }
                             },
-                            {
-                                name: "₡11M",
-                                value: "VE: ₡2.30M",
-                                children: [
-                                    { name: "Win (40%)", value: "₡5.90M" },
-                                    { name: "Lose (60%)", value: "-₡0.10M" }
-                                ]
+                            x: {
+                                ticks: {
+                                    color: '#ffffff'  // Texto blanco para mejor contraste
+                                }
                             }
-                        ]
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff'  // Texto blanco para mejor contraste
+                                }
+                            }
+                        }
                     }
-                ]
-            };
+                });
+                
+                // Licitación A - Con Estudio
+                const ctxA2 = document.getElementById('chartA2').getContext('2d');
+                new Chart(ctxA2, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Bid ₡50M', 'Bid ₡60M'],
+                        datasets: [{
+                            label: 'Expected value (₡ M)',
+                            data: [2.3, 0.22],
+                            backgroundColor: [successColor, dangerColor],
+                            borderColor: [successColor, dangerColor],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Expected Value (₡ M)',
+                                    color: '#ffffff'
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // Licitación B
+                const ctxB = document.getElementById('chartB').getContext('2d');
+                new Chart(ctxB, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Bid ₡8M', 'Bid ₡11M'],
+                        datasets: [{
+                            label: 'Expected Value (₡ M)',
+                            data: [2.3, 2.3],
+                            backgroundColor: [successColor, infoColor],
+                            borderColor: [successColor, infoColor],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Expected Value (₡ M)',
+                                    color: '#ffffff'
+                                },
+                                ticks: {
+                                    color: '#ffffff'
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Árbol de decisiones con formas correctas y mejor espaciado
+            function renderDecisionTree() {
+                const container = document.getElementById('tree-container');
+                container.innerHTML = '';
+                
+                // Datos para el árbol de decisiones
+                const treeData = {
+                    name: "Decisión Inicial",
+                    value: "",
+                    children: [
+                        {
+                            name: "A",
+                            value: "",
+                            children: [
+                                {
+                                    name: "A1",
+                                    value: "",
+                                    children: [
+                                        {
+                                            name: "₡55M",
+                                            value: "VE: ₡2.50M",
+                                            children: [
+                                                { name: "Win (30%)", value: "₡8.8M" },
+                                                { name: "Lose (70%)", value: "-₡0.2M" }
+                                            ]
+                                        },
+                                        {
+                                            name: "₡57M",
+                                            value: "VE: ₡2.00M",
+                                            children: [
+                                                { name: "Win (20%)", value: "₡10.8M" },
+                                                { name: "Lose (80%)", value: "-₡0.2M" }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    name: "A2",
+                                    value: "",
+                                    children: [
+                                        {
+                                            name: "₡50M",
+                                            value: "VE: ₡2.30M",
+                                            children: [
+                                                { name: "Win (80%)", value: "₡3.10M" },
+                                                { name: "Lose (20%)", value: "-₡0.90M" }
+                                            ]
+                                        },
+                                        {
+                                            name: "₡60M",
+                                            value: "VE: ₡0.22M",
+                                            children: [
+                                                { name: "Win C (40%)", value: "₡1.90M" },
+                                                { name: "Lose C (60%)", value: "-₡0.90M" }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            name: "B",
+                            value: "",
+                            children: [
+                                {
+                                    name: "₡8M",
+                                    value: "VE: ₡2.30M",
+                                    children: [
+                                        { name: "Win (80%)", value: "₡2.90M" },
+                                        { name: "Lose (20%)", value: "-₡0.10M" }
+                                    ]
+                                },
+                                {
+                                    name: "₡11M",
+                                    value: "VE: ₡2.30M",
+                                    children: [
+                                        { name: "Win (40%)", value: "₡5.90M" },
+                                        { name: "Lose (60%)", value: "-₡0.10M" }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                };
+                
+            // Configuración de dimensiones con márgenes equilibrados
+            const margin = {top: 60, right: 20, bottom: 30, left: 20};
+            const containerWidth = container.clientWidth;
+            const width = containerWidth - margin.left - margin.right;
+            const height = 600;
             
-            // Configuración del árbol
-            const margin = {top: 40, right: 90, bottom: 50, left: 90};
-            const width = container.clientWidth - margin.left - margin.right;
-            const height = 600 - margin.top - margin.bottom;
-            
-            // Crear el lienzo SVG
+            // Crear el lienzo SVG centrado
             const svg = d3.select("#tree-container")
                 .append("svg")
-                .attr("width", width + margin.left + margin.right)
+                .attr("width", width + margin.left + margin.right)  // Usar 100% del contenedor
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", `translate(${margin.left},${margin.top})`);
             
-            // Declarar el diseño del árbol
-            const treeLayout = d3.tree().size([width, height]);
+            // Configuración del árbol con separación adecuada
+            const treeLayout = d3.tree()
+                .size([width, height])
+                .nodeSize([50, 100]);  // Ajuste para mejor distribución
             
             // Dar formato a los datos para la jerarquía
             const root = d3.hierarchy(treeData);
             const treeDataFormatted = treeLayout(root);
+            
+            // Calcular desplazamiento para centrar el árbol
+            const minX = d3.min(treeDataFormatted.descendants(), d => d.x);
+            const maxX = d3.max(treeDataFormatted.descendants(), d => d.x);
+            const treeWidth = maxX - minX;
+            const initialTranslate = (width - treeWidth) / 2 - minX;
+            
+            // Reaplicar transformación para centrar
+            svg.attr("transform", `translate(${initialTranslate},${margin.top})`);
             
             // Dibujar los enlaces
             svg.selectAll('.link')
@@ -1577,9 +1412,11 @@
                 .attr('class', 'link')
                 .attr('d', d3.linkVertical()
                     .x(d => d.x)
-                    .y(d => d.y));
+                    .y(d => d.y))
+                .attr('stroke', '#4b5563')
+                .attr('stroke-width', 1.5);
             
-            // Añadir texto a los enlaces (probabilidades)
+            // Texto de probabilidades
             svg.selectAll('.link-text')
                 .data(treeDataFormatted.links())
                 .enter()
@@ -1587,12 +1424,13 @@
                 .attr('class', 'link-text')
                 .attr('x', d => (d.source.x + d.target.x) / 2)
                 .attr('y', d => (d.source.y + d.target.y) / 2)
-                .attr('dy', -5)
+                .attr('dy', d => d.target.data.name.includes("Win") ? -12 : 12)
+                .style('font-size', '11px')
+                .style('fill', '#e5e7eb')
+                .style('text-anchor', 'middle')
                 .text(d => {
-                    if (d.target.data.name.includes("(") && d.target.data.name.includes("%)")) {
-                        return d.target.data.name.match(/\((.*?)%/)[1] + "%";
-                    }
-                    return "";
+                    const match = d.target.data.name.match(/\((.*?)%/);
+                    return match ? match[1] + "%" : "";
                 });
             
             // Crear grupos de nodos
@@ -1603,47 +1441,240 @@
                 .attr('class', 'node')
                 .attr('transform', d => `translate(${d.x},${d.y})`);
             
-            // Añadir círculos a los nodos
-            node.append('circle')
-                .attr('class', d => {
-                    if (d.children) {
-                        return d.depth === 0 ? "decision-node" : 
-                               d.depth === 1 ? "chance-node" : "decision-node";
-                    } else {
-                        return "end-node";
-                    }
-                })
-                .attr('r', d => d.depth === 0 ? 20 : d.depth === 1 ? 15 : 10);
+            // Añadir formas a los nodos
+            node.each(function(d) {
+                const nodeGroup = d3.select(this);
+                
+                if (d.depth === 0) { // Nodos de decisión (cuadrados)
+                    nodeGroup.append('rect')
+                        .attr('class', 'decision-node')
+                        .attr('x', -15)
+                        .attr('y', -15)
+                        .attr('width', 30)
+                        .attr('height', 30)
+                        .attr('rx', 3)
+                        .attr('fill', '#3b82f6')
+                        .attr('stroke', '#1d4ed8');
+                } 
+                else if (d.depth === 1) { // Nodos de probabilidad (círculos)
+                    nodeGroup.append('circle')
+                        .attr('class', 'chance-node')
+                        .attr('r', 12)
+                        .attr('fill', '#10b981')
+                        .attr('stroke', '#047857');
+                } 
+                else { // Nodos finales (triángulos)
+                    const triangle = d3.symbol().type(d3.symbolTriangle).size(80);
+                    nodeGroup.append('path')
+                        .attr('class', 'end-node')
+                        .attr('d', triangle)
+                        .attr('transform', 'translate(0, 4)')
+                        .attr('fill', '#ef4444')
+                        .attr('stroke', '#b91c1c');
+                }
+            });
             
-            // Añadir texto a los nodos
+            // Texto principal de nodos
             node.append('text')
-                .attr('class', 'node-text')
-                .attr('dy', d => d.depth === 0 ? 35 : d.depth === 1 ? 30 : 20)
+                .attr('class', 'node-name')
+                .attr('dy', d => d.depth === 0 ? -25 : -18)
                 .attr('text-anchor', 'middle')
-                .text(d => {
-                    // Mostrar solo el nombre sin probabilidad
-                    if (d.data.name.includes("(")) {
-                        return d.data.name.split("(")[0].trim();
-                    }
-                    return d.data.name;
-                });
+                .style('font-size', d => d.depth === 0 ? '12px' : '11px')
+                .style('fill', '#f3f4f6')
+                .style('font-weight', d => d.depth === 0 ? 'bold' : 'italic')
+                .text(d => d.data.name.split("(")[0].trim());
             
-            // Añadir valores a los nodos
-            node.append('text')
-                .attr('class', 'node-text')
-                .attr('dy', d => d.depth === 0 ? 55 : d.depth === 1 ? 45 : 35)
+            // Valores (VE)
+            node.filter(d => d.data.value)
+                .append('text')
+                .attr('class', 'node-value')
+                .attr('dy', d => d.depth === 0 ? 30 : 20)
                 .attr('text-anchor', 'middle')
-                .style('font-size', '10px')
+                .style('font-size', '11px')
                 .style('fill', '#d1d5db')
-                .text(d => d.data.value || "");
+                .style('font-style', 'normal')
+                .text(d => d.data.value);
         }
-        
-        // Inicializar visualizaciones
-        document.addEventListener('DOMContentLoaded', () => {
-            renderDecisionTree();
-            renderCharts();
-        });
-        });
+
+        // Función principal para renderizar el análisis de sensibilidad
+        function renderSensitivityAnalysis() {
+            const container = document.getElementById('sensitivity-container');
+            container.innerHTML = '';
+            
+            // Datos base para cada escenario
+            const scenarios = {
+                'A1 - Sin estudio (₡55M)': { 
+                    cost: 46, bid: 55, prepCost: 0.2, 
+                    winProb: 0.3, winValue: 8.8, loseValue: -0.2 
+                },
+                'A2 - Sin estudio (₡57M)': { 
+                    cost: 46, bid: 57, prepCost: 0.2, 
+                    winProb: 0.2, winValue: 10.8, loseValue: -0.2 
+                },
+                'A3 - Con estudio (₡50M)': { 
+                    cost: 46, bid: 50, prepCost: 0.9, 
+                    winProb: 0.8, winValue: 3.1, loseValue: -0.9 
+                },
+                'A4 - Compensación (₡60M)': { 
+                    cost: 46, bid: 60, prepCost: 0.9, 
+                    winProb: 0.4, winValue: 1.9, loseValue: -0.9 
+                },
+                'B1 - Oferta básica (₡8M)': { 
+                    cost: 5, bid: 8, prepCost: 0.1, 
+                    winProb: 0.8, winValue: 2.9, loseValue: -0.1 
+                },
+                'B2 - Oferta premium (₡11M)': { 
+                    cost: 5, bid: 11, prepCost: 0.1, 
+                    winProb: 0.4, winValue: 5.9, loseValue: -0.1 
+                }
+            };
+            
+            // Crear controles para cada escenario
+            Object.entries(scenarios).forEach(([key, scenario]) => {
+                createScenarioControl(container, key, scenario);
+            });
+            
+            // Inicializar gráfico
+            updateSensitivityChart(scenarios);
+        }
+
+        // Función para crear los controles de cada escenario
+        function createScenarioControl(container, key, scenario) {
+            const scenarioDiv = document.createElement('div');
+            scenarioDiv.className = 'scenario';
+            
+            scenarioDiv.innerHTML = `
+                <h4>${key}</h4>
+                <div class="lang-es slider-container mb-4">
+                    <label>
+                        Probabilidad de Ganar: 
+                        <span class="prob-value">${Math.round(scenario.winProb * 100)}%</span>
+                    </label>
+                    <input type="range" min="0" max="100" value="${scenario.winProb * 100}" 
+                        class="prob-slider" data-scenario="${key}">
+                </div>
+                <div class="lang-es ve-container">
+                    Valor Esperado: <span class="ve-value">${calculateVE(scenario).toFixed(2)}</span> M
+                </div>
+                <div class="lang-en hidden slider-container mb-4">
+                    <label>
+                        Winning Probability: 
+                        <span class="prob-value">${Math.round(scenario.winProb * 100)}%</span>
+                    </label>
+                    <input type="range" min="0" max="100" value="${scenario.winProb * 100}" 
+                        class="prob-slider" data-scenario="${key}">
+                </div>
+                <div class="ve-container lang-en hidden">
+                    Expected value: <span class="ve-value">${calculateVE(scenario).toFixed(2)}</span> M
+                </div>
+            `;
+            
+            container.appendChild(scenarioDiv);
+            
+            // Event listener para el slider
+            scenarioDiv.querySelector('.prob-slider').addEventListener('input', function() {
+                const newProb = parseInt(this.value) / 100;
+                scenario.winProb = newProb;
+                
+                // Actualizar visualización
+                this.closest('.scenario').querySelector('.prob-value').textContent = `${this.value}%`;
+                this.closest('.scenario').querySelector('.ve-value').textContent = calculateVE(scenario).toFixed(2);
+                
+                // Actualizar gráfico
+                updateSensitivityChart(scenarios);
+            });
+        }
+
+        // Función para actualizar el gráfico
+        function updateSensitivityChart(scenarios) {
+            const ctx = document.getElementById('sensitivity-chart').getContext('2d');
+            
+            // Destruir gráfico anterior si existe
+            if (window.sensitivityChart) {
+                window.sensitivityChart.destroy();
+            }
+            
+            // Preparar datos para el gráfico
+            const labels = Object.keys(scenarios);
+            const data = labels.map(key => calculateVE(scenarios[key]));
+            const backgroundColors = labels.map(key => 
+                key.startsWith('A1') ? '#3b82f6' : 
+                key.startsWith('A2') ? '#2563eb' :
+                key.startsWith('A3') ? '#10b981' :
+                key.startsWith('A4') ? '#059669' :
+                key.startsWith('B1') ? '#ef4444' : '#dc2626'
+            );
+            
+            // Crear nuevo gráfico
+            window.sensitivityChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Valor Esperado (₡ M)',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors.map(c => c.replace('0.6', '1')),
+                        borderWidth: 1
+                    }]
+                },
+                options: getChartOptions()
+            });
+        }
+
+        // Función para calcular el Valor Esperado
+        function calculateVE(scenario) {
+            return (scenario.winProb * scenario.winValue) + ((1 - scenario.winProb) * scenario.loseValue);
+        }
+
+        // Opciones del gráfico
+        function getChartOptions() {
+            return {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Valor Esperado (₡ M)',
+                            color: '#f3f4f6'
+                        },
+                        ticks: {
+                            color: '#f3f4f6',
+                            callback: function(value) {
+                                return value.toFixed(1);
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#f3f4f6',
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `VE: ₡${context.raw.toFixed(2)}M`;
+                            }
+                        }
+                    }
+                }
+            };
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', renderSensitivityAnalysis);
     </script>
 </body>
 </html>
