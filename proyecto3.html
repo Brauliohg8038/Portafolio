@@ -193,6 +193,11 @@
         white-space: nowrap;
         z-index: 100;
         }
+        @media (max-width: 768px) {
+            .lang-es .math, .lang-en .math {
+            font-size: 0.8em; /* Ajusta este valor según tu necesidad */
+        }
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
     <script>
@@ -518,12 +523,12 @@
                             <span class="lang-en hidden"><strong>Sensitivity Analysis:</strong></span>
                             <ul class="list-disc list-inside ml-4">
                                 <li>
-                                    <span class="lang-es">Impacto de aumentar la probabilidad de éxito de A al 35%</span>
-                                    <span class="lang-en hidden">Impact of increasing success probability of A to 35%</span>
+                                    <span class="lang-es">Aumento en la probabilidad de éxito de la Licitación (A sin estudio) de 30% a 45% ofertando 55M, debido a una mejora en la percepción sobre la empresa.</span>
+                                    <span class="lang-en hidden">Increased probability of success of Tender (A without study) from 30% to 45% offering 55M, due to an improvement in the company's perception.</span>
                                 </li>
                                 <li>
-                                    <span class="lang-es">Efecto de una reducción del 20% en la utilidad de B debido a competencia agresiva</span>
-                                    <span class="lang-en hidden">Effect of a 20% reduction in B's profit due to aggressive competition</span>
+                                    <span class="lang-es">Disminución en la probabilidad de éxito de la Licitación B de 80% a 60% ofertando 8M, debido al ingreso de nuevos competidores.</span>
+                                    <span class="lang-en hidden">Decrease in the probability of success of Tender B from 80% to 60% by bidding 8M due to the entry of new competitors.</span>
                                 </li>
                             </ul>
                         </li>
@@ -570,24 +575,22 @@
                 </h4>
                 <p class="text-gray-300 leading-relaxed text-justify">
                     <span class="lang-es">
-                        La fórmula del Valor Esperado (VE) es: $$VE = (\text{Probabilidad de Éxito} \times \text{Beneficio Neto}) - (\text{Probabilidad de Fracaso} \times \text{Costos})$$
+                        La fórmula del Valor Esperado (VE) es: <span class="math">$$VE = (\text{Probabilidad de Éxito} \times \text{Beneficio Neto}) + (\text{Probabilidad de Fracaso} \times \text{Costos})$$</span>
                         <br>
-                        Para la Licitación A (sin estudio, Licitación 55M, Preparación): $$VE_{A} = (0.30 \times 8.8M) - (0.70 \times 0.2M) = \text{₡2.5M}$$
+                        Para la Licitación A (sin estudio, Licitación 55M, Preparación): <span class=>$$VE_{A} = (0.30 \times 8.8M) + (0.70 \times 0.2M) = \text{₡2.5M}$$</span>
                         <br>
-                        Con estudio de mercado (₡700k, Licitación 50M, Preparación): $$VE_{A\text{ con estudio}} = (0.8 \times 3.1M) - (0.2 \times 0.9M) = \text{₡2.3M}$$
+                        Con estudio de mercado (₡700k, Licitación 50M, Preparación): <span class="math">$$VE_{A\text{ con estudio}} = (0.8 \times 3.1M) + (0.2 \times 0.9M) = \text{₡2.3M}$$</span>
                     </span>
                     <span class="lang-en hidden">
-                        The Expected Value (EV) formula is: $$EV = (\text{Probability of Success} \times \text{Net Benefit}) - (\text{Probability of Failure} \times \text{Costs})$$
+                        The Expected Value (EV) formula is: <span class="math">$$EV = (\text{Probability of Success} \times \text{Net Benefit}) + (\text{Probability of Failure} \times \text{Costs})$$</span>
                         <br>
-                        For Tender A (without study, Bid 55M, Preparation): $$EV_{A} = (0.3 \times 8.8M) - (0.7 \times 0.2M) = \text{₡2.5M}$$
+                        For Tender A (without study, Bid 55M, Preparation): <span class="math">$$EV_{A} = (0.3 \times 8.8M) + (0.7 \times 0.2M) = \text{₡2.5M}$$</span>
                         <br>
-                        With market study (₡700k, Bid 50M, Preparation): $$EV_{A\text{ with study}} = (0.8 \times 3.1M) - (0.2 \times 0.9M) = \text{₡2.3M}$$
+                        With market study (₡700k, Bid 50M, Preparation): <span class="math">$$EV_{A\text{ with study}} = (0.8 \times 3.1M) + (0.2 \times 0.9M) = \text{₡2.3M}$$</span>
                     </span>
                 </p>
             </div>
-                
-
-                <hr class="my-6 border-gray-700">
+<!--Comienza el árbol de decisiones-->
                 <div class="max-w-7xl mx-auto">
                     <h1 class="text-3xl font-bold mb-6 text-center text-blue-400 lang-es">Árbol de Decisiones - Análisis de Licitaciones</h1>
                     <h1 class="text-3xl font-bold mb-6 text-center text-blue-400 lang-en hidden">Decision Tree - Bid Analysis</h1>
@@ -719,8 +722,8 @@
                                 <div class="mt-4 p-3 bg-gray-900 rounded-lg">
                                     <p class="font-medium lang-es">Mejor dentro de "Sin estudio":</p>
                                     <p class="font-medium lang-en hidden">Best within "Without study":</p>
-                                    <p class="lang-es">Ofertar <span class="text-yellow-300 font-bold">₡55 M</span> → <span class="text-green-300 font-bold">VE = ₡2,50 M</span> (vs. ₡2M de ofertar ₡57M).</p>
-                                    <p class="lang-en hidden">Bid <span class="text-yellow-300 font-bold">₡55 M</span> → <span class="text-green-300 font-bold">EV = ₡2.50 M</span> (vs. ₡2M from bidding ₡57M).</p>
+                                    <p class="lang-es">Ofertar <span class="text-yellow-300 font-bold">₡55 M</span> para obtener un <span class="text-green-300 font-bold">VE = ₡2,50 M</span> (vs. ₡2M de ofertar ₡57M).</p>
+                                    <p class="lang-en hidden">Bid <span class="text-yellow-300 font-bold">₡55 M</span> to get a <span class="text-green-300 font-bold">EV = ₡2.50 M</span> (vs. ₡2M from bidding ₡57M).</p>
                                 </div>
                             </div>
                             
@@ -797,8 +800,8 @@
                                 <div class="mt-4 p-3 bg-gray-900 rounded-lg">
                                     <p class="font-medium lang-es">Mejor dentro de "Con estudio":</p>
                                     <p class="font-medium lang-en hidden">Best within "With study":</p>
-                                    <p class="lang-es">Ofertar <span class="text-yellow-300 font-bold">₡50 M</span> → <span class="text-green-300 font-bold">VE = ₡2,30 M</span> (vs. ₡0,22 M del precio perdedor).</p>
-                                    <p class="lang-en hidden">Bid <span class="text-yellow-300 font-bold">₡50 M</span> → <span class="text-green-300 font-bold">EV = ₡2.30 M</span> (vs. ₡0.22 M of the losing price).</p>
+                                    <p class="lang-es">Ofertar <span class="text-yellow-300 font-bold">₡50 M</span> para obtener un <span class="text-green-300 font-bold">VE = ₡2,30 M</span> (vs. ₡0,22 M del precio perdedor).</p>
+                                    <p class="lang-en hidden">Bid <span class="text-yellow-300 font-bold">₡50 M</span> to get a <span class="text-green-300 font-bold">EV = ₡2.30 M</span> (vs. ₡0.22 M of the losing price).</p>
                                 </div>
                             </div>
                             
@@ -921,12 +924,12 @@
                 </p>
                 <ul class="list-disc list-inside ml-4 text-gray-300 text-justify mb-4">
                     <li class="mb-2">
-                        <span class="lang-es">Escenario 1: Aumento en la probabilidad de éxito de la Licitación (A sin estudio) de 30% a 45%) debido a una mejora en la percepción del cliente sobre la empresa.</span>
+                        <span class="lang-es">Escenario 1: Aumento en la probabilidad de éxito de la Licitación (A sin estudio) de 30% a 45% debido a una mejora en la percepción del cliente sobre la empresa.</span>
                         <span class="lang-en hidden">Scenario 1: Increase in the probability of success of Bid A without study (from 30% to 40%) due to an improvement in the client's perception of the company.</span>
                     </li>
                     <li class="mb-2">
                         <span class="lang-es">Escenario 2: Disminución en la probabilidad de éxito de la Licitación B de 80% a 60% debido al ingreso de nuevos competidores.</span>
-                        <span class="lang-en hidden">Scenario 2: Reduction in the net value of winning Bid B (from ₡2.9 M to ₡2.5 M) due to increased market competition putting pressure on margins.</span>
+                        <span class="lang-en hidden">Scenario 2: Decrease in the probability of success of Tender B from 80% to 60% due to the entry of new competitors.</span>
                     </li>
                 </ul>
                 </section>
@@ -946,42 +949,89 @@
                         <canvas id="sensitivity-chart"></canvas>
                     </div>
                 </section>
-
+                <section class="mt-8">
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Resultados del análisis de sensibilidad</span>
+                        <span class="lang-en hidden">Results of the sensitivity analysis</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">En un escenario en donde la probabilidad de éxito de la Licitación A, sin realizar un estudio de mercado y con una oferta de 55 millones, aumenta del 30% al 45% debido a una mejora en la percepción de la empresa, se obtiene un valor esperado de <span class="text-white">3.85</span> millones. Este resultado muestra cómo una variación moderada en la probabilidad de adjudicación puede mejorar de forma significativa la rentabilidad esperada.</span>
+                            <span class="lang-en hidden">In a scenario where the probability of success for Tender A, without conducting a market study and offering 55 million, increases from 30% to 45% due to an improved perception of the company, the expected value rises to <span class="text-white">3.85</span> million. This result highlights how even a moderate improvement in success probability can significantly enhance the expected profitability.</span>
+                        </p>
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">Por otro lado, si en la Licitación B la probabilidad de éxito al ofertar 8 millones disminuye del 80% al 60% debido al ingreso de nuevos competidores, el valor esperado cae a <span class="text-white">1.67</span> millones. Este cambio refleja el impacto directo que puede tener la presión competitiva sobre la rentabilidad de las propuestas más pequeñas.</span>
+                            <span class="lang-en hidden">On the other hand, if in Tender B the probability of success when bidding 8 million decreases from 80% to 60% due to the entry of new competitors, the expected value drops to <span class="text-white">1.67</span> million. This change illustrates the direct impact that competitive pressure can have on the profitability of smaller proposals.</span>
+                        </p> 
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">Finalmente, si el escenario de la Licitación A con estudio de mercado alcanzara una probabilidad de éxito del <span class="text-white">85%</span>, el valor esperado sería equivalente al obtenido en la estrategia de ofertar 55 millones sin estudio (2.50 millones). Esto evidencia que la decisión de realizar el estudio solo sería justificable si logra incrementar sustancialmente la probabilidad de adjudicación, ya que en términos de valor esperado puede igualar estrategias menos costosas.</span>
+                            <span class="lang-en hidden">Finally, if Tender A with a market study were to reach a success probability of <span class="text-white">85%</span>, the expected value would match that of offering 55 million without the study (2.50 million). This indicates that conducting the study would only be justifiable if it can substantially raise the likelihood of success, since in terms of expected value it may converge with less costly strategies</span>
+                        </p> 
+                    </div>
+                </section>
 <!--Ultima sección-->
-                <section>
+                <section class="mt-8">
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
                         <span class="lang-es">Conclusiones y Recomendaciones</span>
                         <span class="lang-en hidden">Conclusions and Recommendations</span>
                     </h2>
-                    <div class="space-y-8">
-                        <div>
-                            <h3 class="text-xl font-semibold text-white mb-4">
-                                <span class="lang-es">Conclusiones Clave</span>
-                                <span class="lang-en hidden">Key Conclusions</span>
-                            </h3>
-                            <ul class="list-disc list-inside text-gray-300 space-y-4">
-                                <li>
-                                    <span class="font-semibold">
-                                        <span class="lang-es">NVIDIA y Meta lideran en rendimiento ajustado por riesgo:</span>
-                                        <span class="lang-en hidden">NVIDIA and Meta lead in risk-adjusted performance</span>
-                                    </span>
-                                    <ul class="list-circle list-inside ml-4 text-gray-400 space-y-2 mt-2">
-                                        <li>
-                                            <span class="lang-es">Ambas empresas presentaron los mejores ratios de Sharpe del grupo (0.30 y 0.27, respectivamente), lo que indica que lograron un buen equilibrio entre retorno y volatilidad. Sin embargo, su desempeño estuvo acompañado de una alta variabilidad en los precios, lo cual representa un mayor riesgo para inversionistas conservadores.</span>
-                                            <span class="lang-en hidden">Both companies recorded the highest Sharpe Ratios among the group (0.30 and 0.27, respectively), indicating a favorable balance between return and volatility. However, their performance was accompanied by high price variability, representing a higher risk for more conservative investors.</span>
-                                        </li>
-                                    </ul>
-                                </ul>                             
-                        <div class="mt-8">
+                    <div class="space-y-6">
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">El análisis evidencia que la Licitación A sin estudio y con una oferta de ₡55 millones presenta el mayor valor esperado (₡2,50 M), lo que la convierte en la mejor alternativa bajo un criterio estrictamente cuantitativo. Sin embargo, esta estrategia está condicionada por una baja probabilidad de éxito (30%) y una elevada volatilidad en los resultados, lo cual representa un riesgo significativo para una empresa con recursos limitados como BHG.</span>
+                            <span class="lang-en hidden">The analysis shows that Tender A without the market study and with a ₡55 million bid delivers the highest expected value (₡2.50 M), making it the most attractive option from a purely quantitative standpoint. However, this strategy comes with a low probability of success (30%) and high volatility in outcomes, which poses a considerable risk for a company with limited resources like BHG.</span>
+                        </p>
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">La opción de realizar el estudio de mercado en la Licitación A permite aumentar la probabilidad de adjudicación hasta un 80%, a costa de reducir la utilidad esperada (₡2,30 M) y enfrentar una pérdida mayor en caso de fracaso. Esta estrategia brinda mayor certeza y estabilidad, aunque no mejora el valor esperado en relación con la opción sin estudio. Solo sería justificable si el estudio eleva la probabilidad de éxito a niveles superiores al 85%, donde el valor esperado se equipara a la estrategia de ofertar sin estudio.</span>
+                            <span class="lang-en hidden">The option of conducting the market study for Tender A significantly increases the probability of success to 80%, but reduces the expected profit (₡2.30 M) and worsens the downside in case of failure. This approach offers more stability but does not improve the expected value compared to the strategy without the study. It would only be justifiable if the probability of success exceeded 85%, at which point it would match the expected value of the non-study option.</span>
+                        </p> 
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">En contraste, la Licitación B con una oferta de ₡8 millones se configura como la alternativa más conservadora, con un valor esperado competitivo (₡2,30 M), la mayor probabilidad de éxito (80%) y la pérdida más reducida (−₡0,1 M). Esto la convierte en la opción más consistente para un perfil de riesgo bajo, priorizando estabilidad y limitación de pérdidas.</span>
+                            <span class="lang-en hidden">On the other hand, Tender B with an ₡8 million bid emerges as the most conservative strategy, with a competitive expected value (₡2.30 M), the highest probability of success (80%), and the lowest downside risk (−₡0.1 M). This makes it the most suitable alternative for a low-risk profile focused on financial stability.</span>
+                        </p> 
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">Debe excluirse de manera categórica la opción de aceptar la propuesta del competidor de presentar una oferta a precio perdedor. Más allá de que esta alternativa implicaría resultados financieros negativos inmediatos y comprometería la sostenibilidad de la empresa, conlleva un riesgo ético al fomentar prácticas poco transparentes, además de deteriorar la reputación corporativa.</span>
+                            <span class="lang-en hidden">The option to accept the competitor's proposal to submit a loss-leader bid must be categorically excluded. Beyond the immediate negative financial results and the risk to company sustainability this alternative would entail, it carries an ethical risk by encouraging non-transparent practices and also deteriorates the corporate reputation</span>
+                        </p> 
+                        <p class="text-gray-300 text-justify">
+                            <span class="lang-es">Finalmente, el análisis de sensibilidad confirma que pequeñas variaciones en la percepción del cliente o en la presión competitiva pueden modificar de manera relevante los resultados. Un aumento de la probabilidad de adjudicación de la Licitación A sin estudio al 45% eleva el valor esperado a ₡3,85 M, mientras que una reducción de la probabilidad de éxito de la Licitación B al 60% reduce su valor esperado a ₡1,67 M. Estos hallazgos muestran la vulnerabilidad de cada alternativa frente a cambios en el entorno competitivo.</span>
+                            <span class="lang-en hidden">Finally,the sensitivity analysis highlights that moderate changes in client perception or competitive pressure can significantly shift results. Increasing Tender A’s success probability to 45% without the study raises the expected value to ₡3.85 M, whereas a drop in Tender B’s success probability to 60% lowers its expected value to ₡1.67 M. These findings reveal the vulnerability of each alternative to competitive dynamics.</span>
+                        </p> 
+                    </div>
+                                              
+                    <div class="mt-8">
                             <h3 class="text-xl font-semibold text-white mb-4 border-b border-blue-600 pb-2">
                                 <span class="lang-es">Recomendaciones</span>
                                 <span class="lang-en hidden">Recommendations</span>
                             </h3>
                             <ul class="list-disc list-inside text-gray-300 space-y-4">
                                 <li>
-                                    <span class="font-semibold">
-                                        <span class="lang-es">Para inversionistas conservadores, Microsoft y Apple ofrecen los perfiles más estables:</span>
-                                        <span class="lang-en hidden">For risk-averse investors, Microsoft and Apple offer the most stable profiles:</span>
+                                    <span>
+                                        <span class="lang-es"><span class="text-white">Perfil conservador:</span> Optar por la Licitación B con una oferta de ₡8 millones, priorizando la seguridad en la adjudicación y la estabilidad financiera de la empresa.</span>
+                                        <span class="lang-en hidden"><span class="text-white">Conservative profile:</span> Choose Tender B with an ₡8 million bid, prioritizing certainty of award and financial stability.</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <span class="lang-es"><span class="text-white">Perfil ambicioso:</span> Apostar por la Licitación A sin estudio con una oferta de ₡55 millones, maximizando el valor esperado, aunque con mayor exposición al riesgo.</span>
+                                        <span class="lang-en hidden"><span class="text-white">Ambitious profile:</span> Target Tender A without the study at ₡55 million, maximizing expected value but accepting higher risk.</span>
+                                    </span>
+                                </li>
+                                 <li>
+                                    <span>
+                                        <span class="lang-es"><span class="text-white">Estudio de mercado:</span> Considerar la inversión únicamente si existen señales sólidas de que la probabilidad de éxito podría superar el 85%, de lo contrario no justifica el costo adicional.</span>
+                                        <span class="lang-en hidden"><span class="text-white">Market study:</span> Invest only if there is strong evidence that the probability of success could exceed 85%, otherwise the cost is not justified.</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span>
+                                        <span class="lang-es"><span class="text-white">Gestión estratégica:</span>   Fortalecer la percepción del mercado sobre BHG, dado que mejoras en la reputación y credibilidad pueden impactar más en el resultado que la variación en los montos ofertados.</span>
+                                        <span class="lang-en hidden"><span class="text-white">Strategic management:</span> Focus on improving BHG’s market reputation, as perception shifts can influence results more than bid adjustments.</span>
+                                    </span>
+                                </li>
+                                 <li>
+                                    <span>
+                                        <span class="lang-es"><span class="text-white">Capacidad financiera:</span> Dado el limitado capital de trabajo, se recomienda mantener una estrategia prudente de exposición al riesgo y reservar liquidez para garantizar la ejecución del proyecto adjudicado.</span>
+                                        <span class="lang-en hidden"><span class="text-white">Financial capacity:</span> Given the limited working capital, maintain prudent risk exposure and secure liquidity for project execution once awarded.</span>
                                     </span>
                                 </li>
                             </ul>
@@ -992,14 +1042,6 @@
         </div>
     </main>
 
-    <div class="text-center mt-8">
-        <a href="https://github.com/Brauliohg8038/Analisis-Acciones/blob/master/An%C3%A1lisis%20de%20Cotizaci%C3%B3n%20empresas%20Tecnol%C3%B3gicas.ipynb" target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center px-6 py-3 border border-gray-500 text-white hover:bg-gray-700 rounded-full text-base font-semibold shadow-lg transition duration-300 ease-in-out">
-            <svg class="-ml-1 mr-3 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.865 8.168 6.839 9.482.499.09.682-.215.682-.477 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.529 2.341 1.089 2.91.833.091-.647.35-1.089.636-1.338-2.22-.253-4.555-1.113-4.555-4.953 0-1.096.391-1.993 1.029-2.697-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.202 2.398.099 2.65.64.704 1.028 1.599 1.028 2.697 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .265.182.577.688.472C17.146 18.16 20 14.417 20 10.017 20 4.484 15.522 0 10 0z" clip-rule="evenodd"></path></svg>
-            <span class="lang-es">Ver el Código en GitHub</span>
-            <span class="lang-en hidden">View Code on GitHub</span>
-        </a>
-    </div>
 <!--Calificación del proyecto-->    
     <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
