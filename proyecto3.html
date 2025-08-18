@@ -14,6 +14,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <!-- Carga polyfill para compatibilidad -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    <!-- MathJax (versión ligera con renderizado responsive) -->
+    <script id="MathJax-script" async 
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -193,10 +200,13 @@
         white-space: nowrap;
         z-index: 100;
         }
-        @media (max-width: 768px) {
-            .lang-es .math, .lang-en .math {
-            font-size: 0.8em; /* Ajusta este valor según tu necesidad */
+        .math-container {
+            max-width: 100%;
+            overflow-x: auto;
+            margin: 0.5rem 0;
         }
+        mjx-container[jax="CHTML"] {
+            outline: none !important;
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
@@ -238,9 +248,29 @@
                         <span class="lang-en hidden">Sector Context</span>
                     </h2>
                    <p class="text-gray-300 leading-relaxed text-justify mb-2">
-                        <span class="lang-es">En Costa Rica, el sector eléctrico vive una transformación impulsada por políticas de <strong>descarbonización</strong> y <strong>eficiencia energética</strong>. Instituciones como el ICE (Instituto Costarricense de Electricidad) y la ARESEP (Autoridad Reguladora de los Servicios Públicos) promueven normativas para modernizar infraestructuras, especialmente en proyectos industriales y comerciales. Ejemplos clave incluyen edificios inteligentes con certificación EDGE y modernizaciones en plantas manufactureras, apoyadas por programas gubernamentales como PROCOMER.</span>
-                        <span class="lang-en hidden">Costa Rica's electricity sector is undergoing a transformation driven by <strong>decarbonization</strong> and <strong>energy efficiency</strong> policies. Key institutions like ICE (Costa Rican Electricity Institute) and ARESEP (Public Services Regulatory Authority) enforce regulations to modernize infrastructure, particularly in industrial and commercial projects. Notable examples include EDGE-certified smart buildings and manufacturing plant upgrades, supported by government programs like PROCOMER.</span>
+                        <span class="lang-es">El sector eléctrico costarricense experimenta una transformación histórica impulsada por el <strong>Plan Nacional de Descarbonización 2022-2050</strong> y la <strong>Ley 9996 de Incentivos a la Eficiencia Energética</strong>. Bajo este marco, instituciones como el ICE, ARESEP y municipalidades priorizan proyectos de modernización con tres focos principales:</span>
+                        <span class="lang-en hidden">The Costa Rican electricity sector is undergoing a historic transformation driven by the <strong>2022-2050 National Decarbonization Plan</strong> and <strong>Law 9996 on Energy Efficiency Incentives</strong>. Within this framework, institutions such as ICE, ARESEP, and municipalities are prioritizing modernization projects with three main focuses:</span>
                     </p>
+                    <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4 ml-4">
+                        <li>
+                            <span class="lang-es"><span class="text-white">Alumbrado público inteligente:</span> 25 municipalidades licitan sistemas LED con telemetría (montos: ₡30M–₡80M), exigiendo normativa RETILAP y sensores IoT.</span>
+                            <span class="lang-en hidden"><span class="text-white">Smart street lighting:</span> 25 municipalities are bidding LED systems with telemetry (budgets: ₡30M–₡80M), requiring RETILAP compliance and IoT sensors.</span>
+                        </li>
+                        <li>
+                            <span class="lang-es"><span class="text-white">Microgrids rurales:</span> Financiadas por IMAS y cooperación internacional (BID), con participación prioritara de PYMES (₡3M–₡10M por proyecto).</span>
+                            <span class="lang-en hidden"><span class="text-white">Rural microgrids:</span> Funded by IMAS and international partners (IDB), prioritizing SMEs (₡3M–₡10M per project).</span>
+                        </li>
+                        <li>
+                            <span class="lang-es"><span class="text-white">Subestaciones industriales:</span> PROCOMER apoya modernizaciones en plantas manufactureras (₡5M–₡20M), donde compiten empresas como Ilumitec y Schneider Electric.</span>
+                            <span class="lang-en hidden"><span class="text-white">Industrial substations:</span> PROCOMER supports upgrades in manufacturing plants (₡5M–₡20M), with competition between firms like Ilumitec and Schneider Electric.</span>
+                        </li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed text-justify mb-2">
+                        <span class="lang-es">La <strong>ARESEP</strong> regula estándares técnicos (ej.: equipos IEEE 1547-2018), mientras el <strong>ICE</strong> subcontrata obras menores, creando oportunidades para empresas con capacidad en energías limpias.</span>
+                        <span class="lang-en hidden">ARESEP enforces technical standards (e.g., IEEE 1547-2018 equipment), while ICE outsources minor works, creating opportunities for clean energy specialists.</span>
+
+
+
                 </section>
                 <section>
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
@@ -271,22 +301,22 @@
                             </p>
                             <ul class="mb-2">
                                 <li class="text-justify mt-2 font-semibold">
-                                    <span class="lang-es text-white"><stron>Licitación A (Edificio inteligente) – Código: 2024LY-000001-000700001:</stron></span>
-                                    <span class="lang-en hidden text-white"><strong>Tender A (Smart building) – Code: 2024LY-000001-000700001:</strong></span>
+                                    <span class="lang-es text-white"><stron>Licitación A (Modernización de Alumbrado Público LED) – Código: 2024CD-000001-000700001:</stron></span>
+                                    <span class="lang-en hidden text-white"><strong>Tender A (Modernization of LED Public Lighting) – Code: 2024CD-000001-000700001:</strong></span>
                                 </li>
                             </ul>
                             <p class="text-gray-300 leading-relaxed text-justify mb-2">
-                                <span class="lang-es">Instalación eléctrica completa en un edificio inteligente en San José (₡46 millones, proyecto del INVU).</span>
-                                <span class="lang-en hidden">Full electrical installation in a smart building in San José (₡46 million, INVU project).</span>
+                                <span class="lang-es">Instalación de 500 luminarias LED con sistema de telemetría en circuito urbano (₡46 millones, Municipalidad de Curridabat).</span>
+                                <span class="lang-en hidden">Installation of 500 LED lights with telemetry system in urban circuit (₡46 million, Municipality of Curridabat).</span>
                             </p>
                             <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4 ml-4">
                                 <li>
-                                    <span class="lang-es">Probabilidad de adjudicación: 30%, debido a la fuerte competencia de multinacionales y exigencias técnicas avanzadas.</span>
-                                    <span class="lang-en hidden">Probability of award: 30%, due to strong multinational competition and advanced technical requirements.</span>
+                                    <span class="lang-es">Probabilidad de adjudicación: 30%, debido a la fuerte competencia de multinacionales y exigencias técnicas avanzadas y garantía de 5 años</span>
+                                    <span class="lang-en hidden">Probability of award: 30%, due to strong multinational competition and advanced technical requirements and a 5-year warranty.</span>
                                 </li>
                                 <li>
-                                    <span class="lang-es">Existe la opción de invertir ₡700,000 en una "investigación de mercado" que podría aumentar la probabilidad al 80%, al identificar el rango de cotización más competitivo y diferenciar la propuesta.</span>
-                                    <span class="lang-en hidden">Option to invest ₡700,000 in a "market study" that could raise the probability to 80%, by identifying the optimal bidding range and differentiation strategy.</span>
+                                    <span class="lang-es">Existe la opción de invertir ₡700,000 en una "inteligencia de mercado" que podría aumentar la probabilidad al 80%, al identificar el rango de cotización más competitivo y diferenciar la propuesta. Sin embargo, para lograr esta probabilidad, se prevé que la cotización tendrá que ser de 50M.</span>
+                                    <span class="lang-en hidden">Option to invest ₡700,000 in a "market intelligence" that could raise the probability to 80%, by identifying the optimal bidding range and differentiation strategy. However, to achieve this probability, the quote is expected to have to be 50M.</span>
                                 </li>
                                 <li>
                                     <span class="lang-es">Costos de preparación: ₡200,000.</span>
@@ -303,8 +333,8 @@
                             </ul>
                             <ul class="mb-2">
                                 <li class="text-justify mt-2 font-semibold">
-                                    <span class="lang-es text-white"><strong>Licitación B (Fábrica de café) – Código: 2024LY-000002-000700001:</strong></span>
-                                    <span class="lang-en hidden text-white"><strong>Tender B (Coffee factory) – Code: 2024LY-000002-000700001:</strong></span>
+                                    <span class="lang-es text-white"><strong>Licitación B (Fábrica de café) – Código: 2024CD-000002-000700001:</strong></span>
+                                    <span class="lang-en hidden text-white"><strong>Tender B (Coffee factory) – Code: 2024CD-000002-000700001:</strong></span>
                                 </li>
                             </ul>
                             <p class="text-gray-300 leading-relaxed text-justify mb-2">
@@ -341,8 +371,8 @@
                                     <span class="lang-en hidden">Assess whether the additional expense for Tender A justifies the potential increase in award probability.</span>
                                 </li>
                                 <li>
-                                    <span class="lang-es">Balancear riesgo y recompensa bajo dos enfoques: <strong>Escenario conservador:</strong> Priorizar la Licitación B (alta probabilidad de éxito, pero menor rentabilidad). <strong>Escenario ambicioso:</strong> Optar por la Licitación A con el estudio, aceptando mayor riesgo para acceder a un proyecto emblemático.</span>
-                                    <span class="lang-en hidden">Balance risk and reward under two approaches: <strong>Conservative scenario:</strong> Prioritize Tender B (high success probability but lower profitability). <strong>Ambitious scenario:</strong> Choose Tender A with the study, accepting higher risk for a landmark project.</span>
+                                    <span class="lang-es">Balancear riesgo y recompensa bajo dos enfoques: <strong>Escenario conservador B</strong>, <strong>Escenario ambicioso A</strong>.</span>
+                                    <span class="lang-en hidden">Balance risk and reward under two approaches: <strong>Conservative scenario B</strong>, <strong>Ambitious scenario A</strong>.</span>
                                 </li>
                             </ul>
                         </div>  
@@ -365,19 +395,19 @@
                         </h3>
                         <ul class="list-disc list-inside text-gray-300 space-y-2">
                             <li>
-                                <span class="font-semibold">
+                                <span>
                                     <span class="lang-es">Históricos de licitaciones pasadas (registros de SICOP y experiencia de BHG).</span>
                                     <span class="lang-en hidden">Historical tender records (SICOP databases and BHG’s experience).</span>
                                 </span>
                             </li>
                             <li>
-                                <span class="font-semibold">
+                                <span>
                                     <span class="lang-es">Costos de materiales y mano de obra en el mercado costarricense (2024).</span>
                                     <span class="lang-en hidden">Costs of materials and labor in the Costa Rican market (2024).</span>
                                 </span>
                             </li>
                             <li>
-                                <span class="font-semibold">
+                                <span>
                                     <span class="lang-es">Competencia: Se consideran la participación de 3-5 competidores en la Licitación A y 1-2 en la B.</span>
                                     <span class="lang-en hidden">Competition: The participation of 3-5 competitors in Tender A and 1-2 in Tender B is considered.</span>
                                 </span>
@@ -392,12 +422,12 @@
                                             <span class="lang-en hidden">Variable</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                            <span class="lang-es">Licitación A (Edificio Inteligente)</span>
-                                            <span class="lang-en hidden">Tender A (Smart Building)</span>
+                                            <span class="lang-es">Licitación A</span>
+                                            <span class="lang-en hidden">Tender A</span>
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                                            <span class="lang-es">Licitación B (Fábrica de Café)</span>
-                                            <span class="lang-en hidden">Tender B (Coffee Factory)</span>
+                                            <span class="lang-es">Licitación B</span>
+                                            <span class="lang-en hidden">Tender B</span>
                                         </th>
                                     </tr>
                                 </thead>
@@ -505,6 +535,24 @@
                     </h3>
                     <ol class="list-decimal list-inside text-gray-300 space-y-2 ml-4">
                         <li>
+                            <span class="lang-es"><strong>Construcción del Árbol de Decisiones:</strong></span>
+                            <span class="lang-en hidden"><strong>Building the Decision Tree:</strong></span>
+                            <ul class="list-disc list-inside ml-4">
+                                <li>
+                                    <span class="lang-es">Nodos de decisión: Participar en Licitación A o B.</span>
+                                    <span class="lang-en hidden">Decision nodes: Participate in tender A or B.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Nodos aleatorios: Probabilidades de adjudicación (30%, 80%...)</span>
+                                    <span class="lang-en hidden">Random nodes: Award probabilities (30%, 80%, etc.).</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Nodos terminales: Resultados financieros netos (utilidad - costos).</span>
+                                    <span class="lang-en hidden">Terminal nodes: Net financial results (benefits - costs).</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <span class="lang-es"><strong>Cálculo del Valor Esperado (VE) para cada licitación:</strong></span>
                             <span class="lang-en hidden"><strong>Expected Value (EV) Calculation for each bid:</strong></span>
                             <ul class="list-disc list-inside ml-4">
@@ -544,6 +592,7 @@
                         </li>
                     </ol>
                 </div>
+            </section>
                 <div class="mb-4">
                 <h3 class="text-xl font-medium text-white mb-2">
                     <span class="lang-es">Estructura del Árbol de Decisiones</span>
@@ -551,18 +600,18 @@
                 </h3>
                 <ul class="list-disc list-inside ml-4"">
                     <li>
-                        <strong>Nodos de Decisión (cuadrados):</strong>
+                        Nodos de Decisión (cuadrados):
                         <span class="lang-es">Representan las opciones (Participar en Licitación A o B).</span>
                         <span class="lang-en hidden">Choices (e.g., bid on Tender A or B).</span>
                     </li>
                     <li>
-                        <strong>Nodos de Probabilidad (círculos):</strong>
+                        Nodos de Probabilidad (círculos):
                         <span class="lang-es">Ramifican los resultados posibles (éxito/fracaso) con sus probabilidades.</span>
                         <span class="lang-en hidden">Possible outcomes (success/failure) with probabilities.</span>
                     </li>
                     <li>
-                        <strong>Nodos Finales (triángulos):</strong>
-                        <span class="lang-es">Muestran los resultados financieros (utilidad o pérdida).</span>
+                        Nodos Finales (triángulos):
+                        <span class="lang-es"> Muestran los resultados financieros (utilidad o pérdida).</span>
                         <span class="lang-en hidden">Financial results (profit/loss).</span>
                     </li>
                 </ul>
@@ -570,39 +619,66 @@
 
             <div class="mb-4">
                 <h4 class="text-xl font-medium text-white mb-2">
-                    <span class="lang-es">Fórmula y Ejemplo de Valor Esperado (VE)</span>
-                    <span class="lang-en hidden">Expected Value (EV) Formula and Example</span>
+                    <span class="lang-es">Fórmula del Valor Esperado (VE)</span>
+                    <span class="lang-en hidden">Expected Value (EV) Formula</span>
                 </h4>
                 <p class="text-gray-300 leading-relaxed text-justify">
-                    <span class="lang-es">
-                        La fórmula del Valor Esperado (VE) es: <span class="math">$$VE = (\text{Probabilidad de Éxito} \times \text{Beneficio Neto}) + (\text{Probabilidad de Fracaso} \times \text{Costos})$$</span>
-                        <br>
-                        Para la Licitación A (sin estudio, Licitación 55M, Preparación): <span class=>$$VE_{A} = (0.30 \times 8.8M) + (0.70 \times 0.2M) = \text{₡2.5M}$$</span>
-                        <br>
-                        Con estudio de mercado (₡700k, Licitación 50M, Preparación): <span class="math">$$VE_{A\text{ con estudio}} = (0.8 \times 3.1M) + (0.2 \times 0.9M) = \text{₡2.3M}$$</span>
-                    </span>
-                    <span class="lang-en hidden">
-                        The Expected Value (EV) formula is: <span class="math">$$EV = (\text{Probability of Success} \times \text{Net Benefit}) + (\text{Probability of Failure} \times \text{Costs})$$</span>
-                        <br>
-                        For Tender A (without study, Bid 55M, Preparation): <span class="math">$$EV_{A} = (0.3 \times 8.8M) + (0.7 \times 0.2M) = \text{₡2.5M}$$</span>
-                        <br>
-                        With market study (₡700k, Bid 50M, Preparation): <span class="math">$$EV_{A\text{ with study}} = (0.8 \times 3.1M) + (0.2 \times 0.9M) = \text{₡2.3M}$$</span>
-                    </span>
+                <span class="lang-es">
+                    <div class="math-container">
+                    La fórmula del Valor Esperado (VE) es:
+                    $$VE = (P_{\text{éxito}} \times \text{Beneficio Neto}) + (P_{\text{fracaso}} \times \text{Costos})$$
+                    </div>
+
+                    <div class="math-container">
+                    Para la Licitación A (sin estudio, ₡55M, ₡200K de preparación):
+                    $$VE_{A} = (0.30 \times 8.8\text{M}) + (0.70 \times 0.2\text{M}) = \text{₡2.5M}$$
+                    </div>
+
+                    <div class="math-container">
+                    Con estudio de mercado (₡700K, ₡50M, ₡200K de preparación):
+                    $$VE_{A\text{ con estudio}} = (0.80 \times 3.1\text{M}) + (0.20 \times 0.9\text{M}) = \text{₡2.3M}$$
+                    </div>
+                </span>
+
+                <span class="lang-en hidden">
+                    <div class="math-container">
+                    The Expected Value (EV) formula is:
+                    $$EV = (P_{\text{success}} \times \text{Net Benefit}) + (P_{\text{failure}} \times \text{Costs})$$
+                    </div>
+
+                    <div class="math-container">
+                    For Tender A (without study, ₡55M, ₡200K preparation):
+                    $$EV_{A} = (0.30 \times 8.8\text{M}) + (0.70 \times 0.2\text{M}) = \text{₡2.5M}$$
+                    </div>
+
+                    <div class="math-container">
+                    With market study (₡700K, ₡50M, ₡200K preparation):
+                    $$EV_{A\text{ with study}} = (0.80 \times 3.1\text{M}) + (0.20 \times 0.9\text{M}) = \text{₡2.3M}$$
+                    </div>
+                </span>
                 </p>
             </div>
 <!--Comienza el árbol de decisiones-->
                 <div class="max-w-7xl mx-auto">
-                    <h1 class="text-3xl font-bold mb-6 text-center text-blue-400 lang-es">Árbol de Decisiones - Análisis de Licitaciones</h1>
-                    <h1 class="text-3xl font-bold mb-6 text-center text-blue-400 lang-en hidden">Decision Tree - Bid Analysis</h1>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                    <span class="lang-es">Desarrollo de las etapas</span>
+                    <span class="lang-en hidden">Methodology and Analysis</span>
+                </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        <span class="lang-es">A continuación, se presenta el árbol de decisiones que ilustra las diferentes opciones y sus resultados esperados:</span>
+                        <span class="lang-en hidden">Below is the decision tree illustrating the different options and their expected outcomes:</span>
+                    </p>
                     
+    
+
                     <!-- Pestañas para diferentes visualizaciones -->
                     <div class="flex mb-6 border-b border-gray-700">
-                        <button class="tab-button px-4 py-2 font-medium active lang-es" data-tab="tree">Árbol de decisiones</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tree">Decision Tree</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="comparison">Comparación Visual</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="comparison">Visual Comparison</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="tables">Tablas Detalladas</button>
-                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tables">Detailed Tables</button>
+                        <button class="tab-button px-4 py-2 font-medium active lang-es" data-tab="tree">1. Árbol de decisiones</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tree">1. Decision Tree</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="comparison">2. Comparación Visual</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="comparison">2. Visual Comparison</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="tables">3. Calculo VE</button>
+                        <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tables">3 .EV Calculate</button>
                     </div>
                     
                     <!-- Contenido de las pestañas -->
@@ -889,7 +965,7 @@
 
                 <section>
                     <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
-                        <span class="lang-es">Análisis de los Resultado</span>
+                        <span class="lang-es">Análisis de los Resultados</span>
                         <span class="lang-en hidden">Analysis of results</span>
                     </h2>
                 <ul class="list-disc list-inside ml-4 text-gray-300 text-justify">
