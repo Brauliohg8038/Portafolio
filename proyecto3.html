@@ -208,6 +208,37 @@
         mjx-container[jax="CHTML"] {
             outline: none !important;
         }
+        /* Estilos generales para ambos contenedores */
+        .decision-tree-container {
+        overflow-x: auto; /* Permite desplazamiento horizontal si es necesario en PC */
+        }
+
+        /* Ocultar la imagen en PC y mostrar el SVG */
+        #image-container {
+        display: none;
+        }
+
+        #tree-container {
+        display: block;
+        }
+
+        /* Reglas específicas para dispositivos móviles (pantallas de hasta 768px de ancho) */
+        @media (max-width: 768px) {
+        /* Ocultar el SVG en dispositivos móviles */
+        #tree-container {
+            display: none;
+        }
+        
+        /* Mostrar la imagen en dispositivos móviles */
+        #image-container {
+            display: block;
+        }
+
+        #image-container img {
+            width: 100%; /* La imagen se ajusta al ancho de la pantalla */
+            height: auto;
+        }
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
     <script>
@@ -595,8 +626,8 @@
             </section>
                 <div class="mb-4">
                 <h3 class="text-xl font-medium text-white mb-2">
-                    <span class="lang-es">Estructura del Árbol de Decisiones</span>
-                    <span class="lang-en hidden">Decision Tree Structure</span>
+                    <span class="lang-es">Estructura del Árbol de Decisiones:</span>
+                    <span class="lang-en hidden">Decision Tree Structure:</span>
                 </h3>
                 <ul class="list-disc list-inside ml-4"">
                     <li>
@@ -619,41 +650,19 @@
 
             <div class="mb-4">
                 <h4 class="text-xl font-medium text-white mb-2">
-                    <span class="lang-es">Fórmula del Valor Esperado (VE)</span>
-                    <span class="lang-en hidden">Expected Value (EV) Formula</span>
+                    <span class="lang-es">Fórmula del Valor Esperado (VE):</span>
+                    <span class="lang-en hidden">Expected Value (EV) Formula:</span>
                 </h4>
                 <p class="text-gray-300 leading-relaxed text-justify">
                 <span class="lang-es">
                     <div class="math-container">
-                    La fórmula del Valor Esperado (VE) es:
                     $$VE = (P_{\text{éxito}} \times \text{Beneficio Neto}) + (P_{\text{fracaso}} \times \text{Costos})$$
                     </div>
-
-                    <div class="math-container">
-                    Para la Licitación A (sin estudio, ₡55M, ₡200K de preparación):
-                    $$VE_{A} = (0.30 \times 8.8\text{M}) + (0.70 \times 0.2\text{M}) = \text{₡2.5M}$$
-                    </div>
-
-                    <div class="math-container">
-                    Con estudio de mercado (₡700K, ₡50M, ₡200K de preparación):
-                    $$VE_{A\text{ con estudio}} = (0.80 \times 3.1\text{M}) + (0.20 \times 0.9\text{M}) = \text{₡2.3M}$$
-                    </div>
                 </span>
-
                 <span class="lang-en hidden">
                     <div class="math-container">
-                    The Expected Value (EV) formula is:
                     $$EV = (P_{\text{success}} \times \text{Net Benefit}) + (P_{\text{failure}} \times \text{Costs})$$
-                    </div>
-
-                    <div class="math-container">
-                    For Tender A (without study, ₡55M, ₡200K preparation):
-                    $$EV_{A} = (0.30 \times 8.8\text{M}) + (0.70 \times 0.2\text{M}) = \text{₡2.5M}$$
-                    </div>
-
-                    <div class="math-container">
-                    With market study (₡700K, ₡50M, ₡200K preparation):
-                    $$EV_{A\text{ with study}} = (0.80 \times 3.1\text{M}) + (0.20 \times 0.9\text{M}) = \text{₡2.3M}$$
+        
                     </div>
                 </span>
                 </p>
@@ -665,14 +674,11 @@
                     <span class="lang-en hidden">Methodology and Analysis</span>
                 </h2>
                     <p class="text-gray-300 leading-relaxed mb-4">
-                        <span class="lang-es">A continuación, se presenta el árbol de decisiones que ilustra las diferentes opciones y sus resultados esperados:</span>
-                        <span class="lang-en hidden">Below is the decision tree illustrating the different options and their expected outcomes:</span>
+                        <span class="lang-es">A continuación, se presentan los resultados en tres secciones: en la pestaña 1 se muestra el árbol de decisión, en la pestaña 2 un gráfico comparativo y en la pestaña 3 el resumen de los valores esperados para cada alternativa de licitación</span>
+                        <span class="lang-en hidden">The results are presented in three sections: Tab 1 displays the decision tree, Tab 2 provides a comparative chart, and Tab 3 summarizes the expected values for each bidding alternative.</span>
                     </p>
-                    
-    
-
                     <!-- Pestañas para diferentes visualizaciones -->
-                    <div class="flex mb-6 border-b border-gray-700">
+                    <div class="flex mb-6 border-b border-gray-700 justify-center">
                         <button class="tab-button px-4 py-2 font-medium active lang-es" data-tab="tree">1. Árbol de decisiones</button>
                         <button class="tab-button px-4 py-2 font-medium lang-en hidden" data-tab="tree">1. Decision Tree</button>
                         <button class="tab-button px-4 py-2 font-medium lang-es" data-tab="comparison">2. Comparación Visual</button>
@@ -687,6 +693,9 @@
                             <h2 class="text-xl font-semibold mb-4 lang-es">Árbol de Decisión</h2>
                             <h2 class="text-xl font-semibold mb-4 lang-en hidden">Decision Tree</h2>
                             <div id="tree-container"></div>
+                            <div id="image-container">
+                            <img src="images/tree.jpg" alt="Árbol de decisiones">
+                        </div>
                         </div>
                     </div>
                     
@@ -713,8 +722,8 @@
                                     <h3 class="font-medium text-blue-100 mb-3 lang-es">Licitación B</h3>
                                     <h3 class="font-medium text-blue-100 mb-3 lang-en hidden">Bid B</h3>
                                     <canvas id="chartB" height="250"></canvas>
-                                    <p class="mt-3 text-sm lang-es">Opciones equivalentes: ₡8M y ₡11M (VE = ₡2.30M)</p>
-                                    <p class="mt-3 text-sm lang-en hidden">Equivalent options: ₡8M and ₡11M (EV = ₡2.30M)</p>
+                                    <p class="mt-3 text-sm lang-es">Opciones equivalentes: (VE = ₡2.30M)</p>
+                                    <p class="mt-3 text-sm lang-en hidden">Equivalent options: (EV = ₡2.30M)</p>
                                 </div>
                             </div>
                         </div>
@@ -978,8 +987,8 @@
                         <span class="lang-en hidden">Alternatively, the option of conducting the market study and bidding ₡50M significantly increases the probability of success (80% vs. 30%), but at the cost of a lower expected value (₡2.30 M) and a higher loss in the event of failure (−₡0.9 M). This strategy reduces the potential upside but provides a more stable and predictable scenario with less volatility in returns.</span>
                     </li>
                     <li class="mb-4">
-                        <span class="lang-es">La Licitación B con una oferta de ₡8M se perfila como la opción más conservadora: presenta un valor esperado de ₡2,30 M, un 80% de probabilidad de éxito y la pérdida más baja en caso de fracaso (−₡0,1 M). Esto la convierte en la alternativa más adecuada para un perfil de riesgo bajo que priorice estabilidad y limitación de pérdidas.</span>
-                        <span class="lang-en hidden">Bid B with an offer of ₡8M stands out as the most conservative option: it delivers an expected value of ₡2.30 M, an 80% success rate, and the lowest loss if unsuccessful (−₡0.1 M). This makes it the most suitable alternative for a risk-averse profile prioritizing stability and limited downside.</span>
+                        <span class="lang-es">La Licitación B con una oferta de ₡8M se perfila como la opción más conservadora. Presenta un valor esperado de ₡2,30 M, un 80% de probabilidad de éxito y la pérdida más baja en caso de fracaso (−₡0,1 M). Esto la convierte en la alternativa más adecuada para un perfil de riesgo bajo que priorice estabilidad y limitación de pérdidas.</span>
+                        <span class="lang-en hidden">Bid B with an offer of ₡8M stands out as the most conservative option. It delivers an expected value of ₡2.30 M, an 80% success rate, and the lowest loss if unsuccessful (−₡0.1 M). This makes it the most suitable alternative for a risk-averse profile prioritizing stability and limited downside.</span>
                     </li>
                 </ul>
                 </section>
@@ -1148,7 +1157,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- 1. Actualizar el año en el footer ---
             const currentYearEsElement = document.getElementById('current-year-project-es');
             const currentYearEnElement = document.getElementById('current-year-project-en');
             const currentYear = new Date().getFullYear();
@@ -1160,7 +1168,7 @@
                 currentYearEnElement.textContent = currentYear;
             }
 
-            // --- 2. Lógica de traducción para esta página ---
+            // --- 2. Lógica de traducciónpágina ---
             const htmlElement = document.documentElement;
             const langToggleButton = document.getElementById('project-lang-toggle-button');
 
@@ -1174,8 +1182,7 @@
                     document.title = (lang === 'es') ? titleEsSpan.textContent : titleEnSpan.textContent;
                 } else {
                     // Fallback si los spans dentro del title no se encuentran
-                    // Asegúrate de que este fallback sea apropiado para la página actual
-                    document.title = (lang === 'es') ? 'Análisis de cotizaciones en Bolsa Empresas tecnológicas' : 'Analysis of Stock Market Quotes for Technology Companies';
+                    document.title = (lang === 'es') ? 'Análisis de Licitaciones' : 'Analysis of Tenders';
                 }
             }
 
@@ -1451,7 +1458,7 @@
                 });
             }
 
-            // Árbol de decisiones con formas correctas y mejor espaciado
+            // Árbol de decisiones 
             function renderDecisionTree() {
                 const container = document.getElementById('tree-container');
                 container.innerHTML = '';
