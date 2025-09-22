@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <span class="lang-es">Optimización SQL con Gemini AI</span>
+        <span class="lang-en hidden">SQL Optimization with Gemini AI</span>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .performance-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            border: 1px solid #4f46e5;
+        }
+        /* Forzar tema oscuro en el iframe */
+        .nbviewer-iframe {
+            filter: invert(1) hue-rotate(180deg) contrast(1.15) brightness(1);
+            background-color: #000000 !important;
+        }
+
+        .nbviewer-iframe body {
+            background-color: #0c0000 !important;
+            color: #f8fafa !important;
+        }
+
+        /* Corregir imágenes dentro del iframe */
+        .nbviewer-iframe img {
+            filter: invert(1) hue-rotate(180deg) contrast(1.1) brightness(1.1);
+        }
+
+        /* Corregir código y sintaxis */
+        .nbviewer-iframe .highlight {
+            background-color: #f7f0f0 !important;
+            border-color: #f0e5e5 !important;
+        }
+
+        .nbviewer-iframe .code-cell {
+            background-color: #000000 !important;
+        }
+
+        .chart-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .performance-badge {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .ranking-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
+    </script>
+</head>
+<body class="dotted-background">
+    <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+            <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                <span class="lang-es text-base font-semibold flex items-center">EN <i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en text-base font-semibold flex items-center">ES <i class="fas fa-globe text-base ml-2"></i></span>
+            </button>
+            <a href="https://github.com/Brauliohg8038/SQL-TechSolutions/blob/master/SQL-Optimization.ipynb" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 sm:p-8 text-white text-center rounded-t-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                    <span class="lang-es">Optimización SQL con Gemini AI</span>
+                    <span class="lang-en hidden">SQL Optimization with Gemini AI</span>
+                </h1>
+                <p class="text-blue-200 text-lg">
+                    <span class="lang-es">Mejora de rendimiento en bases de Datos PostgreSQL</span>
+                    <span class="lang-en hidden">PostgreSQL Database performance improvement</span>
+                </p>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Resumen Ejecutivo</span>
+                        <span class="lang-en hidden">Executive Summary</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-justify">
+                        <span class="lang-es">Este trabajo corresponde a una práctica de consultas avanzadas en SQL y a la experimentación del uso de IA generativa (LLM) como apoyo en el autoaprendizaje. Se exploraron técnicas de optimización en PostgreSQL como indexación, funciones de ventana, CTEs y procedimientos almacenados, evaluando su impacto en el rendimiento de las consultas.</span>
+                        <span class="lang-en hidden">This work is a practice of advanced SQL queries and an experiment with generative AI (LLM) as a tool for self-learning. Optimization techniques in PostgreSQL were explored, such as indexing, window functions, CTEs, and stored procedures, evaluating their impact on query performance.</span>
+                    </p>
+                    <p class="text-gray-300 leading-relaxed text-justify mt-4">
+                        <span class="lang-es"> Además, se integró Gemini AI para analizar y proponer mejoras en las consultas SQL, probando cómo los modelos de lenguaje pueden contribuir en procesos de diagnóstico y optimización. Los resultados mostraron mejoras significativas en tiempos de ejecución (hasta un 98.28% de incremento en eficiencia en algunos casos), confirmando el valor de combinar prácticas tradicionales con herramientas de IA en entornos de aprendizaje.</span>
+                        <span class="lang-en hidden">In addition, Gemini AI was integrated to analyze and suggest improvements to SQL queries, testing how language models can support diagnostics and optimization. The results showed significant execution time improvements (up to 98.28% efficiency gains in some cases), highlighting the value of combining traditional practices with AI tools in learning environments.</span>
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Consideraciones</span>
+                        <span class="lang-en hidden">Considerations</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-gray-300 leading-relaxed">
+                                <span class="lang-es">Este ejercicio se desarrolló con fines de autoaprendizaje y experimentación en técnicas avanzadas de SQL junto con el uso de IA generativa (LLM). Para interpretar adecuadamente los resultados, es importante tener en cuenta las siguientes consideraciones:</span>
+                                <span class="lang-en hidden">This exercise was carried out for self-learning and experimentation with advanced SQL techniques combined with the use of generative AI (LLM). To correctly interpret the results, it is important to keep in mind the following considerations:</span>
+                            </p>
+                            <ul class="list-disc list-inside space-y-3 mt-3">
+                                <li>
+                                    <span class="lang-es pl-2"> <strong>Tamaño y entorno de la base de datos:</strong> Se utilizó una base de datos local de tamaño modesto, lo que significa que los resultados pueden no ser directamente reproducibles en bases de datos más grandes o en entornos productivos.</span>
+                                    <span class="lang-en hidden pl-2"> <strong>Database size and environment:</strong> A modestly sized local database was used, meaning results may not be directly reproducible in larger databases or production environments.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2"><strong>Evaluación de respuestas de la IA:</strong> Las sugerencias generadas por la IA deben analizarse críticamente, ya que no siempre cuentan con el contexto completo para ofrecer soluciones totalmente precisas o aplicables.</span>
+                                    <span class="lang-en hidden pl-2"><strong>Evaluation of AI responses:</strong> Suggestions generated by the AI should be critically analyzed, as they may not always have the full context to provide completely accurate or applicable solutions.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2"><strong>Importancia del diseño de prompts:</strong> La calidad y relevancia de las recomendaciones de la IA dependen en gran medida de los prompts utilizados. Una personalización adecuada es clave para obtener mejores resultados.</span>
+                                    <span class="lang-en hidden pl-2"><strong>Importance of prompt design:</strong> The quality and relevance of AI recommendations largely depend on the prompts used. Proper customization is key to obtaining better results.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2"><strong>Factores externos en los tiempos de ejecución:</strong> Los tiempos de consulta no dependen únicamente de la base de datos, sino también de factores externos (hardware, configuración del sistema, carga concurrente), los cuales no se evaluaron en detalle en esta práctica.</span>
+                                    <span class="lang-en hidden pl-2"><strong>External factors in execution times:</strong> Query times do not depend solely on the database but also on external factors (hardware, system configuration, concurrent load), which were not evaluated in detail in this practice.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2"><strong>Entorno controlado de pruebas:</strong> Las optimizaciones se realizaron en un contexto sin cargas simultáneas ni escenarios de alta concurrencia, por lo que los resultados no reflejan necesariamente el rendimiento en sistemas de producción.</span>
+                                    <span class="lang-en hidden pl-2"><strong>Controlled test environment:</strong> Optimizations were performed in a context without simultaneous loads or high concurrency scenarios, so results do not necessarily reflect performance in production systems.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2"><strong>Alcance limitado:</strong> Las técnicas aplicadas se enfocaron en un conjunto específico de consultas y no abarcan todos los posibles escenarios de optimización en bases de datos complejas o distribuidas.</span>
+                                    <span class="lang-en hidden pl-2"><strong>Limited scope:</strong> The techniques applied focus on a specific set of queries and do not cover all possible optimizations in complex or distributed databases.</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es pl-2 text-white"><strong>Propósito educativo:</strong> este trabajo no pretende ser una guía definitiva de optimización, sino una práctica exploratoria para comprender técnicas avanzadas y evaluar el potencial del uso de IA en SQL.</span>
+                                    <span class="lang-en hidden pl-2 text-white"><strong>Educational purpose:</strong> This work is not intended to be a definitive optimization guide but an exploratory practice to understand advanced techniques and evaluate the potential of using AI in SQL.</span>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Herramientas Utilizadas</span>
+                        <span class="lang-en hidden">Tools Used</span>
+                    </h2>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-blue-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">PostgreSQL</span>
+                        <span class="bg-green-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Python</span>
+                        <span class="bg-purple-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Jupyter</span>
+                        <span class="bg-red-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Pandas</span>
+                        <span class="bg-indigo-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">SQLAlchemy</span>
+                        <span class="bg-pink-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Gemini AI</span>
+                        <span class="bg-yellow-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Matplotlib</span>
+                        <span class="bg-teal-900 text-white text-sm font-medium px-3 py-1 rounded-full transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg cursor-pointer">Seaborn</span>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Metodología y Proceso</span>
+                        <span class="lang-en hidden">Methodology and Process</span>
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-3">
+                                <span class="lang-es">Flujo de Optimización</span>
+                                <span class="lang-en hidden">Optimization Flow</span>
+                            </h3>
+                            <div class="bg-gray-700 p-4 rounded-lg">
+                                <div class="grid grid-cols-1 md:grid-cols-6 gap-4 text-center">
+                                    <div class="bg-red-900 p-3 rounded">
+                                        <i class="fas fa-network-wired text-2xl mb-2"></i>
+                                        <p class="lang-es text-sm">API Conexión</p>
+                                        <p class="lang-en hidden text-sm">API Connection</p>
+                                    </div>
+
+                                    <div class="bg-blue-900 p-3 rounded">
+                                        <i class="fas fa-database text-2xl mb-2"></i>
+                                        <p class="lang-es text-sm">Conexión BD </p>
+                                        <p class="lang-en hidden text-sm">DB Connection</p>
+                                        </p>
+                                    </div>
+                                    <div class="bg-green-900 p-3 rounded">
+                                        <i class="fas fa-search text-2xl mb-2"></i>
+                                        <p class="lang-es text-sm">Análisis Inicial</p>
+                                        <p class="lang-en hidden text-sm">Initial Analysis</p>
+                                    </div>
+                                    <div class="bg-purple-900 p-3 rounded">
+                                        <i class="fas fa-brain text-2xl mb-2"></i>
+                                        <p class="text-sm">Gemini AI</p>
+                                    </div>
+                                    <div class="bg-orange-900 p-3 rounded">
+                                        <i class="fas fa-tachometer-alt text-2xl mb-2"></i>
+                                        <p class="lang-es text-sm">Optimización</p>
+                                        <p class="lang-en hidden text-sm">Optimization</p>
+                                    </div>
+                                    <div class="bg-teal-700 p-3 rounded">
+                                        <i class="fas fa-chart-line text-2xl mb-2"></i>
+                                        <p class="lang-es text-sm">Resultados</p>
+                                        <p class="lang-en hidden text-sm">Results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+<!--Notebook embed-->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Notebook Interactivo</span>
+                        <span class="lang-en hidden">Interactive Notebook</span>
+                    </h2>
+                    
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <iframe 
+                            id="nbviewer-frame"
+                            src="https://nbviewer.jupyter.org/github/Brauliohg8038/SQL-TechSolutions/blob/master/SQL-Optimization.ipynb?theme=dark"
+                            width="100%" 
+                            height="600px" 
+                            frameborder="0"
+                            class="rounded-lg shadow-lg nbviewer-iframe"
+                            onload="applyDarkTheme()"
+                        >
+                        </iframe>
+                        
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="https://nbviewer.jupyter.org/github/Brauliohg8038/SQL-TechSolutions/blob/master/SQL-Optimization.ipynb?theme=dark"
+                            target="_blank" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                <span class="lang-es">Abrir en NBViewer</span>
+                                <span class="lang-en hidden">Open in NBViewer</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Análisis con Gemini AI</span>
+                        <span class="lang-en hidden">Gemini AI Analysis</span>
+                    </h2>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="text-white font-semibold mb-2">
+                                    <span class="lang-es">Problemas Detectados</span>
+                                    <span class="lang-en hidden">Problems Detected</span>
+                                </h3>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><span class="lang-es">Índices faltantes en llaves foráneas</span><span class="lang-en hidden">Missing foreign key indexes</span></li>
+                                    <li><span class="lang-es">Funciones en cláusulas WHERE</span><span class="lang-en hidden">Functions in WHERE clauses</span></li>
+                                    <li><span class="lang-es">GROUP BY sobre-dimensionado</span><span class="lang-en hidden">Over-sized GROUP BY</span></li>
+                                    <li><span class="lang-es">División por cero no manejada</span><span class="lang-en hidden">Unhandled division by zero</span></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-semibold mb-2">
+                                    <span class="lang-es">Optimizaciones Sugeridas</span>
+                                    <span class="lang-en hidden">Suggested Optimizations</span>
+                                </h3>
+                                <ul class="list-disc list-inside text-gray-300 space-y-1 text-sm">
+                                    <li><span class="lang-es">Índices de expresión para fechas</span><span class="lang-en hidden">Expression indexes for dates</span></li>
+                                    <li><span class="lang-es">LANGUAGE SQL en procedimientos</span><span class="lang-en hidden">LANGUAGE SQL in procedures</span></li>
+                                    <li><span class="lang-es">NULLIF para divisiones seguras</span><span class="lang-en hidden">NULLIF for safe divisions</span></li>
+                                    <li><span class="lang-es">CTEs mejor estructuradas</span><span class="lang-en hidden">Better structured CTEs</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+<!--Charts and metrics-->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Resultados</span>
+                        <span class="lang-en hidden">Results</span>
+                    </h2>
+                    <div class="chart-container">
+                        <h2 class="lang-es text-xl font-semibold text-white mb-6">Comparación General de Rendimiento</h2>
+                        <h2 class="lang-en hidden text-xl font-semibold text-white mb-6">Overall performance comparison</h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Gráfico Principal -->
+                            <div class="lg:col-span-2">
+                                <canvas id="overallPerformanceChart" height="250"></canvas>
+                            </div>
+                            <!-- Tarjetas de Métricas -->
+                            <div class="space-y-4">
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Window Query</span>
+                                        <span class="ranking-badge text-white font-bold">92%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-400">91.26%</div>
+                                    <div class="text-sm text-slate-400">0.2274s -> 0.0199s</div>
+                                    <div class="mt-2 bg-slate-700 rounded-full h-2">
+                                        <div class="bg-green-500 rounded-full h-2" style="width: 91.26%"></div>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">CTE Query</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">98%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-blue-400">97.66%</div>
+                                    <div class="text-sm text-slate-400">0.8464s -> 0.0198s</div>
+                                    <div class="mt-2 bg-slate-700 rounded-full h-2">
+                                        <div class="bg-blue-500 rounded-full h-2" style="width: 97.66%"></div>
+                                    </div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">View Table</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">96%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-purple-400">95.81%</div>
+                                    <div class="text-sm text-slate-400">0.2776s -> 0.0116s</div>
+                                    <div class="mt-2 bg-slate-700 rounded-full h-2">
+                                        <div class="bg-purple-500 rounded-full h-2" style="width: 95.81%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 2: Rendimiento con Índices -->
+                    <div class="chart-container">
+                        <h2 class="lang-es text-xl font-semibold text-white mb-6">Rendimiento después de Índices</h2>
+                        <h2 class="lang-en hidden text-xl font-semibold text-white mb-6">Performance after indices</h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Gráfico -->
+                            <div class="lg:col-span-2">
+                                <canvas id="indexPerformanceChart" height="250"></canvas>
+                            </div>
+                            <!-- Tarjetas de Métricas -->
+                            <div class="space-y-4">
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Salesperson</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">+51%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-orange-400">0.0097s</div>
+                                    <div class="lang-es text-sm text-slate-400">+51.18% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+51.18% Improvement</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Product Profit</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">+65%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-amber-400">0.0069s</div>
+                                    <div class="lang-es text-sm text-slate-400">+65.26% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+65.26% Improvement</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Sales View</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">+29%</span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-yellow-400">0.0083s</div>
+                                    <div class="lang-es text-sm text-slate-400">+28.67% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+28.67% Improvement</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Stored Procedures -->
+                    <div class="chart-container">
+                        <h2 class="lang-es text-xl font-semibold text-white mb-6">Optimización de Procedimientos Almacenados</h2>
+                        <h2 class="lang-en hidden text-xl font-semibold text-white mb-6">Optimización de Stored Procedures</h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Gráfico -->
+                            <div class="lg:col-span-2">
+                                <canvas id="storedProcedureChart" height="250"></canvas>
+                            </div>
+                            <!-- Tarjetas de Métricas -->
+                            <div class="space-y-4">
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">All Sellers</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">15%</span>
+                                    </div>
+                                    <div class="text-xl font-bold text-cyan-400">0.0074s -> 0.0063s</div>
+                                    <div class="lang-es text-sm text-slate-400">+15.18% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+15.18% Improvement</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Specific Seller</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">25%</span>
+                                    </div>
+                                    <div class="text-xl font-bold text-teal-400">0.0076s -> 0.0057s</div>
+                                    <div class="lang-es text-sm text-slate-400">+24.92% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+24.92% Improvement</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-white">Specific Month</span>
+                                        <span class="ranking-badge text-white text-xs font-bold">70%</span>
+                                    </div>
+                                    <div class="text-xl font-bold text-emerald-400">0.0214s -> 0.0065s</div>
+                                    <div class="lang-es text-sm text-slate-400">+69.53% Mejora</div>
+                                    <div class="lang-en hidden text-sm text-slate-400">+69.53% Mejora</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen Final -->
+                    <div class="chart-container">
+                        <h2 class="lang-es text-xl font-semibold text-white mb-6">Resumen de Mejoras</h2>
+                        <h2 class="lang-en hidden text-xl font-semibold text-white mb-6">Summary of Improvements</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="metric-card text-center">
+                                <div class="text-3xl font-bold text-green-400 mb-2">97.66%</div>
+                                <div class="lang-es text-slate-300">Mejora máxima</div>
+                                <div class="lang-en hidden text-slate-300">Maximum improvement</div>
+                                <div class="text-sm text-slate-400">CTE Query</div>
+                            </div>
+                            <div class="metric-card text-center">
+                                <div class="text-3xl font-bold text-blue-400 mb-2">0.0069s</div>
+                                <div class="lang-es text-slate-300">Consulta más rápida</div>
+                                <div class="lang-en hidden text-slate-300">Faster query</div>
+                                <div class="text-sm text-slate-400">Product Profit</div>
+                            </div>
+                            <div class="metric-card text-center">
+                                <div class="text-3xl font-bold text-purple-400 mb-2">69.53%</div>
+                                <div class="text-slate-300">Mejora SP máxima</div>
+                                <div class="text-sm text-slate-400">Specific Month</div>
+                            </div>
+                            <div class="metric-card text-center">
+                                <div class="text-3xl font-bold text-amber-400 mb-2">99.19%</div>
+                                <div class="lang-es text-slate-300">Mejora total CTE</div>
+                                <div class="lang-en hidden text-slate-300">Total improvement CTE</div>
+                                <div class="lang-es text-sm text-slate-400">Con índices</div>
+                                <div class="lang-en hidden text-sm text-slate-400">With indexes</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+                
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Conclusiones</span>
+                        <span class="lang-en hidden">Conclusions</span>
+                    </h2>
+
+                    <ol class="list-decimal list-inside space-y-3 text-white">
+                        <li class="lang-es">
+                        <strong>Impacto de la optimización tradicional:</strong> técnicas como window functions, CTEs y la optimización de vistas pueden reducir drásticamente los tiempos de ejecución (en este caso hasta un 97.66% de mejora), confirmando el valor de aplicar buenas prácticas de SQL.
+                        </li>
+                        <li class="lang-en hidden">
+                        <strong>Impact of traditional optimization:</strong> techniques such as window functions, CTEs, and view optimization can drastically reduce execution times (in this case up to 97.66% improvement), confirming the value of applying SQL best practices.
+                        </li>
+                        <li class="lang-es">
+                        <strong>Rol complementario de la IA:</strong> el uso de un modelo de IA generativa (LLM) como Gemini permitió identificar alternativas de optimización que resultaron efectivas. Sin embargo, sus recomendaciones deben analizarse críticamente, ya que dependen del contexto y de la calidad de los prompts.
+                        </li>
+                        <li class="lang-en hidden">
+                        <strong>Complementary role of AI:</strong> the use of a generative AI model (LLM) such as Gemini helped identify effective optimization alternatives. However, its suggestions must be critically assessed, as they depend on context and the quality of the prompts.
+                        </li>
+                        <li class="lang-es">
+                        <strong>Importancia de los índices:</strong> la creación de índices sobre campos clave mejoró aún más el rendimiento de consultas específicas, especialmente en procedimientos almacenados y filtros por fechas, con mejoras de hasta 69.53%.
+                        </li>
+                        <li class="lang-en hidden">
+                        <strong>Importance of indexing:</strong> creating indexes on key fields further enhanced the performance of specific queries, especially in stored procedures and date filters, achieving improvements of up to 69.53%.
+                        </li>
+                        <li class="lang-es">
+                        <strong>Limitaciones del entorno de prueba:</strong> los resultados se obtuvieron en una base de datos local y controlada, con un tamaño modesto y sin escenarios de concurrencia. En sistemas más grandes o productivos, los resultados podrían diferir significativamente.
+                        </li>
+                        <li class="lang-en hidden">
+                        <strong>Limitations of the testing environment:</strong> results were obtained in a local and controlled database of modest size, without concurrent workloads. In larger or production systems, performance gains may differ significantly.
+                        </li>
+                        <li class="lang-es">
+                        <strong>Valor educativo y exploratorio:</strong> más allá de los números, este ejercicio demuestra cómo combinar técnicas tradicionales de SQL con herramientas modernas de IA puede enriquecer el aprendizaje y abrir oportunidades para aplicar estas prácticas en proyectos reales.
+                        </li>
+                        <li class="lang-en hidden">
+                        <strong>Educational and exploratory value:</strong> beyond the numbers, this exercise shows how combining traditional SQL techniques with modern AI tools can enrich learning and open opportunities for applying these practices in real-world projects.
+                        </li>
+                    </ol>
+                    </section>
+            </div>
+        </div>
+    </main>
+
+    <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4">
+                <span class="lang-es">¿Qué te pareció este proyecto? ¡Califícalo!</span>
+                <span class="lang-en">How would you rate this project? Give it your score!</span>
+            </h3>
+            <div id="stars-rating-container" class="flex justify-center space-x-2">
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="1">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="2">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="3">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="4">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="5">&#9733;</span>
+            </div>
+            <p id="calificacion-gracias" class="text-sm mt-4 text-gray-400 hidden">
+                <span class="lang-es">¡Gracias por tu calificación!</span>
+                <span class="lang-en">Thank you for your rating!</span>
+            </p>
+        </div>
+    </section>
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en"></span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar el año en el footer
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = new Date().getFullYear();
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = new Date().getFullYear();
+            }
+
+            // Lógica de traducción para esta página
+            const htmlElement = document.documentElement; // Acceder al <html>
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang; // Actualiza el atributo lang del HTML
+                localStorage.setItem('preferredLang', lang); // Guarda en localStorage
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Función para actualizar el <title> dinámicamente
+            function updateTitle(lang) {
+                const titleEs = document.querySelector('title .lang-es');
+                const titleEn = document.querySelector('title .lang-en');
+                if (titleEs && titleEn) {
+                    if (lang === 'es') {
+                        document.title = titleEs.textContent;
+                    } else {
+                        document.title = titleEn.textContent;
+                    }
+                } else {
+                    // Fallback si no se encuentran los spans dentro del title
+                    document.title = lang === 'es' ? 'Optimización SQL con Gemini AI' : 'SQL Optimization with Gemini';
+                }
+            }
+
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma (en la página del proyecto)
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+            // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
+
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
+
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
+                });
+
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Optimización_SQL', 
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
+                });
+            }
+            // Configuración común de gráficos
+            Chart.defaults.color = '#e2e8f0';
+            Chart.defaults.font.family = 'Inter, sans-serif';
+
+            // Datos
+            const data = {
+                queries: ['Window Query', 'CTE Query', 'View Table'],
+                original: [0.2274, 0.8464, 0.2776],
+                geminiOptimized: [0.0199, 0.0198, 0.0116],
+                
+                indexedQueries: ['Salesperson', 'Product Profit', 'Sales View'],
+                indexedTimes: [0.0097, 0.0069, 0.0083],
+                
+                spScenarios: ['All Sellers', 'Specific Seller', 'Specific Month', 'Seller + Month'],
+                spOriginal: [0.0074, 0.0076, 0.0214, 0.0081],
+                spOptimized: [0.0063, 0.0057, 0.0065, 0.0057]
+            };
+
+            // Gráfico 1: Comparación General
+            new Chart(document.getElementById('overallPerformanceChart'), {
+                type: 'bar',
+                data: {
+                    labels: data.queries,
+                    datasets: [
+                        {
+                            label: 'Original (s)',
+                            data: data.original,
+                            backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Optimizado (s)',
+                            data: data.geminiOptimized,
+                            backgroundColor: 'rgba(34, 197, 94, 0.8)',
+                            borderColor: 'rgba(34, 197, 94, 1)',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Tiempos de Ejecución (segundos)'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico 2: Rendimiento con Índices
+            new Chart(document.getElementById('indexPerformanceChart'), {
+                type: 'bar',
+                data: {
+                    labels: data.indexedQueries,
+                    datasets: [{
+                        label: 'Tiempo con Índices (s)',
+                        data: data.indexedTimes,
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.8)',
+                            'rgba(245, 158, 11, 0.8)',
+                            'rgba(234, 179, 8, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(245, 158, 11, 1)',
+                            'rgba(234, 179, 8, 1)'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Tiempos después de implementar índices'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico 3: Stored Procedures
+            new Chart(document.getElementById('storedProcedureChart'), {
+                type: 'bar',
+                data: {
+                    labels: data.spScenarios,
+                    datasets: [
+                        {
+                            label: 'Original (s)',
+                            data: data.spOriginal,
+                            backgroundColor: 'rgba(239, 68, 68, 0.8)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Optimizado (s)',
+                            data: data.spOptimized,
+                            backgroundColor: 'rgba(14, 165, 233, 0.8)',
+                            borderColor: 'rgba(14, 165, 233, 1)',
+                            borderWidth: 2,
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Rendimiento de Stored Procedures'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
