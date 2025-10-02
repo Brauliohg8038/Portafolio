@@ -50,7 +50,7 @@
 <body class="dotted-background">
     <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
         <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
-            <a href="index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+            <a href="/index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
                 <i class="fas fa-arrow-left mr-2"></i>
                 <span class="lang-es">Proyectos</span>
                 <span class="lang-en hidden">Projects</span>
@@ -243,7 +243,7 @@
                             <span class="lang-es">Precios de las Acciones por empresa del 2023 al 2025</span>
                             <span class="lang-en hidden">Stock Prices by Company from 2023 to 2025</span>
                         </h3>
-                        <img src="images/price.png"
+                        <img src="/assets/images/price.png"
                             alt="Captura de precios"
                             class="w-full h-auto rounded-md shadow-md object-contain"
                             loading="lazy"
@@ -271,7 +271,7 @@
                         <span class="lang-es">Volatilidad Anualizada de las Acciones del 2023 al 2025</span>
                         <span class="lang-en hidden">Annualized Stock Volatility from 2023 to 2025</span>
                     </h4>
-                    <img src="images/volatilidad.png"
+                    <img src="/assets/images/volatilidad.png"
                         alt="Captura de pantalla de volatilidad"
                         class="w-full h-auto rounded-md shadow-md object-contain"
                         loading="lazy"
@@ -318,7 +318,7 @@
                         <span class="lang-es">Matríz de Correlación</span>
                         <span class="lang-en hidden">Correlation Matrix</span>
                     </h5>
-                    <img src="images/corre.png"
+                    <img src="/assets/images/corre.png"
                         alt="Captura de pantalla de correlacion"
                         class="w-full h-auto rounded-md shadow-md object-contain"
                         loading="lazy"
@@ -411,7 +411,7 @@
                         <span class="lang-es">Tabla de resumen</span>
                         <span class="lang-en hidden">Summary table</span>
                     </h5>
-                    <img src="images/cuadrog.png"
+                    <img src="/assets/images/cuadrog.png"
                         alt="Captura de pantalla tabla"
                         class="w-full h-auto rounded-md shadow-md object-contain"
                         loading="lazy"
@@ -471,7 +471,7 @@
                         <span class="lang-es">Simulación Monte Carlo - Precio de Tesla Inc (6 meses)</span>
                         <span class="lang-en hidden">Monte Carlo Simulation – Tesla Inc. Price (6 Months)</span>
                     </h6>
-                    <img src="images/Simul.png"
+                    <img src="/assets/images/Simul.png"
                         alt="Captura de pantalla tabla"
                         class="w-full h-auto rounded-md shadow-md object-contain"
                         loading="lazy"
@@ -483,7 +483,7 @@
                         <span class="lang-es">Resumen de Simulaciones Monte Carlo</span>
                         <span class="lang-en hidden">Monte Carlo Simulations Summary</span>
                     </h6>
-                    <img src="images/MonteResumen.png"
+                    <img src="/assets/images/MonteResumen.png"
                         alt="resumen mot"
                         class="w-full h-auto rounded-md shadow-md object-contain"
                         loading="lazy"
@@ -690,8 +690,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- 1. Actualizar el año en el footer ---
-            // Se puede optimizar si ambos elementos comparten el mismo ID o una clase común.
-            // Asumiendo que pueden ser diferentes o necesitar IDs separados, la forma actual es clara.
+            
             const currentYearEsElement = document.getElementById('current-year-project-es');
             const currentYearEnElement = document.getElementById('current-year-project-en');
             const currentYear = new Date().getFullYear();
