@@ -11,12 +11,12 @@ function initLiquidEther(container, options = {}) {
     BFECC = true,
     resolution = 0.5,
     isBounce = false,
-    colors = ['#3b0cf7ff', '#FF9FFC', '#B19EEF'],
+    colors = ['#471bf8ff', '#FF9FFC', '#B19EEF'],
     autoDemo = true,
-    autoSpeed = 0.5,
+    autoSpeed = 0.2,
     autoIntensity = 2.2,
     takeoverDuration = 0.25,
-    autoResumeDelay = 1000,
+    autoResumeDelay = 0,
     autoRampDuration = 0.6
   } = options;
 
