@@ -16,7 +16,7 @@ function initLiquidEther(container, options = {}) {
     autoSpeed = 0.2,
     autoIntensity = 2.2,
     takeoverDuration = 0.25,
-    autoResumeDelay = 0,
+    autoResumeDelay = 00,
     autoRampDuration = 0.6
   } = options;
 
