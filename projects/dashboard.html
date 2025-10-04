@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Ventas - TwoGrow Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+
+        .grid-background {
+            background-color: #000000;
+            background-size: 20px 20px;
+            padding: 1.5rem; /* 24px */
+            border-radius: 0.5rem; /* 8px */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        
+        /* Elementos ocultos */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Estilos específicos para el dashboard */
+        .dashboard-theme {
+            --bg-primary: #0a1416;
+            --bg-secondary: #0f1c1e;
+            --text-primary: #d8f3dc;
+            --text-secondary: #a8dadc;
+            --accent: #22d3ee;
+            --chart-green: #52b788;
+            --chart-light-green: #74c69d;
+        }
+        
+        .dashboard-card {
+            background: linear-gradient(145deg, #101c1e, #0e191b);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.7),
+                        -4px -4px 12px rgba(40,40,40,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 6px 6px 16px rgba(0,0,0,0.8),
+                        -6px -6px 16px rgba(40,40,40,0.2);
+        }
+        
+        .chart-container {
+            background: var(--bg-secondary);
+            background: #0a1012;
+            border-radius: 12px;
+            padding: 15px;
+            height: 300px;
+            box-shadow: 4px 4px 12px rgba(0,0,0,0.7),
+                        -4px -4px 12px rgba(40,40,40,0.2);
+            border: 1px solid #000;
+        }
+        
+        .tabs button.active {
+            background: #22d3ee !important;
+            color: #0a1416 !important;
+        }
+    </style>
+</head>
+<body class="dotted-background">
+    <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="../index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+            <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                <span class="lang-es text-base font-semibold flex items-center">EN<i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en text-base font-semibold flex items-center">ES<i class="fas fa-globe text-base ml-2"></i></span>
+            </button>
+            <a href="https://github.com/tu-usuario/tu-repositorio-dashboard" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
+            <div class="bg-gradient-to-r from-blue-900 to-emerald-500 p-6 sm:p-8 text-white text-center rounded-t-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                    <span class="lang-es">Dashboard 1 - TwoGrow Analytics</span>
+                    <span class="lang-en hidden">Dashboard 1 - TwoGrow Analytics</span>
+                </h1>
+                <p class="text-lg text-gray-200 mt-2">
+                    <span class="lang-es">Análisis comparativo de ventas 2023 vs 2024</span>
+                    <span class="lang-en hidden">Comparative sales analysis 2023 vs 2024</span>
+                </p>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-8 dashboard-theme">
+                <!-- Sección de descripción -->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Descripción del Proyecto</span>
+                        <span class="lang-en hidden">Project Description</span>
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed text-justify mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Este dashboard interactivo presenta un análisis comparativo de las métricas de ventas entre los años 2023 y 2024. Desarrollado con HTML, CSS y Chart.js, permite visualizar tendencias de ingresos, distribución regional y rendimiento por producto de forma clara y atractiva.</span>
+                        <span class="lang-en hidden">This interactive dashboard presents a comparative analysis of sales metrics between 2023 and 2024. Developed with HTML, CSS, and Chart.js, it allows clear and attractive visualization of revenue trends, regional distribution, and product performance.</span>
+                    </p>
+                </section>
+
+                <!-- Dashboard integrado -->
+                <section>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-2xl font-semibold text-white">
+                            <span class="lang-es">Dashboard Interactivo</span>
+                            <span class="lang-en hidden">Interactive Dashboard</span>
+                        </h2>
+                        <div class="tabs">
+                            <button class="bg-green-600 text-gray-900 px-4 py-2 rounded-l-lg transition duration-200 active">Accesorios</button>
+                            <button class="bg-gray-700 text-gray-300 hover:bg-gray-600 px-4 py-2 rounded-r-lg transition duration-200">Electrónica</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-background">
+                        <!-- Métricas principales -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="dashboard-card p-4">
+                                <h3 class="text-green-400 font-semibold">Sales</h3>
+                                <div class="text-2xl font-bold my-2 text-white">$475.6K</div>
+                                <div class="text-sm text-gray-400">▲ 30% vs 2023</div>
+                            </div>
+                            <div class="dashboard-card p-4">
+                                <h3 class="text-green-400 font-semibold">Quantity</h3>
+                                <div class="text-2xl font-bold my-2 text-white">899</div>
+                                <div class="text-sm text-gray-400">▲ 24% vs 2023</div>
+                            </div>
+                            <div class="dashboard-card p-4">
+                                <h3 class="text-green-400 font-semibold">Cost</h3>
+                                <div class="text-2xl font-bold my-2 text-white">$64.0K</div>
+                                <div class="text-sm text-gray-400">▲ 11% vs 2023</div>
+                            </div>
+                            <div class="dashboard-card p-4">
+                                <h3 class="text-green-400 font-semibold">Profit</h3>
+                                <div class="text-2xl font-bold my-2 text-white">$411.6K</div>
+                                <div class="text-sm text-gray-400">▲ 34% vs 2023</div>
+                            </div>
+                        </div>
+
+                        <!-- Gráficos -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <div class="chart-container">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="regionalChart"></canvas>
+                            </div>
+                            <div class="chart-container lg:col-span-2">
+                                <canvas id="productChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección de implementación -->
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Detalles de Implementación</span>
+                        <span class="lang-en hidden">Implementation Details</span>
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Desafíos Técnicos</span>
+                                <span class="lang-en hidden">Technical Challenges</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                <li>
+                                    <span class="lang-es">Integración fluida de múltiples gráficos</span>
+                                    <span class="lang-en hidden">Smooth integration of multiple charts</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Diseño responsivo para todos los dispositivos</span>
+                                    <span class="lang-en hidden">Responsive design for all devices</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Optimización del rendimiento visual</span>
+                                    <span class="lang-en hidden">Visual performance optimization</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Mantenimiento de consistencia en el tema oscuro</span>
+                                    <span class="lang-en hidden">Maintaining consistency in dark theme</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-medium text-white mb-2">
+                                <span class="lang-es">Soluciones</span>
+                                <span class="lang-en hidden">Solutions</span>
+                            </h3>
+                            <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                <li>
+                                    <span class="lang-es">Uso de Chart.js para visualizaciones interactivas</span>
+                                    <span class="lang-en hidden">Use of Chart.js for interactive visualizations</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">CSS Grid para layouts adaptativos</span>
+                                    <span class="lang-en hidden">CSS Grid for adaptive layouts</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Variables CSS para mantener consistencia</span>
+                                    <span class="lang-en hidden">CSS variables for consistency</span>
+                                </li>
+                                <li>
+                                    <span class="lang-es">Optimización de contenedores de gráficos</span>
+                                    <span class="lang-en hidden">Chart container optimization</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es">2024</span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en">2024</span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado - inicializando dashboard...');
+            
+            // Actualizar año en el footer
+            const currentYear = new Date().getFullYear();
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            
+            if (currentYearEsElement) currentYearEsElement.textContent = currentYear;
+            if (currentYearEnElement) currentYearEnElement.textContent = currentYear;
+
+            // Lógica de traducción
+            const htmlElement = document.documentElement;
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang;
+                localStorage.setItem('preferredLang', lang);
+            }
+
+            // Cargar idioma preferido
+            const storedLang = localStorage.getItem('preferredLang') || 'es';
+            setLanguage(storedLang);
+
+            // Event listener para cambio de idioma
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = (currentLang === 'es') ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+
+            // Lógica para botones de pestañas
+            document.querySelectorAll('.tabs button').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.tabs button').forEach(btn => {
+                        btn.classList.remove('active', 'bg-green-600');
+                        btn.classList.add('bg-gray-700', 'text-gray-300');
+                    });
+                    this.classList.add('active', 'bg-green-600', 'text-gray-900');
+                    this.classList.remove('bg-gray-700', 'text-gray-300');
+                });
+            });
+
+            // Inicializar gráficos
+            initializeCharts();
+        });
+
+        function initializeCharts() {
+            console.log('Inicializando gráficos...');
+            
+            // Verificar que los canvas existen
+            const revenueCanvas = document.getElementById('revenueChart');
+            const regionalCanvas = document.getElementById('regionalChart');
+            const productCanvas = document.getElementById('productChart');
+            
+            if (!revenueCanvas || !regionalCanvas || !productCanvas) {
+                console.error('No se encontraron todos los elementos canvas');
+                return;
+            }
+
+            // Gráfico de líneas: Revenue Trend
+            const ctxRevenue = revenueCanvas.getContext('2d');
+            new Chart(ctxRevenue, {
+                type: 'line',
+                data: {
+                    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                    datasets: [
+                        {
+                            label: '2023',
+                            data: [30,35,50,60,20,40,55,50,60,65,55,35],
+                            borderColor: '#74c69d',
+                            backgroundColor: 'rgba(116, 198, 157, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: '2024',
+                            data: [35,40,60,55,25,50,60,55,65,60,58,40],
+                            borderColor: '#52b788',
+                            backgroundColor: 'rgba(82, 183, 136, 0.1)',
+                            borderColor: '#22d3ee',
+                            backgroundColor: 'rgba(34, 211, 238, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { 
+                            labels: { 
+                                color: '#d8f3dc',
+                                boxWidth: 12,
+                                padding: 15
+                            } 
+                        },
+                        title: {
+                            display: true,
+                            text: 'Revenue Trend',
+                            color: '#d8f3dc',
+                            font: { size: 14 }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#d8f3dc' } 
+                        },
+                        y: { 
+                            ticks: { color: '#d8f3dc' } 
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de barras horizontales: Regional Sales
+            const ctxRegional = regionalCanvas.getContext('2d');
+            new Chart(ctxRegional, {
+                type: 'bar',
+                data: {
+                    labels: ['West','South','North','East'],
+                    datasets: [
+                        { 
+                            label: '2023', 
+                            data: [70,90,40,75], 
+                            backgroundColor: '#74c69d',
+                            barPercentage: 0.6
+                        },
+                        { 
+                            label: '2024', 
+                            data: [85,110,50,95], 
+                            backgroundColor: '#52b788',
+                            backgroundColor: '#22d3ee',
+                            barPercentage: 0.6
+                        }
+                    ]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { 
+                            labels: { 
+                                color: '#d8f3dc',
+                                boxWidth: 12,
+                                padding: 15
+                            } 
+                        },
+                        title: {
+                            display: true,
+                            text: 'Regional Sales',
+                            color: '#d8f3dc',
+                            font: { size: 14 }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#d8f3dc' } 
+                        },
+                        y: { 
+                            ticks: { color: '#d8f3dc' } 
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de barras: Product Performance
+            const ctxProduct = productCanvas.getContext('2d');
+            new Chart(ctxProduct, {
+                type: 'bar',
+                data: {
+                    labels: ['Headphones','Keyboard','Laptop','Monitor','Mouse','Printer'],
+                    datasets: [
+                        { 
+                            label: '2023', 
+                            data: [80,60,50,90,85,45], 
+                            backgroundColor: '#74c69d',
+                            barPercentage: 0.6
+                        },
+                        { 
+                            label: '2024', 
+                            data: [95,70,65,110,100,55], 
+                            backgroundColor: '#52b788',
+                            backgroundColor: '#22d3ee',
+                            barPercentage: 0.6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { 
+                            labels: { 
+                                color: '#d8f3dc',
+                                boxWidth: 12,
+                                padding: 15
+                            } 
+                        },
+                        title: {
+                            display: true,
+                            text: 'Product Performance',
+                            color: '#d8f3dc',
+                            font: { size: 14 }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#d8f3dc' } 
+                        },
+                        y: { 
+                            ticks: { color: '#d8f3dc' } 
+                        }
+                    }
+                }
+            });
+            
+            console.log('Gráficos inicializados correctamente');
+        }
+    </script>
+</body>
+</html>
