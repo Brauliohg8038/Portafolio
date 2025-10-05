@@ -3,7 +3,7 @@
   position: fixed;           /* para asegurar que cubra toda la pantalla */
   top: 0;
   left: 0;
-  overflow: visible;         /* Permite que el canvas se renderice */
+  overflow: hidden;         /* Permite que el canvas se renderice */
   width: 100%;
   height: 100%;
   touch-action: none;

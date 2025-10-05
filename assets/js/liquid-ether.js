@@ -724,9 +724,19 @@ function initLiquidEther(container, options = {}) {
       this.createAllFBO();
       this.createShaderPass();
     }
-    getFloatType() {
-      const isIOS = /(iPad|iPhone|iPod)/i.test(navigator.userAgent);
-      return isIOS ? THREE.HalfFloatType : THREE.FloatType;
+    getFloatType() {// y mejorar compatibilidad con WebGL2 en Android y Desktop.
+      try {
+        const gl = Common.renderer.getContext();
+        const supportsHalfFloat =
+          gl.getExtension('OES_texture_half_float') ||
+          gl.getExtension('EXT_color_buffer_half_float') ||
+          (gl.getExtension('EXT_color_buffer_float') && gl instanceof WebGL2RenderingContext);
+
+        return supportsHalfFloat ? THREE.HalfFloatType : THREE.FloatType;
+      } catch (e) {
+        console.warn("Fallo al detectar soporte de HalfFloat, usando FloatType:", e);
+        return THREE.FloatType;
+      }
     }
     createAllFBO() {
       const type = this.getFloatType();
