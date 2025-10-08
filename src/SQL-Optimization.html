@@ -49,6 +49,100 @@ table, th, td {
 .output_png, .output_jpeg, .output_svg {
     background-color: white !important; /* Mantener fondo blanco en gráficos */
 }
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-width: 300px; /* Ancho mínimo para móvil */
+}
+
+/* Contenedor principal responsive */
+.container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto; /* Scroll horizontal en móvil */
+}
+
+/* Celdas de código responsive */
+.code_cell {
+    margin: 10px 0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow-x: auto; /* Scroll horizontal para código largo */
+}
+
+.input_area, .output_area {
+    padding: 10px;
+    background-color: #2d2d2d;
+}
+
+/* Código con scroll horizontal */
+pre, code {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    white-space: pre-wrap; /* Wrap en móvil */
+    word-wrap: break-word;
+}
+
+/* Tablas responsive */
+table {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+    background-color: #2d2d2d;
+}
+
+/* Texto responsive */
+h1, h2, h3, h4, h5, h6, p {
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+/* Media queries para móvil */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .code_cell {
+        margin: 5px 0;
+    }
+    
+    pre, code {
+        font-size: 12px;
+        padding: 8px;
+    }
+    
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.3em; }
+    h3 { font-size: 1.1em; }
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777;
+}
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
