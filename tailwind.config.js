@@ -6,7 +6,12 @@ module.exports = {
     "./src/**/*.css",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'electric-blue': '#5227FF',
+        'deep-purple': '#1E00FF',
+      },
+    },
   },
   plugins: [],
 }
