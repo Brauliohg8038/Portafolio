@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <span class="lang-es">Análisis Comercial</span>
+        <span class="lang-en hidden">Comercial Analysis</span>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <<style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #2563eb;
+            --accent: #60a5fa;
+            --dark-bg: #0d0d0d;
+            --card-bg: #1e293b;
+            --card-gradient: linear-gradient(135deg, #1e293b 0%, #2d3748 100%);
+            --border: #475569;
+            --text: #e0e0e0;
+            --text-light: #f8fafc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .dotted-background {
+            background-image: radial-gradient(circle, #2d3748 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Navigation */
+        .nav-header {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #9ca3af;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link:hover {
+            color: white;
+        }
+        
+        .lang-toggle {
+            color: #d1d5db;
+            background: transparent;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .lang-toggle:hover {
+            background: #374151;
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: var(--text-light);
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            color: var(--text-light);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .subsection {
+            margin-bottom: 1.5rem;
+        }
+        
+        .subsection-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        table th {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            color: var(--text-light);
+            text-align: left;
+            padding: 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        table tr:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            padding: 1.25rem;
+            border-left: 4px solid var(--accent);
+            margin: 1.25rem 0;
+            border-radius: 8px;
+        }
+        
+        .metric-card {
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.25rem 0;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: var(--text);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .positive {
+            color: var(--success);
+        }
+        
+        .negative {
+            color: var(--danger);
+        }
+        
+        .recommendation {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            border-radius: 8px;
+        }
+        
+        .key-finding {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border-left: 4px solid var(--warning);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+            border-radius: 8px;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .performance-badge {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .ranking-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-radius: 6px;
+            padding: 0.125rem 0.375rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: var(--text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .chart-container {
+            background: var(--card-gradient);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
+
+        ul, ol {
+            margin-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        strong {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .hero {
+                padding: 2.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            table {
+                font-size: 0.9rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            table {
+                font-size: 0.8rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
+    </script>
+</head>
+<body class="dotted-background">
+    <header class="nav-header">
+        <nav class="nav-container">
+            <a href="../index.html#proyectos" class="nav-link">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+<!--Traducción NO DISPONIBLE-->
+            <!-- <button id="project-lang-toggle-button" class="lang-toggle">
+                <span class="lang-es text-base font-semibold flex items-center">EN <i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en hidden text-base font-semibold flex items-center">ES <i class="fas fa-globe text-base ml-2"></i></span>
+            </button> -->
+            <a href="/projects/Detalles_Comerciales.html" class="nav-link">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">Detalles</span>
+                <span class="lang-en hidden">Details</span>
+            </a>
+            <a href="https://github.com/tu-usuario/tu-repositorio" target="_blank" rel="noopener noreferrer" class="nav-link">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <section class="hero">
+            <div class="container">
+                <h1>Análisis Estratégico CommerSoluciones 2025</h1>
+                <p>Evaluación del desempeño comercial y plan de acción para el cumplimiento de metas</p>
+            </div>
+    </section>
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">Contexto Empresarial</h2>
+            <p>CommerSoluciones S.A., fundada en 2010, ha evolucionado de un pequeño comercio local a un ecosistema retail integral con presencia en las siete provincias de Costa Rica. Su portafolio abarca electrodomésticos, tecnología, hogar y oficina, combinando la calidez del comercio tradicional con la eficiencia del entorno digital.</p>
+            <p>En los últimos años, la compañía ha consolidado una estrategia multicanal que integra tiendas físicas, e-commerce, Marketplace y atención por WhatsApp, logrando una base de más de 500 mil clientes anuales.</p>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">Desafío Estratégico 2025</h2>
+            <p>La dirección general de CommerSoluciones se fijó una meta de crecimiento del 5% sobre las ventas récord de 2024 (elevarlas de ₡2,597 millones a ₡2,727 millones). Sin embargo, al cierre del tercer trimestre, los resultados preliminares mostraban una brecha del -7.3% frente a la proyección lineal.</p>
+            
+            <div class="highlight">
+                <p><strong>Pregunta crítica:</strong> ¿Era esta brecha una señal de alerta o simplemente el efecto natural de la estacionalidad del negocio?</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">1. Diagnóstico Integral de la Brecha Comercial</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">1.1. Análisis General de Desempeño</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Concepto</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ventas totales 2024</td>
+                            <td>₡2,597,484,411</td>
+                        </tr>
+                        <tr>
+                            <td>Meta 2025 (+5%)</td>
+                            <td>₡2,727,358,632</td>
+                        </tr>
+                        <tr>
+                            <td>Ventas acumuladas Ene–Sep 2025</td>
+                            <td>₡1,896,259,886</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">1.2. Proyecciones de Cumplimiento</h3>
+                
+                <div class="metric-card">
+                    <div class="metric-value negative">-7.3%</div>
+                    <div class="metric-label">Brecha según proyección lineal</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value positive">+14.2%</div>
+                    <div class="metric-label">Brecha según proyección estacional</div>
+                </div>
+                
+                <div class="key-finding">
+                    <p><strong>Hallazgo clave:</strong> La perspectiva lineal es engañosa y subestima el rendimiento real al ignorar la dinámica estacional. La perspectiva estacional revela un sobrecumplimiento del 14.2%, indicando una posición competitiva fuerte.</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">1.3. Proyección al Cierre 2025</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Trimestre</th>
+                            <th>Participación esperada anual 2025</th>
+                            <th>Ventas esperadas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ene–Sep</td>
+                            <td>61%</td>
+                            <td>₡1,896,259,886</td>
+                        </tr>
+                        <tr>
+                            <td>Oct–Dic</td>
+                            <td>39%</td>
+                            <td>₡856,879,980</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>100%</strong></td>
+                            <td><strong>₡2,753,139,866</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="highlight">
+                    <p><strong>Escenario de Cierre Proyectado:</strong> Ventas Totales proyectadas 2025: ₡2,753 millones (+0.9% sobre meta, +6.0% sobre 2024)</p>
+                </div>
+            </div>
+            
+            <div class="recommendation">
+                <h3>Recomendaciones Inmediatas</h3>
+                <ul>
+                    <li>Fortalecer las campañas de cierre de año para asegurar la conversión del potencial de ventas proyectado.</li>
+                    <li>Revisar y asegurar los inventarios de productos clave y optimizar la logística para prevenir quiebres de stock.</li>
+                    <li>Ajustar los incentivos de ventas para el último trimestre, alineándolos con la capitalización de la estacionalidad.</li>
+                    <li>Implementar un monitoreo semanal de los indicadores de avance durante noviembre y diciembre.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">2. Análisis Comparativo Multidimensional: 2024 vs 2025</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">2.1. Desempeño por Categoría de Producto</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Ingreso 2024</th>
+                            <th>Ingreso 2025</th>
+                            <th>Variación (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Electrodomésticos</td>
+                            <td>₡491,990,057</td>
+                            <td>₡522,607,627</td>
+                            <td class="positive">+6.22</td>
+                        </tr>
+                        <tr>
+                            <td>Hogar</td>
+                            <td>₡143,976,371</td>
+                            <td>₡150,901,626</td>
+                            <td class="positive">+4.81</td>
+                        </tr>
+                        <tr>
+                            <td>Oficina</td>
+                            <td>₡254,390,904</td>
+                            <td>₡287,710,419</td>
+                            <td class="positive">+13.10</td>
+                        </tr>
+                        <tr>
+                            <td>Tecnología</td>
+                            <td>₡898,692,892</td>
+                            <td>₡935,040,214</td>
+                            <td class="positive">+4.04</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">2.2. Desempeño por Canal de Venta</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Canal de Venta</th>
+                            <th>Ventas 2024</th>
+                            <th>Ventas 2025</th>
+                            <th>Variación (%)</th>
+                            <th>Part. 2025 (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>E-commerce</td>
+                            <td>₡492,055,755</td>
+                            <td>₡510,455,042</td>
+                            <td class="positive">+3.74</td>
+                            <td>26.92</td>
+                        </tr>
+                        <tr>
+                            <td>Marketplace</td>
+                            <td>₡263,589,400</td>
+                            <td>₡275,501,253</td>
+                            <td class="positive">+4.52</td>
+                            <td>14.53</td>
+                        </tr>
+                        <tr>
+                            <td>Tienda Física</td>
+                            <td>₡910,939,320</td>
+                            <td>₡988,200,859</td>
+                            <td class="positive">+8.48</td>
+                            <td>52.11</td>
+                        </tr>
+                        <tr>
+                            <td>WhatsApp</td>
+                            <td>₡122,465,749</td>
+                            <td>₡122,102,732</td>
+                            <td class="negative">-0.30</td>
+                            <td>6.44</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">2.3. Síntesis Comparativa</h3>
+                
+                <div class="key-finding">
+                    <h4>Motores Principales del Crecimiento (Acelerar):</h4>
+                    <ul>
+                        <li>Geografía: Alajuela (+13%) y San José (+8.3%)</li>
+                        <li>Categoría: Oficina (+13.1%) y Electrodomésticos (+6.2%)</li>
+                        <li>Canal: Tienda Física (+8.5%)</li>
+                        <li>Cliente: Segmento Institucional (+26.4% en ticket)</li>
+                    </ul>
+                </div>
+                
+                <div class="key-finding">
+                    <h4>Áreas Críticas de Atención (Corregir):</h4>
+                    <ul>
+                        <li>Geografía: Provincias de Limón y Guanacaste (en contracción)</li>
+                        <li>Canal: WhatsApp (estancamiento)</li>
+                        <li>Cliente: Segmento Mayorista (caída del -6.7%)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">3. Patrones Estacionales y Proyecciones</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">3.1. Análisis de Temporadas Pasadas (Q4 2024)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mes</th>
+                            <th>Ventas (₡ millones)</th>
+                            <th>Cantidad Vendida</th>
+                            <th>Campaña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Octubre</td>
+                            <td>197.75</td>
+                            <td>1,552</td>
+                            <td>Normal</td>
+                        </tr>
+                        <tr>
+                            <td>Noviembre</td>
+                            <td>308.53</td>
+                            <td>2,447</td>
+                            <td>Mes Negro</td>
+                        </tr>
+                        <tr>
+                            <td>Diciembre</td>
+                            <td>302.15</td>
+                            <td>2,182</td>
+                            <td>Temporada Alta</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">3.2. Productos Estrella en Temporadas 2024</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Producto</th>
+                            <th>Ingreso Total (₡)</th>
+                            <th>Cantidad Vendida</th>
+                            <th>Margen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="5">Tecnología</td>
+                            <td>Laptop</td>
+                            <td>86,267,732</td>
+                            <td>338</td>
+                            <td>0.18</td>
+                        </tr>
+                        <tr>
+                            <td>Smart TV</td>
+                            <td>80,195,286</td>
+                            <td>285</td>
+                            <td>0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Tablet</td>
+                            <td>78,373,483</td>
+                            <td>293</td>
+                            <td>0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Auriculares</td>
+                            <td>76,910,852</td>
+                            <td>311</td>
+                            <td>0.17</td>
+                        </tr>
+                        <tr>
+                            <td>Smartphone</td>
+                            <td>72,214,572</td>
+                            <td>283</td>
+                            <td>0.17</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="5">Electrodomésticos</td>
+                            <td>Lavadora</td>
+                            <td>56,230,739</td>
+                            <td>384</td>
+                            <td>0.23</td>
+                        </tr>
+                        <tr>
+                            <td>Cafetera</td>
+                            <td>52,041,645</td>
+                            <td>357</td>
+                            <td>0.22</td>
+                        </tr>
+                        <tr>
+                            <td>Microondas</td>
+                            <td>47,307,025</td>
+                            <td>327</td>
+                            <td>0.23</td>
+                        </tr>
+                        <tr>
+                            <td>Ventilador</td>
+                            <td>42,323,630</td>
+                            <td>287</td>
+                            <td>0.23</td>
+                        </tr>
+                        <tr>
+                            <td>Refrigeradora</td>
+                            <td>35,764,819</td>
+                            <td>260</td>
+                            <td>0.23</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="key-finding">
+                <p><strong>Hallazgo Principal:</strong> El 80% de los ingresos estacionales se concentra en un núcleo de 10 productos estrella, con los 5 principales de tecnología generando más de ₡393 millones.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">4. Efectividad de la Fuerza de Ventas</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">4.1. Análisis de Desempeño por Vendedor</h3>
+                
+                <div class="metric-card">
+                    <div class="metric-value">92.3%</div>
+                    <div class="metric-label">Cumplimiento promedio del equipo</div>
+                </div>
+                
+                <div class="key-finding">
+                    <p><strong>Distribución del desempeño:</strong></p>
+                    <ul>
+                        <li>10 vendedores ≥95% (grupo "Estable")</li>
+                        <li>2 vendedores >105% (alto desempeño)</li>
+                        <li>6 vendedores <90% (bajo desempeño)</li>
+                    </ul>
+                </div>
+                
+                <div class="recommendation">
+                    <h3>Plan de Acción para el Cierre 2025</h3>
+                    <ul>
+                        <li><strong>Intervención Focalizada en Brechas Críticas:</strong> Programa de coaching intensivo para los 6 vendedores con desempeño <90%</li>
+                        <li><strong>Optimización Territorial:</strong> Reforzamiento en Limón y Guanacaste con acompañamiento de top performers</li>
+                        <li><strong>Incentivos Estacionales Inteligentes:</strong> Bonos por venta de productos estacionales de alto margen</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">5. Rentabilidad y Optimización de Márgenes</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">5.1. Análisis de Correlaciones Comerciales</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Variable 1</th>
+                            <th>Variable 2</th>
+                            <th>Coeficiente (r)</th>
+                            <th>Interpretación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ingreso Total</td>
+                            <td>Margen</td>
+                            <td>-0.321</td>
+                            <td>A mayor volumen de ventas, el margen tiende a disminuir</td>
+                        </tr>
+                        <tr>
+                            <td>Margen</td>
+                            <td>Descuento</td>
+                            <td>-0.532</td>
+                            <td>Mayores descuentos implican márgenes más bajos</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="metric-card">
+                    <div class="metric-value negative">22.6%</div>
+                    <div class="metric-label">Margen bruto actual</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value">26%</div>
+                    <div class="metric-label">Benchmark del sector</div>
+                </div>
+                
+                <div class="key-finding">
+                    <p><strong>Oportunidad de mejora:</strong> ₡88 millones anuales en utilidad bruta</p>
+                </div>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">5.2. Propuesta de Plan de Acción para Mejora de Margen</h3>
+                
+                <div class="recommendation">
+                    <h4>Iniciativa 1: Control Estricto de Descuentos (Corto Plazo)</h4>
+                    <p>Implementar límites automáticos en CRM con aprobación gerencial para descuentos >15%</p>
+                    <p><strong>Impacto esperado:</strong> +0.8 p.p. en margen bruto</p>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>Iniciativa 2: Revisión de Portafolio de Promociones</h4>
+                    <p>Identificar y reestructurar 3-5 campañas con margen <10%</p>
+                    <p><strong>Impacto esperado:</strong> +0.6 p.p. en margen bruto</p>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>Iniciativa 3: Estrategia de Mix Comercial Inteligente</h4>
+                    <p>Diseñar bundles obligatorios "Tecnología + Hogar" para ventas mayores a ₡500,000</p>
+                    <p><strong>Impacto esperado:</strong> +0.4 p.p. en margen bruto</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">6. Plan de Acción Estratégico</h2>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Fase 1: Acciones Inmediatas (0-30 días)</h3>
+                <ul>
+                    <li>Implementar límites automáticos de descuento (>15% requiere aprobación)</li>
+                    <li>Revisar 3-5 promociones con margen <10%</li>
+                    <li>Asegurar stock de 10 productos estrella</li>
+                    <li>Establecer acuerdos con operadores logísticos temporales</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Fase 2: Intervenciones Tácticas (30-60 días)</h3>
+                <ul>
+                    <li>Coaching intensivo para 6 vendedores de bajo desempeño</li>
+                    <li>Campañas geo-direccionadas en Alajuela y San José</li>
+                    <li>Programas de fidelización para segmento institucional</li>
+                    <li>Rediseño de procesos de picking y despacho</li>
+                </ul>
+            </div>
+            
+            <div class="subsection">
+                <h3 class="subsection-title">Fase 3: Ejecución y Monitoreo (60-90 días)</h3>
+                <ul>
+                    <li>War room comercial con reportes semanales</li>
+                    <li>Plan de contingencia para Nov-Dic</li>
+                    <li>Incentivos estacionales por productos de alto margen</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2 class="section-title">7. Conclusiones</h2>
+            
+            <div class="conclusion">
+                <h3>Conclusión General</h3>
+                <p>El análisis multidimensional confirma que CommerSoluciones puede alcanzar y superar su meta del 5% en 2025, proyectando un crecimiento del +6.0% (₡2,753 millones). La aparente brecha del -7.3% era un espejismo estadístico causado por la alta estacionalidad del negocio.</p>
+                
+                <div class="metric-card">
+                    <div class="metric-value positive">+14.2%</div>
+                    <div class="metric-label">Sobre cumplimiento en perspectiva estacional</div>
+                </div>
+                
+                <div class="metric-card">
+                    <div class="metric-value positive">+6.0%</div>
+                    <div class="metric-label">Crecimiento proyectado sobre 2024</div>
+                </div>
+            </div>
+            
+            <div class="key-finding">
+                <h3>Respuesta a las Preguntas Centrales</h3>
+                <ol>
+                    <li><strong>¿Cuál es la verdadera brecha entre el desempeño actual y la meta anual?</strong><br>
+                    No existe brecha negativa. Al ajustar por estacionalidad, la empresa lleva un superávit de ₡236 millones (+14.2%) sobre la meta esperada a septiembre.</li>
+                    
+                    <li><strong>¿Existe capacidad de recuperación en el último trimestre?</strong><br>
+                    Sí, y es robusta. El Q4 históricamente representa el 39% de las ventas anuales.</li>
+                    
+                    <li><strong>¿Dónde están las oportunidades de mejora en rentabilidad y ejecución?</strong><br>
+                    Rentabilidad: Brecha de 3.4 p.p. vs sector (22.6% vs 26%). Ejecución: 33% del equipo comercial explica 60% del desvío.</li>
+                </ol>
+            </div>
+        </section>
+        <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4">
+                <span class="lang-es">¿Qué te pareció este proyecto? ¡Califícalo!</span>
+                <span class="lang-en">How would you rate this project? Give it your score!</span>
+            </h3>
+            <div id="stars-rating-container" class="flex justify-center space-x-2">
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="1">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="2">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="3">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="4">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="5">&#9733;</span>
+            </div>
+            <p id="calificacion-gracias" class="text-sm mt-4 text-gray-400 hidden">
+                <span class="lang-es">¡Gracias por tu calificación!</span>
+                <span class="lang-en">Thank you for your rating!</span>
+            </p>
+        </div>
+        </section>
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en"></span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar el año en el footer
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = new Date().getFullYear();
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = new Date().getFullYear();
+            }
+
+            // Lógica de traducción para esta página
+            const htmlElement = document.documentElement; // Acceder al <html>
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang; // Actualiza el atributo lang del HTML
+                localStorage.setItem('preferredLang', lang); // Guarda en localStorage
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Función para actualizar el <title> dinámicamente
+            function updateTitle(lang) {
+                const titleEs = document.querySelector('title .lang-es');
+                const titleEn = document.querySelector('title .lang-en');
+                if (titleEs && titleEn) {
+                    if (lang === 'es') {
+                        document.title = titleEs.textContent;
+                    } else {
+                        document.title = titleEn.textContent;
+                    }
+                } else {
+                    // Fallback si no se encuentran los spans dentro del title
+                    document.title = lang === 'es' ? 'Análisis Comercial' : 'Comercial Analysis';
+                }
+            }
+
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma (en la página del proyecto)
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+            // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
+
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
+
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
+                });
+
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Analisis_comercial', 
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

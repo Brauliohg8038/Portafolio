@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <span class="lang-es">Detalles del Anáiisis comercial</span>
+        <span class="lang-en hidden">Details of Comercial Analysis</span>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .performance-card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            border: 1px solid #4f46e5;
+        }
+        /* Forzar tema oscuro en el iframe */
+        .nbviewer-iframe {
+            filter: invert(1) hue-rotate(180deg) contrast(1.15) brightness(1);
+            background-color: #000000 !important;
+        }
+
+        .nbviewer-iframe body {
+            background-color: #0c0000 !important;
+            color: #f8fafa !important;
+        }
+
+        /* Corregir imágenes dentro del iframe */
+        .nbviewer-iframe img {
+            filter: invert(1) hue-rotate(180deg) contrast(1.1) brightness(1.1);
+        }
+
+        /* Corregir código y sintaxis */
+        .nbviewer-iframe .highlight {
+            background-color: #f7f0f0 !important;
+            border-color: #f0e5e5 !important;
+        }
+
+        .nbviewer-iframe .code-cell {
+            background-color: #000000 !important;
+        }
+
+        .chart-container {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1e293b 0%, #2d3748 100%);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        .performance-badge {
+            background: linear-gradient(135deg, #334155 0%, #475569 100%);
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .ranking-badge {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+    </style>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
+    </script>
+</head>
+<body class="dotted-background">
+    <header class="bg-gray-900 bg-opacity-70 backdrop-blur-sm shadow-md py-4">
+        <nav class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <a href="../index.html#proyectos" class="text-semibold font-bold text-gray-400 hover:text-white transition duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span class="lang-es">Proyectos</span>
+                <span class="lang-en hidden">Projects</span>
+            </a>
+    <!--Traducción NO DISPONIBLE-->
+            <!-- <button id="project-lang-toggle-button" class="text-gray-300 hover:text-white focus:outline-none transition duration-200 ease-in-out px-3 py-1 rounded-full hover:bg-gray-700">
+                <span class="lang-es text-base font-semibold flex items-center">EN <i class="fas fa-globe text-base ml-2"></i></span>
+                <span class="lang-en text-base font-semibold flex items-center">ES <i class="fas fa-globe text-base ml-2"></i></span>
+            </button> -->
+            <a href="proyecto5.html" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">Principal</span>
+                <span class="lang-en hidden">Principal</span>
+            </a>
+            <a href="https://github.com/Brauliohg8038/SQL-TechSolutions/blob/master/SQL-Optimization.ipynb" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-white font-medium transition duration-200">
+                <i class="fab fa-github mr-2"></i>
+                <span class="lang-es">GitHub</span>
+                <span class="lang-en hidden">GitHub</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 max-w-5xl">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden border border-gray-500">
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-900 p-6 sm:p-8 text-white text-center rounded-t-xl">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+                    <span class="lang-es">Análisis Comercial Commersoluciones SA</span>
+                    <span class="lang-en hidden">SQL Optimization with Gemini AI</span>
+                </h1>
+                <p class="text-blue-200 text-lg">
+                    <span class="lang-es">Mejora de rendimiento en bases de Datos PostgreSQL</span>
+                    <span class="lang-en hidden">PostgreSQL Database performance improvement</span>
+                </p>
+            </div>
+            
+            <div class="lang-es p-6 sm:p-8 text-gray-200 leading-relaxed space-y-6">
+                <section>
+                    <h2 class="text-2xl font-bold mb-4 border-b-2 border-blue-500 pb-2">Contexto empresarial y Enfoque analítico</h2>
+                    <p>
+                        Este estudio analiza el caso de CommerSoluciones S.A., una empresa costarricense que, desde su fundación en 2010,
+                        ha evolucionado de un pequeño comercio local a un ecosistema retail integral con presencia en las siete provincias del país.
+                        Su portafolio abarca electrodomésticos, tecnología, hogar y oficina, combinando la calidez del comercio tradicional con la eficiencia del entorno digital.
+                    </p>
+                    <p class="mt-3">
+                        En los últimos años, la compañía ha consolidado una estrategia multicanal que integra tiendas físicas, e‑commerce, Marketplace y atención por WhatsApp,
+                        logrando una base de más de 500 mil clientes anuales. Esta diversificación ha sido fundamental para sostener el crecimiento en un mercado dinámico y competitivo.
+                    </p>
+
+                    <hr class="border-blue-500 pb-2 mt-3" />
+                    <h3 class="text-xl font-semibold mb-2">El Desafío Estratégico 2025: Crecer con Precisión</h3>
+                      
+                    <p>
+                        Al inicio de 2025, la dirección general de CommerSoluciones se fijó una meta de crecimiento del 5% sobre las ventas récord del año anterior
+                        (elevarlas de ₡2,597 millones a ₡2,727 millones). Esta proyección se sustentó en tres pilares:
+                    </p>
+                    <ul class="list-disc ml-6">
+                        <li class="mt-1">El contexto macroeconómico: Crecimiento esperado de 3.5–3.8% (Banco Central de Costa Rica).</li>
+                        <li> La tendencia del sector: Un dinamismo del retail cercano al 8%.</li>
+                        <li>La capacidad interna: Análisis del desempeño histórico y la capacidad operativa.</li>
+                    </ul> 
+                    <p class="mt-3"> 
+                        Sin embargo, al cierre del tercer trimestre, los resultados preliminares mostraban una brecha del -7.3% frente a la proyección lineal.
+                        Esto planteaba una pregunta crítica: ¿Era una señal de alerta o simplemente el efecto natural de la estacionalidad del negocio?
+                    </p>
+
+                    <hr class="border-blue-500 pb-2 mt-3" />
+
+                    <h3 class="text-xl font-semibold mb-2">Rol analítico y propósito del estudio</h3>
+                    <p>
+                        El objetivo de este análisis fue evaluar el desempeño comercial de CommerSoluciones en el marco de su meta anual 2025, con el fin de identificar brechas,
+                        oportunidades y tácticas clave para cerrar el año con éxito.
+                    </p>
+                    <p>
+                        Para ello, se procesaron y analizaron 14,500 registros históricos y actuales de ventas, márgenes, canales, provincias y fuerza de ventas,
+                        aplicando técnicas de análisis exploratorio, proyecciones estacionales y validaciones estadísticas.
+                    </p>
+                    <p>Este estudio busca responder a tres preguntas centrales:</p>
+                    <ol class="list-decimal ml-6">
+                        <li>¿Cuál es la verdadera brecha entre el desempeño actual y la meta anual?</li>
+                        <li>¿Existe capacidad de recuperación en el último trimestre del año?</li>
+                        <li>¿Dónde se encuentran las oportunidades clave para mejorar la rentabilidad y la ejecución?</li>
+                    </ol>
+
+                    <hr class="border-blue-500 pb-2 mt-3" />
+
+                    <h3 class="text-xl font-semibold mb-3">Objetivos estratégicos</h3>
+                    <p class="font-semibold mb-3">Objetivo Principal:</p>
+                    <p clas="mb-3">Evaluar la viabilidad de alcanzar la meta de crecimiento del 5% para 2025 y definir un plan táctico que asegure su cumplimiento.</p>
+
+                    <p class="font-semibold mt-3">Objetivos Específicos:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Cuantificar la brecha comercial real entre las ventas acumuladas y la meta, proyectando el escenario de cierre anual bajo un modelo estacional.</li>
+                        <li>Desglosar el desempeño comercial 2024-2025 a nivel de categorías, canales, provincias y fuerza de ventas para identificar los motores y frenos del crecimiento.</li>
+                        <li>Calibrar el potencial de recuperación del último trimestre, analizando los patrones estacionales históricos y los productos clave.</li>
+                        <li>Detectar oportunidades concretas de optimización en márgenes y eficiencia operativa, basándose en análisis de correlación y rentabilidad.</li>
+                        <li>Elaborar un plan de acción priorizado con iniciativas de alto impacto, estimación de resultados y un cronograma de ejecución.</li>
+                    </ul>
+
+                    <hr class="border-blue-500 pb-2 mt-3" />
+
+                    <h3 class="text-xl font-semibold">Metodología de análisis</h3>
+                    <p>Fases del análisis:</p>
+                    <ol class="list-decimal ml-6 space-y-2">
+                        <li>
+                            <strong>Fase 1. Diagnóstico Integral de la Brecha y Proyección</strong>
+                            <ul class="list-disc ml-6">
+                                <li>Cálculo de la meta anual y los escenarios de brecha (lineal vs. estacional).</li>
+                                <li>Proyección del cierre anual 2025 aplicando los patrones de estacionalidad histórica.</li>
+                                <li>Estimación de la viabilidad y probabilidad de cumplimiento de la meta.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Fase 2. Análisis Comparativo Multidimensional (2024 vs. 2025)</strong>
+                            <ul class="list-disc ml-6">
+                                <li>Segmentación por categoría, canal y provincia.</li>
+                                <li>Identificación de motores y áreas de bajo rendimiento.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>Fase 3. Evaluación de la Capacidad Estacional y Productos Clave</strong>
+                        </li>
+                        <li>
+                            <strong>Fase 4. Diagnóstico de la Fuerza de Ventas y Asignación de Metas</strong>
+                        </li>
+                        <li>
+                            <strong>Fase 5. Análisis de Rentabilidad y Optimización de Márgenes</strong>
+                        </li>
+                        <li>
+                            <strong>Fase 6. Validación Estadística y Gestión de Riesgos</strong>
+                        </li>
+                        <li>
+                            <strong>Fase 7. Síntesis Estratégica y Plan de Acción</strong>
+                        </li>
+                    </ol>
+                </section>
+                <section>
+                    <h2 class="text-2xl font-semibold text-white mb-4 border-b-2 border-blue-500 pb-2">
+                        <span class="lang-es">Notebook Interactivo</span>
+                        <span class="lang-en hidden">Interactive Notebook</span>
+                    </h2>
+                    
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <iframe 
+                            id="notebook-frame"
+                            src="../src/Análisis Comercial.html"
+                            width="100%" 
+                            height="600px" 
+                            frameborder="0"
+                            class="rounded-lg shadow-lg notebook-iframe">
+                        </iframe>
+                        
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <a href="../src/Análisis Comercial.html"
+                            target="_blank" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200">
+                                <i class="fas fa-external-link-alt mr-2"></i>
+                                <span class="lang-es">Abrir Notebook</span>
+                                <span class="lang-en hidden">Open Notebook</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
+                    <hr class="border-blue-500 pb-2 mt-3" />
+
+                    <h2 class="text-2xl font-bold">1. Diagnóstico Integral de la brecha comercial</h2>
+                    <p>(Sección 4.1.3 — 4.1.4 del Notebook)</p>
+
+                    <h3 class="text-lg font-semibold">1.1. Análisis general de desempeño</h3>
+                    <p>
+                        Para determinar la posición real de CommerSoluciones frente a la meta de crecimiento del 5% para 2025, se realizó un análisis comparativo
+                        de las ventas acumuladas a septiembre contra dos proyecciones distintas: proyección lineal y proyección estacional.
+                    </p>
+
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Concepto</th>
+                                    <th class="py-2">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Ventas totales 2024</td>
+                                    <td class="py-2">₡2,597,484,411</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Meta 2025 (+5%)</td>
+                                    <td class="py-2">₡2,727,358,632</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Ventas acumuladas Ene–Sep 2025</td>
+                                    <td class="py-2">₡1,896,259,886</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia</p>
+                    </div>
+
+                    <h3 class="text-lg font-semibold">1.2. Proyecciones de cumplimiento</h3>
+
+                    <h4 class="font-semibold">1.2.1. Meta Acumulada Lineal</h4>
+                    <p>
+                        Cálculo: Se distribuyó la meta anual de forma uniforme entre los 12 meses del año.
+                    </p>
+                    <p class="ml-4">
+                        Meta acumulada lineal = Meta anual × 9/12 = ₡2,727,358,632 × 9/12 = ₡2,045,518,974
+                    </p>
+                    <ul class="list-disc ml-6">
+                        <li>Meta lineal: ₡2,045,518,974</li>
+                        <li>Ventas reales: ₡1,896,259,886</li>
+                        <li>Brecha: ₡-149,259,088 (-7.3%)</li>
+                    </ul>
+                    <p class="text-gray-300">Interpretación: Bajo un enfoque lineal, la empresa muestra un atraso del 7.3%. Sin embargo, este modelo es engañoso en el sector retail por la estacionalidad.</p>
+
+                    <h4 class="font-semibold">1.2.2. Meta Acumulada Estacional</h4>
+                    <p>
+                        Cálculo: Se calculó la meta esperada a septiembre considerando el patrón de estacionalidad mensual de 2024. Ene–Sep concentra el 61% de las ventas anuales.
+                    </p>
+                    <p class="ml-4">Meta acumulada estacional = Meta anual × 0.61 = ₡2,727,358,632 × 0.61 = ₡1,660,283,688</p>
+                    <ul class="list-disc ml-6">
+                        <li>Meta Estacional (Ene–Sep): ₡1,660,283,688</li>
+                        <li>Ventas Reales (Ene–Sep): ₡1,896,259,886</li>
+                        <li>Desviación: +₡235,976,198 (+14.2%)</li>
+                    </ul>
+                    <p class="text-gray-300">Interpretación: Al incorporar estacionalidad, la empresa supera la meta esperada en +14.2%.</p>
+
+                    <h3 class="text-lg font-semibold">1.3. Proyección al Cierre 2025</h3>
+                    <p>
+                        Metodología: Proyección combinando ventas reales hasta septiembre con extrapolación estacional basada en 2024.
+                    </p>
+
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Trimestre</th>
+                                    <th class="py-2">Participación esperada anual 2025</th>
+                                    <th class="py-2">Ventas esperadas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Ene–Sep</td>
+                                    <td class="py-2">61%</td>
+                                    <td class="py-2">₡1,896,259,886</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Oct–Dic</td>
+                                    <td class="py-2">39%</td>
+                                    <td class="py-2">₡856,879,980</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Total</td>
+                                    <td class="py-2">100%</td>
+                                    <td class="py-2">₡2,753,139,866</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia.</p>
+                    </div>
+
+                    <p class="mt-2">
+                        Escenario de Cierre Proyectado: Ventas Totales proyectadas 2025: ₡2,753 millones (+0.9%) — Crecimiento sobre 2024: +6.0%.
+                    </p>
+
+                    <h3 class="text-lg font-semibold">1.4. Hallazgos clave y Recomendaciones</h3>
+                    <ul class="list-disc ml-6">
+                        <li>La perspectiva lineal es engañosa y subestima el rendimiento real.</li>
+                        <li>La perspectiva estacional revela un sobrecumplimiento del +14.2%.</li>
+                        <li>La proyección de cierre (+0.9%) confirma que la meta es alcanzable con la ejecución actual.</li>
+                        <li>Riesgo Principal: alta dependencia del último trimestre.</li>
+                    </ul>
+
+                    <p class="font-semibold">Recomendaciones inmediatas:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Fortalecer las campañas de cierre de año.</li>
+                        <li>Revisar y asegurar inventarios de productos clave y optimizar la logística.</li>
+                        <li>Ajustar incentivos de ventas para el último trimestre.</li>
+                        <li>Implementar monitoreo semanal durante noviembre y diciembre.</li>
+                    </ul>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">2. Análisis comparativo Multidimensional: 2024 vs 2025</h2>
+                    <p>(Sección 4.2 del Notebook)</p>
+
+                    <h3 class="text-lg font-semibold">2.1. Desempeño por Categoría de Producto</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Categoría</th>
+                                    <th class="py-2">Ingreso 2024</th>
+                                    <th class="py-2">Ingreso 2025</th>
+                                    <th class="py-2">Variación (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">₡491,990,057</td>
+                                    <td class="py-2">₡522,607,627</td>
+                                    <td class="py-2">+6.22</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Hogar</td>
+                                    <td class="py-2">₡143,976,371</td>
+                                    <td class="py-2">₡150,901,626</td>
+                                    <td class="py-2">+4.81</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Oficina</td>
+                                    <td class="py-2">₡254,390,904</td>
+                                    <td class="py-2">₡287,710,419</td>
+                                    <td class="py-2">+13.10</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">₡898,692,892</td>
+                                    <td class="py-2">₡935,040,214</td>
+                                    <td class="py-2">+4.04</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia.</p>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Oficina lidera con +13.1%, Tecnología es el pilar de volumen y Electrodomésticos estabiliza.</p>
+
+                    <h3 class="text-lg font-semibold">2.2. Desempeño por Canal de Venta</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Canal de Venta</th>
+                                    <th class="py-2">Ventas 2024</th>
+                                    <th class="py-2">Ventas 2025</th>
+                                    <th class="py-2">Variación (%)</th>
+                                    <th class="py-2">Part2025 (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">E-commerce</td>
+                                    <td class="py-2">₡492,055,755</td>
+                                    <td class="py-2">₡510,455,042</td>
+                                    <td class="py-2">+3.74</td>
+                                    <td class="py-2">26.92</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Marketplace</td>
+                                    <td class="py-2">₡263,589,400</td>
+                                    <td class="py-2">₡275,501,253</td>
+                                    <td class="py-2">+4.52</td>
+                                    <td class="py-2">14.53</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tienda Física</td>
+                                    <td class="py-2">₡910,939,320</td>
+                                    <td class="py-2">₡988,200,859</td>
+                                    <td class="py-2">+8.48</td>
+                                    <td class="py-2">52.11</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">WhatsApp</td>
+                                    <td class="py-2">₡122,465,749</td>
+                                    <td class="py-2">₡122,102,732</td>
+                                    <td class="py-2">–0.30</td>
+                                    <td class="py-2">6.44</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia.</p>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Tienda física lidera (52%). WhatsApp presenta leve contracción y requiere análisis.</p>
+
+                    <h3 class="text-lg font-semibold">2.3. Desempeño por Provincia</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Provincia</th>
+                                    <th class="py-2">Ventas 2024</th>
+                                    <th class="py-2">Ventas 2025</th>
+                                    <th class="py-2">Variación (%)</th>
+                                    <th class="py-2">Participación 2025 (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Alajuela</td>
+                                    <td class="py-2">₡340,856,046</td>
+                                    <td class="py-2">₡385,113,336</td>
+                                    <td class="py-2">+12.98</td>
+                                    <td class="py-2">20.31</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Cartago</td>
+                                    <td class="py-2">₡273,503,292</td>
+                                    <td class="py-2">₡283,506,862</td>
+                                    <td class="py-2">+3.66</td>
+                                    <td class="py-2">14.95</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Guanacaste</td>
+                                    <td class="py-2">₡129,392,670</td>
+                                    <td class="py-2">₡128,053,542</td>
+                                    <td class="py-2">–1.03</td>
+                                    <td class="py-2">6.75</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Heredia</td>
+                                    <td class="py-2">₡283,214,520</td>
+                                    <td class="py-2">₡286,947,407</td>
+                                    <td class="py-2">+1.32</td>
+                                    <td class="py-2">15.13</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Limón</td>
+                                    <td class="py-2">₡54,882,196</td>
+                                    <td class="py-2">₡54,258,887</td>
+                                    <td class="py-2">–1.14</td>
+                                    <td class="py-2">2.86</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Puntarenas</td>
+                                    <td class="py-2">₡164,124,506</td>
+                                    <td class="py-2">₡170,048,930</td>
+                                    <td class="py-2">+3.61</td>
+                                    <td class="py-2">8.97</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">San José</td>
+                                    <td class="py-2">₡543,076,994</td>
+                                    <td class="py-2">₡588,330,922</td>
+                                    <td class="py-2">+8.33</td>
+                                    <td class="py-2">31.03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia.</p>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Alajuela y San José impulsan el crecimiento; Limón y Guanacaste requieren acciones diferenciadas.</p>
+
+                    <h3 class="text-lg font-semibold">2.4. Desempeño por Segmento de Cliente</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Tipo de Cliente</th>
+                                    <th class="py-2">Ingreso 2024</th>
+                                    <th class="py-2">Ingreso 2025</th>
+                                    <th class="py-2">Ticket Prom. 2024</th>
+                                    <th class="py-2">Ticket Prom. 2025</th>
+                                    <th class="py-2">Variación Ticket (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Institucional</td>
+                                    <td class="py-2">₡113,562,707</td>
+                                    <td class="py-2">₡143,567,134</td>
+                                    <td class="py-2">₡283,906.77</td>
+                                    <td class="py-2">₡330,039.39</td>
+                                    <td class="py-2">+26.42</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Mayorista</td>
+                                    <td class="py-2">₡249,935,653</td>
+                                    <td class="py-2">₡233,272,029</td>
+                                    <td class="py-2">₡307,802.53</td>
+                                    <td class="py-2">₡300,996.17</td>
+                                    <td class="py-2">–6.67</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Nuevo</td>
+                                    <td class="py-2">₡542,801,918</td>
+                                    <td class="py-2">₡573,933,045</td>
+                                    <td class="py-2">₡294,840.80</td>
+                                    <td class="py-2">₡309,231.17</td>
+                                    <td class="py-2">+5.74</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Recurrente</td>
+                                    <td class="py-2">₡882,749,946</td>
+                                    <td class="py-2">₡945,487,678</td>
+                                    <td class="py-2">₡284,482.74</td>
+                                    <td class="py-2">₡301,398.69</td>
+                                    <td class="py-2">+7.11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3 text-sm text-gray-400">Nota. Elaboración propia.</p>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Institucional presenta mayor aumento de ticket; Mayorista decrece y merece intervención.</p>
+
+                    <h3 class="text-lg font-semibold">2.5. Síntesis Comparativa</h3>
+                    <p>Motores principales y áreas críticas:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Instrumentar campañas locales en Alajuela y San José.</li>
+                        <li>Revitalizar el segmento Mayorista.</li>
+                        <li>Crear programas de beneficios para clientes institucionales.</li>
+                        <li>Implementar plan de 60 días para Limón y Guanacaste.</li>
+                    </ul>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">3. Patrones Estacionales y Proyecciones</h2>
+                    <p>(Sección 4.3 del Notebook)</p>
+                    <p>El último trimestre (Q4) concentra históricamente el 39% de las ventas anuales; analizar Q4 2024 para proyectar Q4 2025.</p>
+
+                    <h3 class="text-lg font-semibold">3.1. Análisis de temporadas pasadas (Q4 2024)</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Mes</th>
+                                    <th class="py-2">Ventas (₡ millones)</th>
+                                    <th class="py-2">Cantidad Vendida</th>
+                                    <th class="py-2">Campaña</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Octubre</td>
+                                    <td class="py-2">197.75</td>
+                                    <td class="py-2">1,552</td>
+                                    <td class="py-2">Normal</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Noviembre</td>
+                                    <td class="py-2">308.53</td>
+                                    <td class="py-2">2,447</td>
+                                    <td class="py-2">Mes Negro</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Diciembre</td>
+                                    <td class="py-2">302.15</td>
+                                    <td class="py-2">2,182</td>
+                                    <td class="py-2">Temporada Alta</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Noviembre fue el pico absoluto; Q4 es crítico para la meta anual.</p>
+
+                    <h3 class="text-lg font-semibold">3.2. Comportamiento por Categoría en los periodos pico 2024</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Categoría</th>
+                                    <th class="py-2">Ingreso Total (₡)</th>
+                                    <th class="py-2">Margen Promedio</th>
+                                    <th class="py-2">Cantidad Vendida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">233,667,858</td>
+                                    <td class="py-2">0.23</td>
+                                    <td class="py-2">1,615</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Hogar</td>
+                                    <td class="py-2">61,163,165</td>
+                                    <td class="py-2">0.28</td>
+                                    <td class="py-2">1,484</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Oficina</td>
+                                    <td class="py-2">119,641,239</td>
+                                    <td class="py-2">0.23</td>
+                                    <td class="py-2">1,572</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">393,961,925</td>
+                                    <td class="py-2">0.17</td>
+                                    <td class="py-2">1,510</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Interpretación: Tecnología domina volumen pero con margen más bajo; Hogar y Oficina son oportunidades para mejorar rentabilidad.</p>
+
+                    <h3 class="text-lg font-semibold">3.3. Productos Estrella</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Categoría</th>
+                                    <th class="py-2">Producto</th>
+                                    <th class="py-2">Ingreso Total (₡)</th>
+                                    <th class="py-2">Cantidad Vendida</th>
+                                    <th class="py-2">Margen</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">Laptop</td>
+                                    <td class="py-2">86,267,732</td>
+                                    <td class="py-2">338</td>
+                                    <td class="py-2">0.18</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">Smart TV</td>
+                                    <td class="py-2">80,195,286</td>
+                                    <td class="py-2">285</td>
+                                    <td class="py-2">0.17</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">Tablet</td>
+                                    <td class="py-2">78,373,483</td>
+                                    <td class="py-2">293</td>
+                                    <td class="py-2">0.17</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">Auriculares</td>
+                                    <td class="py-2">76,910,852</td>
+                                    <td class="py-2">311</td>
+                                    <td class="py-2">0.17</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Tecnología</td>
+                                    <td class="py-2">Smartphone</td>
+                                    <td class="py-2">72,214,572</td>
+                                    <td class="py-2">283</td>
+                                    <td class="py-2">0.17</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">Lavadora</td>
+                                    <td class="py-2">56,230,739</td>
+                                    <td class="py-2">384</td>
+                                    <td class="py-2">0.23</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">Cafetera</td>
+                                    <td class="py-2">52,041,645</td>
+                                    <td class="py-2">357</td>
+                                    <td class="py-2">0.22</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">Microondas</td>
+                                    <td class="py-2">47,307,025</td>
+                                    <td class="py-2">327</td>
+                                    <td class="py-2">0.23</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">Ventilador</td>
+                                    <td class="py-2">42,323,630</td>
+                                    <td class="py-2">287</td>
+                                    <td class="py-2">0.23</td>
+                                </tr>
+                                <tr class="border-t border-gray-800">
+                                    <td class="py-2 pr-4">Electrodomésticos</td>
+                                    <td class="py-2">Refrigeradora</td>
+                                    <td class="py-2">35,764,819</td>
+                                    <td class="py-2">260</td>
+                                    <td class="py-2">0.23</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Interpretación: 80% de ingresos estacionales se concentra en ~10 productos; priorizar stock y promoción de estos ítems.</p>
+
+                    <h3 class="text-lg font-semibold">3.4. Implicaciones para la Estrategia 2025</h3>
+                    <p>Proyección conservadora: cierre con ₡2,753 millones, superando la meta por +0.9% si Q4 replica patrón histórico.</p>
+                    <p class="font-semibold">Recomendación:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Planificar la temporada con enfoque integral: stock, campañas multicanal, alianzas con proveedores y coordinación logística.</li>
+                    </ul>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">4. Efectividad de la Fuerza de ventas</h2>
+                    <p>(Sección 4.4 del Notebook)</p>
+
+                    <h3 class="text-lg font-semibold">4.1. Diagnóstico del Sistema de Metas Actual</h3>
+                    <p>Metodología de asignación:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Meta Base Provincial = Ventas Históricas × 1.05</li>
+                        <li>Distribución Individual Proporcional según participación histórica</li>
+                        <li>Ajuste por Potencial (1.05–1.10 para destacados, 1.00 consistentes, 0.95 en desarrollo)</li>
+                    </ul>
+                    <p>Conclusión: marco sólido pero ejecución desigual; oportunidad en apoyo personalizado.</p>
+
+                    <h3 class="text-lg font-semibold">4.2. Análisis de Desempeño por vendedor</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Vendedor</th>
+                                    <th class="py-2">Provincia</th>
+                                    <th class="py-2">Ingreso Total (₡)</th>
+                                    <th class="py-2">Cumplimiento / Meta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Laura Rodríguez</td><td class="py-2">San José</td><td class="py-2">168,247,055</td><td class="py-2">1.01</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Carlos Méndez</td><td class="py-2">San José</td><td class="py-2">149,656,174</td><td class="py-2">1.00</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Pablo Solís</td><td class="py-2">Cartago</td><td class="py-2">144,526,098</td><td class="py-2">0.99</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Ana Vargas</td><td class="py-2">San José</td><td class="py-2">141,323,624</td><td class="py-2">0.85</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Andrea Martínez</td><td class="py-2">Cartago</td><td class="py-2">138,980,764</td><td class="py-2">0.95</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Sofía Jiménez</td><td class="py-2">Alajuela</td><td class="py-2">135,542,337</td><td class="py-2">1.00</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">María Fernández</td><td class="py-2">San José</td><td class="py-2">129,104,069</td><td class="py-2">0.88</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Roberto Navarro</td><td class="py-2">Alajuela</td><td class="py-2">126,604,792</td><td class="py-2">0.96</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Miguel Soto</td><td class="py-2">Alajuela</td><td class="py-2">122,966,207</td><td class="py-2">0.88</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">David Chaves</td><td class="py-2">Heredia</td><td class="py-2">105,316,242</td><td class="py-2">0.92</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Elena Rojas</td><td class="py-2">Heredia</td><td class="py-2">93,055,824</td><td class="py-2">1.01</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Javier Campos</td><td class="py-2">Heredia</td><td class="py-2">88,575,341</td><td class="py-2">0.83</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Luis Ramírez</td><td class="py-2">Puntarenas</td><td class="py-2">88,002,861</td><td class="py-2">0.95</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Carmen Díaz</td><td class="py-2">Puntarenas</td><td class="py-2">82,046,069</td><td class="py-2">0.89</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Diego Jiménez</td><td class="py-2">Guanacaste</td><td class="py-2">73,067,244</td><td class="py-2">1.10</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Gabriela Torres</td><td class="py-2">Guanacaste</td><td class="py-2">54,986,298</td><td class="py-2">0.75</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">José Pérez</td><td class="py-2">Limón</td><td class="py-2">31,002,843</td><td class="py-2">0.89</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Katherine Smith</td><td class="py-2">Limón</td><td class="py-2">23,256,044</td><td class="py-2">0.72</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Hallazgos: cumplimiento promedio 92.3%, alta variabilidad; intervención focalizada en vendedores con <90%.</p>
+
+                    <p class="font-semibold">Plan de Acción para el Cierre 2025</p>
+                    <ol class="list-decimal ml-6">
+                        <li>
+                            <strong>Intervención Focalizada</strong>: coaching intensivo para 6 vendedores con rendimiento <90%; objetivo reducir brecha en 60 días.
+                        </li>
+                        <li>
+                            <strong>Optimización Territorial</strong>: refuerzo en Limón y Guanacaste con rotación temporal y redistribución de leads.
+                        </li>
+                        <li>
+                            <strong>Incentivos Estacionales Inteligentes</strong>: bonos por venta de productos estacionales de alto margen (Nov–Dic).
+                        </li>
+                    </ol>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">5. Rentabilidad y Optimización de Márgenes</h2>
+                    <p>(Secciones 5.1–5.8 del Notebook)</p>
+                    <p>
+                        El margen bruto del 22.6% presenta una brecha de 3.4 p.p. frente al benchmark sectorial (26%), representando una oportunidad de mejora estimada en ₡88 millones anuales.
+                    </p>
+
+                    <h3 class="text-lg font-semibold">5.1. Análisis de Correlaciones comerciales</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Variable 1</th>
+                                    <th class="py-2">Variable 2</th>
+                                    <th class="py-2">Coeficiente (r)</th>
+                                    <th class="py-2">Interpretación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Ingreso Total</td><td class="py-2">Margen</td><td class="py-2">-0.321</td><td class="py-2">A mayor volumen, margen tiende a disminuir.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Margen</td><td class="py-2">Descuento</td><td class="py-2">-0.532</td><td class="py-2">Mayores descuentos implican márgenes más bajos.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="text-lg font-semibold">5.2. Identificación de Transacciones de Bajo Margen</h3>
+                    <p>
+                        Transacciones con margen &lt;10% suman ₡127.34 millones; su eliminación/renegociación podría generar +₡15.86 millones en utilidad bruta anual.
+                    </p>
+
+                    <h3 class="text-lg font-semibold">5.3. Productos y Canales de Alta Rentabilidad</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Categoría / Canal</th>
+                                    <th class="py-2">Margen Promedio (%)</th>
+                                    <th class="py-2">Comentario Estratégico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Hogar</td><td class="py-2">27.9%</td><td class="py-2">Alto valor agregado.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">E-commerce</td><td class="py-2">27.8%</td><td class="py-2">Baja estructura operativa, buena rentabilidad.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Marketplace</td><td class="py-2">27.7%</td><td class="py-2">Oportunidad de escalar.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Tecnología</td><td class="py-2">17.0%</td><td class="py-2">Alto volumen, margen bajo.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="text-lg font-semibold">5.4. Propuesta de Plan de acción para Mejora de Margen</h3>
+                    <p>Objetivo: +1.5–2.0 p.p. en margen bruto en 6 meses.</p>
+                    <ul class="list-disc ml-6">
+                        <li>Control de descuentos (>15% requiere aprobación).</li>
+                        <li>Revisión de promociones con margen &lt;10%.</li>
+                        <li>Bundles "Tecnología + Hogar" para ventas mayores a ₡500,000.</li>
+                        <li>Incluir margen bruto por vendedor como KPI principal.</li>
+                    </ul>
+                    <p>Impacto esperado: recuperar ₡40–50 millones anuales y acercarse al benchmark en 12–18 meses.</p>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">6. Validación estadística y gestión de riesgos</h2>
+
+                    <h3 class="text-lg font-semibold">6.1. Estacionalidad de Márgenes y Logística</h3>
+                    <p>
+                        Márgenes entre 0.22–0.23; correlación tiempo de entrega vs satisfacción: r = -0.801 (negativa fuerte).
+                    </p>
+                    <p class="font-semibold">Recomendación logística:</p>
+                    <ul class="list-disc ml-6">
+                        <li>Revisar procesos de picking y despacho.</li>
+                        <li>Priorizar abastecimiento de productos estrella.</li>
+                        <li>Evaluar alianzas con operadores logísticos temporales.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold">6.2. Validación de Supuestos y Modelos</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Prueba</th>
+                                    <th class="py-2">Resultado (p)</th>
+                                    <th class="py-2">Interpretación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">t-test (ventas diarias 2024–2025)</td><td class="py-2">0.215</td><td class="py-2">No diferencia significativa en promedio diario.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Chi-cuadrado (canales vs provincia)</td><td class="py-2">0.017</td><td class="py-2">Distribución difiere según provincia.</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Shapiro-Wilk (crecimiento)</td><td class="py-2">0.703</td><td class="py-2">Distribución normal, adecuada para proyecciones.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Intervalo de confianza bootstrap (crecimiento 2025): [-0.4%, +12.3%]. Recomendación: preparar plan alternativo (Plan B) si Q4 no alcanza niveles históricos.</p>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">7. Planificación estratégica con Escenarios</h2>
+
+                    <h3 class="text-lg font-semibold">7.1. Escenarios Simulados</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Escenario</th>
+                                    <th class="py-2">Crecimiento Anual (%)</th>
+                                    <th class="py-2">Resultado Estimado (₡)</th>
+                                    <th class="py-2">Brecha vs Meta (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Optimista</td><td class="py-2">+7.5</td><td class="py-2">2,803,000,000</td><td class="py-2">+2.8</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Proyectado 2025</td><td class="py-2">+5.0</td><td class="py-2">2,753,139,866</td><td class="py-2">+0.9</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Pesimista</td><td class="py-2">+2.0</td><td class="py-2">2,675,000,000</td><td class="py-2">-1.9</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Recesión</td><td class="py-2">0.0</td><td class="py-2">2,597,484,411</td><td class="py-2">-4.7</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-2">Variaciones de ±2–4% pueden cambiar la brecha; priorizar acciones de bajo costo y alto impacto.</p>
+
+                    <h3 class="text-lg font-semibold">7.2. Priorización Estratégica (Impacto vs Esfuerzo)</h3>
+                    <div class="overflow-x-auto bg-gray-900 p-4 rounded">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left text-gray-300">
+                                    <th class="py-2 pr-4">Nivel de esfuerzo</th>
+                                    <th class="py-2">Tipo de acción</th>
+                                    <th class="py-2">Impacto esperado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Bajo esfuerzo / Alto impacto</td><td class="py-2">Optimización de mix y control de descuentos</td><td class="py-2">+1–2 p.p. margen bruto</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Medio esfuerzo / Alto impacto</td><td class="py-2">Campañas digitales y capacitación en upsell</td><td class="py-2">+2–3% ventas netas</td></tr>
+                                <tr class="border-t border-gray-800"><td class="py-2 pr-4">Alto esfuerzo / Alto impacto</td><td class="py-2">Expansión logística y mejora de ejecución</td><td class="py-2">+4–5% satisfacción y retención</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="text-lg font-semibold">7.3. Recomendaciones Estratégicas</h3>
+                    <ul class="list-disc ml-6">
+                        <li>Implementar política activa de optimización de márgenes y control de descuentos.</li>
+                        <li>Activación comercial focalizada en Alajuela y San José.</li>
+                        <li>Optimización operativa para asegurar disponibilidad de inventario y eficiencia logística.</li>
+                    </ul>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">8. Conclusiones y Plan de Acción Estratégico</h2>
+
+                    <h3 class="text-lg font-semibold">8.1. Conclusión General</h3>
+                    <p>
+                        El análisis confirma que CommerSoluciones puede alcanzar y superar la meta del 5% en 2025, proyectando un crecimiento del +6.0%
+                        (₡2,753 millones). La aparente brecha del -7.3% era un espejismo causado por la estacionalidad.
+                    </p>
+
+                    <h3 class="text-lg font-semibold">8.2. Respuesta a las Preguntas Centrales</h3>
+                    <ol class="list-decimal ml-6">
+                        <li>No existe brecha negativa al ajustar por estacionalidad: superávit de ₡236 millones (+14.2%) a septiembre.</li>
+                        <li>Sí existe capacidad de recuperación en el último trimestre; Q4 representa el 39% de las ventas anuales.</li>
+                        <li>Oportunidades de mejora: control de descuentos, ejecución focalizada y optimización logística.</li>
+                    </ol>
+
+                    <h3 class="text-lg font-semibold">8.3. Síntesis de Hallazgos Clave</h3>
+                    <p>Fortalezas: sobrecumplimiento estacional, portafolio equilibrado, sistema de metas sólido. Riesgos: dependencia del Q4, erosión de márgenes.</p>
+
+                    <h3 class="text-lg font-semibold">8.4. Plan de Acción Consolidado</h3>
+                    <p>Fase 1: Acciones Inmediatas (0-30 días)</p>
+                    <ul class="list-disc ml-6">
+                        <li>Control de Márgenes: límites de descuento, revisión de promociones.</li>
+                        <li>Preparación Q4: asegurar stock de 10 productos estrella, acuerdos logísticos, diseño de campañas.</li>
+                    </ul>
+
+                    <p>Fase 2: Intervenciones Tácticas (30-60 días)</p>
+                    <ul class="list-disc ml-6">
+                        <li>Coaching intensivo para vendedores de bajo desempeño.</li>
+                        <li>Campañas geo‑direccionadas en Alajuela y San José.</li>
+                        <li>Rediseño de procesos de picking y despacho.</li>
+                    </ul>
+
+                    <p>Fase 3: Ejecución y Monitoreo (60-90 días)</p>
+                    <ul class="list-disc ml-6">
+                        <li>War room comercial con reportes semanales.</li>
+                        <li>Incentivos estacionales por productos de alto margen.</li>
+                        <li>Métricas de éxito: Ventas Q4 ₡857 millones; Margen bruto +1.5 p.p.; Cumplimiento meta ≥100%.</li>
+                    </ul>
+
+                    <h3 class="text-lg font-semibold">8.5. Impacto Esperado y Sostenibilidad</h3>
+                    <ul class="list-disc ml-6">
+                        <li>Crecimiento 2025: +6.0% (₡2,753 millones).</li>
+                        <li>Mejora de rentabilidad: +1.5–2.0 p.p.</li>
+                        <li>Recuperación financiera: ₡40–50 millones adicionales en utilidad bruta.</li>
+                    </ul>
+
+                    <hr class="border-gray-700" />
+
+                    <h2 class="text-2xl font-bold">9. Conclusión</h2>
+                    <p>
+                        Tras integrar los hallazgos, se concluye que CommerSoluciones enfrenta una oportunidad estratégica para transicionar a un crecimiento
+                        más preciso, rentable y sostenible. La meta del 5% está al alcance; los próximos 90 días deberán enfocarse en ejecución impecable.
+                    </p>
+            </div>
+    </main>
+
+    <section id="calificacion" class="py-12 sm:py-10 lg:py-24 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <h3 class="text-2xl font-bold mb-4">
+                <span class="lang-es">¿Qué te pareció este proyecto? ¡Califícalo!</span>
+                <span class="lang-en">How would you rate this project? Give it your score!</span>
+            </h3>
+            <div id="stars-rating-container" class="flex justify-center space-x-2">
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="1">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="2">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="3">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="4">&#9733;</span>
+                <span class="star-rating text-gray-500 cursor-pointer text-3xl transition-colors duration-200" data-value="5">&#9733;</span>
+            </div>
+            <p id="calificacion-gracias" class="text-sm mt-4 text-gray-400 hidden">
+                <span class="lang-es">¡Gracias por tu calificación!</span>
+                <span class="lang-en">Thank you for your rating!</span>
+            </p>
+        </div>
+    </section>
+    <footer class="bg-gray-900 text-gray-400 py-6 text-center text-sm mt-16">
+        <p>
+            <span class="lang-es">&copy; <span id="current-year-project-es"></span> Braulio HG. Todos los derechos reservados.</span>
+            <span class="lang-en hidden">&copy; <span id="current-year-project-en"></span> Braulio HG. All rights reserved.</span>
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar el año en el footer
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = new Date().getFullYear();
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = new Date().getFullYear();
+            }
+
+            // Lógica de traducción para esta página
+            const htmlElement = document.documentElement; // Acceder al <html>
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang; // Actualiza el atributo lang del HTML
+                localStorage.setItem('preferredLang', lang); // Guarda en localStorage
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Función para actualizar el <title> dinámicamente
+            function updateTitle(lang) {
+                const titleEs = document.querySelector('title .lang-es');
+                const titleEn = document.querySelector('title .lang-en');
+                if (titleEs && titleEn) {
+                    if (lang === 'es') {
+                        document.title = titleEs.textContent;
+                    } else {
+                        document.title = titleEn.textContent;
+                    }
+                } else {
+                    // Fallback si no se encuentran los spans dentro del title
+                    document.title = lang === 'es' ? 'Detalles Análisis Comerciales' : 'Commercial Analysis Details';
+                }
+            }
+
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma (en la página del proyecto)
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+            // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
+
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
+
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
+                });
+
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Optimización_SQL', 
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
