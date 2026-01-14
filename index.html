@@ -814,7 +814,6 @@
                             targetElement.scrollIntoView({ behavior: 'smooth' });
                         }
                     }
-                    // --- FIN DEL CÓDIGO AÑADIDO ---
                     
                 }, 500);
             }
@@ -889,45 +888,45 @@
         }
 
         // --- 5. Lógica para el cambio de pestañas en la sección de experiencia ---
-        const tabButtons = document.querySelectorAll('.experience-tab-button');
-        const experienceCategories = document.querySelectorAll('.experience-category');
+        // const tabButtons = document.querySelectorAll('.experience-tab-button');
+        // const experienceCategories = document.querySelectorAll('.experience-category');
 
-        function showCategory(targetId) {
-            experienceCategories.forEach(category => {
-                category.classList.add('hidden');
-            });
-            const targetCategory = document.getElementById(targetId);
-            if (targetCategory) {
-                targetCategory.classList.remove('hidden');
-            }
-        }
+        // function showCategory(targetId) {
+        //     experienceCategories.forEach(category => {
+        //         category.classList.add('hidden');
+        //     });
+        //     const targetCategory = document.getElementById(targetId);
+        //     if (targetCategory) {
+        //         targetCategory.classList.remove('hidden');
+        //     }
+        // }
 
-        function setActiveButton(clickedButton) {
-            // Elimina las clases de estilo activo de TODOS los botones
-            tabButtons.forEach(button => {
-                button.classList.remove('active-tab', 'bg-blue-600', 'transform', 'scale-105');
-                // Restaura los estilos base para los botones inactivos
-                button.classList.add('bg-transparent', 'text-white', 'hover:bg-white', 'hover:bg-opacity-10');
-            });
+        // function setActiveButton(clickedButton) {
+        //     // Elimina las clases de estilo activo de TODOS los botones
+        //     tabButtons.forEach(button => {
+        //         button.classList.remove('active-tab', 'bg-blue-600', 'transform', 'scale-105');
+        //         // Restaura los estilos base para los botones inactivos
+        //         button.classList.add('bg-transparent', 'text-white', 'hover:bg-white', 'hover:bg-opacity-10');
+        //     });
 
-            // Añade los estilos de estado activo al botón clickeado
-            clickedButton.classList.remove('bg-transparent', 'hover:bg-white', 'hover:bg-opacity-10');
-            clickedButton.classList.add('active-tab', 'bg-electric-blue', 'transform', 'scale-105');
-        }
+        //     // Añade los estilos de estado activo al botón clickeado
+        //     clickedButton.classList.remove('bg-transparent', 'hover:bg-white', 'hover:bg-opacity-10');
+        //     clickedButton.classList.add('active-tab', 'bg-electric-blue', 'transform', 'scale-105');
+        // }
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const targetId = button.dataset.target;
-                showCategory(targetId);
-                setActiveButton(button);
-            });
-        });
+        // tabButtons.forEach(button => {
+        //     button.addEventListener('click', () => {
+        //         const targetId = button.dataset.target;
+        //         showCategory(targetId);
+        //         setActiveButton(button);
+        //     });
+        // });
 
-        const defaultButton = document.querySelector('.experience-tab-button[data-target="data-analysis-experience"]');
-        if (defaultButton) {
-            showCategory(defaultButton.dataset.target);
-            setActiveButton(defaultButton);
-        }
+        // const defaultButton = document.querySelector('.experience-tab-button[data-target="data-analysis-experience"]');
+        // if (defaultButton) {
+        //     showCategory(defaultButton.dataset.target);
+        //     setActiveButton(defaultButton);
+        // }
     });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
