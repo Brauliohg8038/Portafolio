@@ -191,6 +191,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .highlight .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
 .highlight .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMHMXGQ301"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-KMHMXGQ301');
+    </script>
 <style type="text/css">
 /*-----------------------------------------------------------------------------
 | Copyright (c) Jupyter Development Team.
@@ -12672,6 +12679,125 @@ Ninguno de los productos seleccionados esta moribundo
 </div>
 </main>
 </body>
+ <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Actualizar el año en el footer
+            const currentYearEsElement = document.getElementById('current-year-project-es');
+            const currentYearEnElement = document.getElementById('current-year-project-en');
+            if (currentYearEsElement) {
+                currentYearEsElement.textContent = new Date().getFullYear();
+            }
+            if (currentYearEnElement) {
+                currentYearEnElement.textContent = new Date().getFullYear();
+            }
+
+            // Lógica de traducción para esta página
+            const htmlElement = document.documentElement; // Acceder al <html>
+            const langToggleButton = document.getElementById('project-lang-toggle-button');
+
+            function setLanguage(lang) {
+                document.querySelectorAll('.lang-es').forEach(el => el.classList.toggle('hidden', lang !== 'es'));
+                document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', lang !== 'en'));
+                htmlElement.lang = lang; // Actualiza el atributo lang del HTML
+                localStorage.setItem('preferredLang', lang); // Guarda en localStorage
+                updateTitle(lang); // Llama a la función para actualizar el título
+            }
+
+            // Función para actualizar el <title> dinámicamente
+            function updateTitle(lang) {
+                const titleEs = document.querySelector('title .lang-es');
+                const titleEn = document.querySelector('title .lang-en');
+                if (titleEs && titleEn) {
+                    if (lang === 'es') {
+                        document.title = titleEs.textContent;
+                    } else {
+                        document.title = titleEn.textContent;
+                    }
+                } else {
+                    // Fallback si no se encuentran los spans dentro del title
+                    document.title = lang === 'es' ? 'Campañas de Marketing' : 'Marketing Campaigns';
+                }
+            }
+
+
+            // Cargar el idioma preferido al iniciar la página
+            const storedLang = localStorage.getItem('preferredLang') || 'es'; // 'es' como predeterminado
+            setLanguage(storedLang);
+
+            // Event listener para el botón de cambio de idioma (en la página del proyecto)
+            if (langToggleButton) {
+                langToggleButton.addEventListener('click', () => {
+                    const currentLang = htmlElement.lang;
+                    const newLang = currentLang === 'es' ? 'en' : 'es';
+                    setLanguage(newLang);
+                });
+            }
+            // Lógica de calificación con estrellas
+            const starsContainer = document.getElementById('stars-rating-container');
+            const stars = document.querySelectorAll('.star-rating');
+            const graciasMensaje = document.getElementById('calificacion-gracias');
+
+            // Comprobar si los elementos existen para evitar errores
+            if (starsContainer && stars.length > 0) {
+                
+                // Estado inicial de la calificación
+                let hasRated = false;
+
+                // Función para cambiar el color de las estrellas al pasar el cursor
+                function highlightStars(value) {
+                    stars.forEach(star => {
+                        if (star.dataset.value <= value) {
+                            star.classList.add('text-yellow-400');
+                            star.classList.remove('text-gray-500');
+                        } else {
+                            star.classList.add('text-gray-500');
+                            star.classList.remove('text-yellow-400');
+                        }
+                    });
+                }
+
+                // Eventos para el efecto de hover
+                starsContainer.addEventListener('mouseover', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        highlightStars(e.target.dataset.value);
+                    }
+                });
+
+                // Evento para el mouseout (cuando el mouse sale del contenedor)
+                starsContainer.addEventListener('mouseout', () => {
+                    if (!hasRated) {
+                        highlightStars(0);
+                    }
+                });
+
+                // Evento para el clic y la integración con Google Analytics
+                starsContainer.addEventListener('click', (e) => {
+                    if (!hasRated && e.target.classList.contains('star-rating')) {
+                        const ratingValue = e.target.dataset.value;
+                        
+                        // Mantener las estrellas seleccionadas con el color
+                        highlightStars(ratingValue);
+                        
+                        // Deshabilitar la interacción después de calificar
+                        hasRated = true;
+                        starsContainer.style.pointerEvents = 'none';
+                        graciasMensaje.classList.remove('hidden');
+
+                        // Envía el evento a Google Analytics
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'calificacion_proyecto', {
+                                'event_category': 'Proyecto',
+                                'event_label': 'Análisis_B2B', 
+                                'value': ratingValue
+                            });
+                        }
+                        
+                        console.log(`Calificación enviada: ${ratingValue} estrellas`);
+                    }
+                });
+            }
+        });
+    </script>
 <div style="text-align: center; margin: 30px 0;">
     <a href="https://brauliohg8038.github.io/Portafolio/#proyectos" 
        style="
